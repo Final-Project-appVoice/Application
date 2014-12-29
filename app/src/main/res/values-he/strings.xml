@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_search">חיפוש</string>
+    <string name="info">מי אנחנו</string>
+    <string name="welcome">ברוכים הבאים ל-</string>
+    <string name="user_name">שם משתמש</string>
+    <string name="password">סיסמה</string>
+    <string name="log_in">התחברות</string>
+
+    <string name="app_name">My Project</string>
+    <string name="hello_world">שלום שלום!</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="help">עזרה</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="plus_sign_out">התנתק</string>
+    <string name="plus_disconnect">התנתק</string>
+    <string name="prompt_email">מייל</string>
+</resources>
