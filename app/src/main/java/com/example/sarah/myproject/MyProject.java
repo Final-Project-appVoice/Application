@@ -1,14 +1,16 @@
 package com.example.sarah.myproject;
 
 import android.app.Activity;
-import android.content.res.Configuration;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
-import java.util.Locale;
+import android.widget.TextView;
 
 
 public class MyProject extends Activity
@@ -17,26 +19,32 @@ public class MyProject extends Activity
     Patient patient;
     EditText userName_editText;
     EditText password_editText;
+    TextView patient_textView;
+
+    SharedPreferences settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //Locale.forLanguageTag("he");
-
-        userName_editText = (EditText)findViewById(R.id.userName);
-        password_editText = (EditText)findViewById(R.id.password);
-
-        Locale locale = new Locale("he");
-        locale.setDefault(locale);
-        Configuration c = new Configuration();
-        c.locale = locale;
-        getBaseContext().getResources().updateConfiguration(c, getBaseContext().getResources().getDisplayMetrics());
-        MyProject.this.setContentView(R.layout.activity_my_project);
-
         setContentView(R.layout.activity_my_project);
+
+        userName_editText = (EditText)findViewById(R.id.username);
+        password_editText = (EditText)findViewById(R.id.pwd);
+        patient_textView = (TextView)findViewById(R.id.patientTextView);
+        settings = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+        String num = userName_editText.getText().toString();
+
+        addNewPatient();
+
+    }
+
+    private void addNewPatient()
+    {
         dalPatient = new DalPatient();
-        patient = new Patient("328786462", "David", "Cohen", "davidco@gmail.com", "Jerusalem", "0525234327", "Clalit");
-        dalPatient.addNewPatient(patient, "password", this);
+        patient = new Patient("3", "David", "Cohen", "davidco@gmail.com", "Jerusalem", "0525234327", "Clalit");
+        Log.w("warning:", patient.toString());
+        dalPatient.addNewPatient(patient, "p", this);
     }
 
 
@@ -61,8 +69,31 @@ public class MyProject extends Activity
 
     public void login_button(View view)
     {
-        String username = userName_editText.toString();
-        String password = password_editText.toString();
+        String username = userName_editText.getText().toString();
+        String password = password_editText.getText().toString();
+        Log.w("Check", username +" "+ password);
+        Cursor c = dalPatient.findPatientByIdAndPwd(username, password, this);
+
+        SharedPreferences.Editor editor=settings.edit();
+
+
+        if(dalPatient.isPatientExists(c))
+        {
+            Log.w("exist", "the patient exists!!");
+
+            Intent i = new Intent(this, PatientActivity.class);
+            String str = dalPatient.showDetails(username, this);
+            //patient_textView.setText(str);
+            i.putExtra("PatientText", str);
+
+            editor.commit();
+            startActivity(i);
+        }
+        else
+        {
+            Log.w("exist", "the patient NOT exists!!");
+        }
+
 
     }
 }

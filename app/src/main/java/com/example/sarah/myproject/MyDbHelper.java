@@ -23,23 +23,25 @@ public class MyDbHelper extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL("CREATE TABLE "+ Patients_db.TABLE_NAME+ "("+
-                Patients_db._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                Patients_db.COLUMN_NAME_ENTRY_ID + " TEXT_TYPE NOT NULL, " +
-                Patients_db.COLUMN_NAME_FIRST_NAME + " TEXT_TYPE," +
-                Patients_db.COLUMN_NAME_LAST_NAME  + " TEXT_TYPE," +
-                Patients_db.COLUMN_NAME_MAIL + " TEXT_TYPE," +
-                Patients_db.COLUMN_NAME_PASSWORD + " TEXT_TYPE," +
-                Patients_db.COLUMN_NAME_ADDRESS + " TEXT_TYPE," +
-                Patients_db.COLUMN_NAME_PHONE + " TEXT_TYPE," +
-                Patients_db.COLUMN_NAME_HMO + " TEXT_TYPE);"
+                        Patients_db._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        Patients_db.COLUMN_NAME_ENTRY_ID + " TEXT_TYPE NOT NULL," +
+                        Patients_db.COLUMN_NAME_FIRST_NAME + " TEXT_TYPE," +
+                        Patients_db.COLUMN_NAME_LAST_NAME  + " TEXT_TYPE," +
+                        Patients_db.COLUMN_NAME_MAIL + " TEXT_TYPE," +
+                        Patients_db.COLUMN_NAME_PASSWORD + " TEXT_TYPE," +
+                        Patients_db.COLUMN_NAME_ADDRESS + " TEXT_TYPE," +
+                        Patients_db.COLUMN_NAME_PHONE + " TEXT_TYPE," +
+                        Patients_db.COLUMN_NAME_HMO + " TEXT_TYPE);"
 
 
         );
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
         db.execSQL("DROP TABLE IF EXISTS " + Patients_db.TABLE_NAME);
 
     }
