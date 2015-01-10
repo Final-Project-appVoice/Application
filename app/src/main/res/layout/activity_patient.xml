@@ -1,30 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.sarah.myproject.Activities.PatientActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.sarah.myproject.PatientActivity">
+    android:orientation="vertical">
 
-    <TextView
-
+    <LinearLayout
+        android:id="@+id/linearLayout_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/patientTextView" />
-    <EditText
+        android:paddingTop="60dp"
+        android:paddingBottom="60dp"
+        android:layout_gravity="center">
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+            <!--android:text="@string/welcome_user"-->
+            <!--android:id="@+id/helloTextView"-->
+            <!--android:textSize="30sp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/patient_name"
+            android:id="@+id/patientNameTextView"
+            android:textSize="30sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/user"/>
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:id="@+id/linearLayout_buttons">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:hint="@string/password"
-        android:drawablePadding="8dp"
-        android:id="@+id/pad"
-        android:password="true"
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageButton"
+            android:background="#646762bf"
+            android:text="@string/voice_hygiene"
+            android:layout_margin="5dp"
+            android:onClick="onClick_voiceHygiene"
+            />
 
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageButton2"
 
-</RelativeLayout>
+            android:background="#73bb604c"
+            android:text="@string/theory"
+            android:layout_margin="5dp"
+            android:onClick="onClick_theory"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageButton3"
+            android:background="#9956c9da"
+            android:text="@string/exercise"
+            android:layout_margin="5dp"
+            android:onClick="onClick_exercises"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="he">
 
-    <string name="app_name">My Project</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="help">Help</string>
-    <string name="action_search">Search</string>
-    <string name="info">Information</string>
-    <string name="welcome">ברוכים הבאים ל- appVoice</string>
-    <string name="user_name">User name</string>
-    <string name="password">Password</string>
-    <string name="log_in">Log in</string>
+    <!-- welcome -->
+    <string name="welcome">ברוכים הבאים ל-</string>
+    <string name="welcome_user">שלום </string>
+    <string name="hello_world">שלום שלום!</string>
+
+    <!-- button -->
+    <string name="action_search">חיפוש</string>
+    <string name="info">מי אנחנו</string>
+    <string name="log_in">התחברות</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="help">עזרה</string>
+
+    <!-- labels -->
+    <string name="user_name">שם משתמש</string>
+    <string name="password">סיסמה</string>
+    <string name="patient_name">מטופל</string>
+
+    <!-- title -->
     <string name="title_activity_login">LoginActivity</string>
-    <string name="plus_sign_out">Sign Out</string>
-    <string name="plus_disconnect">Disconnect</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="quotation">Find your voice and inspire others to find theirs. (Stephen Covey)</string>
     <string name="title_activity_patient">PatientActivity</string>
+    <string name="app_name">My Project</string>
+
+    <!-- english -->
+    <string name="quotation" translatable="false">Find your voice and inspire others to find theirs. (Stephen Covey)</string>
+    <string name="voice_hygiene">הגינה קולית</string>
+    <string name="theory">רקע תאורטי</string>
+    <string name="exercise">תרגילים</string>
+    <string name="welcome_voiceHygiene" />
+    <string name="action_logout">התנתק</string>
+    <string name="action_exit">יציאה</string>
+    <string name="title_activity_exercises">תרגילים</string>
+    <string name="title_activity_theorical_background">רקע תאורטי</string>
+    <string name="title_activity_voice_hygiene">הגיינה קולית</string>
 
 </resources>

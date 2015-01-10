@@ -1,6 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.sarah.myproject.PatientActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" android:showAsAction="never" />
+    tools:context="com.example.sarah.myproject.Activities.PatientActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/action_logout"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:onClick="onClick_action_logout"/>
+    <item
+        android:id="@+id/action_exit"
+        android:title="@string/action_exit"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:onClick="onClick_action_exit"/>
 </menu>

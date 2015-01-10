@@ -3,24 +3,24 @@
     package="com.example.sarah.myproject" >
 
     <!-- &lt;!&ndash; To access Google+ APIs: &ndash;&gt; -->
-    <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+    <!-- <uses-permission android:PATIENT_ID="android.permission.INTERNET" /> -->
     <!-- &lt;!&ndash; -->
     <!-- To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect -->
     <!-- option is required to comply with the Google+ Sign-In developer policies -->
     <!-- &ndash;&gt; -->
-    <!-- <uses-permission android:name="android.permission.USE_CREDENTIALS" /> -->
-    <!-- &lt;!&ndash; To retrieve the account name (email) as part of sign-in: &ndash;&gt; -->
-    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
+    <!-- <uses-permission android:PATIENT_ID="android.permission.USE_CREDENTIALS" /> -->
+    <!-- &lt;!&ndash; To retrieve the account PATIENT_ID (email) as part of sign-in: &ndash;&gt; -->
+    <!-- <uses-permission android:PATIENT_ID="android.permission.GET_ACCOUNTS" /> -->
     <!-- &lt;!&ndash; To auto-complete the email text field in the login form with the user's emails &ndash;&gt; -->
-    <!-- <uses-permission android:name="android.permission.READ_PROFILE" /> -->
-    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> -->
+    <!-- <uses-permission android:PATIENT_ID="android.permission.READ_PROFILE" /> -->
+    <!-- <uses-permission android:PATIENT_ID="android.permission.READ_CONTACTS" /> -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MyProject"
+            android:name=".Activities.MyProject"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,16 +30,40 @@
         </activity>
 
         <!-- <meta-data -->
-        <!-- android:name="com.google.android.gms.version" -->
+        <!-- android:PATIENT_ID="com.google.android.gms.version" -->
         <!-- android:value="@integer/google_play_services_version" /> -->
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name=".PatientActivity"
+            android:name=".Activities.PatientActivity"
             android:label="@string/title_activity_patient" >
+        </activity>
+        <activity
+            android:name=".Activities.VoiceHygieneActivity"
+            android:label="@string/title_activity_voice_hygiene"
+            android:parentActivityName=".Activities.PatientActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sarah.myproject.Activities.PatientActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.TheoricalBackgroundActivity"
+            android:label="@string/title_activity_theorical_background"
+            android:parentActivityName=".Activities.PatientActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sarah.myproject.Activities.PatientActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.ExercisesActivity"
+            android:label="@string/title_activity_exercises"
+            android:parentActivityName=".Activities.PatientActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sarah.myproject.Activities.PatientActivity" />
         </activity>
     </application>
 
