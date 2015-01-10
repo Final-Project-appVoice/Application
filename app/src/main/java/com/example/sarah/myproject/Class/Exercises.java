@@ -21,6 +21,7 @@ public class Exercises extends Patient
         this.pdfPathHashtable = pdfPathHashtable;
     }
 
+
     public Boolean getIsVideo() {
         return isVideo;
     }

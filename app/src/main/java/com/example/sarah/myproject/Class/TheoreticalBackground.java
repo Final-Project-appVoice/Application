@@ -17,6 +17,7 @@ public class TheoreticalBackground extends Patient
         this.hashtable = hashtable;
     }
 
+
     public String getPdfPath() {
         return pdfPath;
     }

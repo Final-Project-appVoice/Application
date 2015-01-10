@@ -287,4 +287,5 @@ public class VoiceHygiene extends Patient
     public void setToDoNotificationsHashtable(Hashtable<Integer, ToDoNotifications> toDoNotificationsHashtable) {
         this.toDoNotificationsHashtable = toDoNotificationsHashtable;
     }
+
 }
