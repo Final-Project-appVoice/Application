@@ -34,5 +34,7 @@
     <string name="title_activity_exercises">תרגילים</string>
     <string name="title_activity_theorical_background">רקע תאורטי</string>
     <string name="title_activity_voice_hygiene">הגיינה קולית</string>
+    <string name="description_voice_hygiene">Description</string>
+    <string name="pdfList_description_voiceHygiene" />
 
 </resources>

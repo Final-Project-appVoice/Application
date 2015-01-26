@@ -33,5 +33,7 @@
     <string name="title_activity_exercises">Exercises</string>
     <string name="title_activity_theorical_background">TheoricalBackground</string>
     <string name="title_activity_voice_hygiene">VoiceHygiene</string>
+    <string name="description_voice_hygiene">Description</string>
+    <string name="pdfList_description_voiceHygiene" />
 
 </resources>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,9 @@ import com.example.sarah.myproject.R;
 public class VoiceHygieneActivity extends Activity
 {
     SessionManager session;
-    DalPatient dalPatient;
+    private DalPatient dalPatient;
+    private ListView listView;
+    private TextView welcome_voiceHygiene;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,14 +29,16 @@ public class VoiceHygieneActivity extends Activity
         session = new SessionManager(getApplicationContext());
         dalPatient = new DalPatient();
 
-        TextView welcome_voiceHygiene = (TextView)findViewById(R.id.welcome_voiceHygiene);
+        welcome_voiceHygiene = (TextView)findViewById(R.id.welcome_voiceHygiene);
+        listView = (ListView)findViewById(R.id.listView_voiceHygiene);
+
         String patientId = session.getUserDetails();
 
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         Patient p = dalPatient.patientDetails(patientId, this);
 
-        welcome_voiceHygiene.setText("Hello " + p.getFName());
+        //welcome_voiceHygiene.setText("Hello " + p.getFName());
     }
 
 
