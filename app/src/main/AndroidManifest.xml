@@ -50,7 +50,7 @@
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
         </activity>
         <activity
-            android:name=".Activities.TheoricalBackgroundActivity"
+            android:name=".Activities.TheoreticalBackgroundActivity"
             android:label="@string/title_activity_theorical_background"
             android:parentActivityName=".Activities.PatientActivity" >
             <meta-data
@@ -64,6 +64,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.BreathingActivity"
+            android:label="@string/title_activity_breathing"
+            android:parentActivityName=".Activities.ExercisesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sarah.myproject.Activities.ExercisesActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.RelaxationActivity"
+            android:label="@string/title_activity_relaxation"
+            android:parentActivityName=".Activities.ExercisesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sarah.myproject.Activities.ExercisesActivity" />
         </activity>
     </application>
 

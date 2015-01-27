@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--welcome-->
-    <string name="hello_world">Hello world!</string>
-    <string name="welcome">Welcome to\n</string>
-    <string name="welcome_user">Hello </string>
+    <!--&lt;!&ndash;welcome&ndash;&gt;-->
+    <!--<string name="hello_world">Hello world!</string>-->
+    <!--<string name="welcome">Welcome to\n</string>-->
+    <!--<string name="welcome_user">Hello </string>-->
 
-    <!--button-->
-    <string name="action_settings">Settings</string>
-    <string name="help">Help</string>
-    <string name="action_search">Search</string>
-    <string name="log_in">Log in</string>
+    <!--&lt;!&ndash;button&ndash;&gt;-->
+    <!--<string name="action_settings">Settings</string>-->
+    <!--<string name="help">Help</string>-->
+    <!--<string name="action_search">Search</string>-->
+    <!--<string name="log_in">Log in</string>-->
 
-    <!--labels-->
-    <string name="info">Information</string>
-    <string name="user_name">User name</string>
-    <string name="password">Password</string>
+    <!--&lt;!&ndash;labels&ndash;&gt;-->
+    <!--<string name="info">Information</string>-->
+    <!--<string name="user_name">User name</string>-->
+    <!--<string name="password">Password</string>-->
 
-    <!--english-->
+    <!--&lt;!&ndash;english&ndash;&gt;-->
 
-    <!--title-->
-    <string name="app_name">My Project</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_patient">PatientActivity</string>
-    <string name="patient_name">Patient</string>
-    <string name="voice_hygiene" >Voice Hygiene</string>
-    <string name="theory" >Theorical Background</string>
-    <string name="exercise" >Exercises</string>
-    <string name="welcome_voiceHygiene" />
-    <string name="action_logout">Logout</string>
-    <string name="action_exit">Exit</string>
-    <string name="title_activity_exercises">Exercises</string>
-    <string name="title_activity_theorical_background">TheoricalBackground</string>
-    <string name="title_activity_voice_hygiene">VoiceHygiene</string>
-    <string name="description_voice_hygiene">Description</string>
-    <string name="pdfList_description_voiceHygiene" />
+    <!--&lt;!&ndash;title&ndash;&gt;-->
+    <!--<string name="app_name">My Project</string>-->
+    <!--<string name="title_activity_login">LoginActivity</string>-->
+    <!--<string name="title_activity_patient">PatientActivity</string>-->
+    <!--<string name="patient_name">Patient</string>-->
+    <!--<string name="voice_hygiene" >Voice Hygiene</string>-->
+    <!--<string name="theory" >Theorical Background</string>-->
+    <!--<string name="exercise" >Exercises</string>-->
+    <!--<string name="welcome_voiceHygiene" />-->
+    <!--<string name="action_logout">Logout</string>-->
+    <!--<string name="action_exit">Exit</string>-->
+    <!--<string name="title_activity_exercises">Exercises</string>-->
+    <!--<string name="title_activity_theorical_background">TheoreticalBackground</string>-->
+    <!--<string name="title_activity_voice_hygiene">VoiceHygiene</string>-->
+    <!--&lt;!&ndash;<string name="description_voice_hygiene">Description</string>&ndash;&gt;-->
+    <!--&lt;!&ndash;<string name="pdfList_description_voiceHygiene" />&ndash;&gt;-->
 
 </resources>

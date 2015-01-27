@@ -17,6 +17,16 @@
     <string name="user_name">שם משתמש</string>
     <string name="password">סיסמה</string>
     <string name="patient_name">מטופל</string>
+    <string name="theory">רקע תאורטי</string>
+    <string name="exercise">תרגילים</string>
+    <string name="welcome_voiceHygiene"></string>
+    <string name="action_logout">התנתק</string>
+    <string name="action_exit">יציאה</string>
+    <string name="title_activity_exercises">תרגילים</string>
+    <string name="title_activity_theorical_background">רקע תאורטי</string>
+    <string name="title_activity_voice_hygiene">הגיינה קולית</string>
+    <string name="description_voice_hygiene">הקול מופק באמצעות זרם אוויר העובר דרך מעבר צר (המיתרים) בו נוצרים  גלי קול שנכנסים לחללי התהודה, באמצעות מספר מערכות. היום נלמד על מערכת ההגייה – פה (לשון, שפתיים, שיניים, חיך, וילון, אף) : ההיגוי מאפשר להפוך את הקול לדיבור ומילים. </string>
+    <string name="pdfList_description_voiceHygiene">להלן רשימת משימות עליכם לבצע:</string>
 
     <!-- title -->
     <string name="title_activity_login">LoginActivity</string>
@@ -26,15 +36,25 @@
     <!-- english -->
     <string name="quotation" translatable="false">Find your voice and inspire others to find theirs. (Stephen Covey)</string>
     <string name="voice_hygiene">הגינה קולית</string>
-    <string name="theory">רקע תאורטי</string>
-    <string name="exercise">תרגילים</string>
-    <string name="welcome_voiceHygiene" />
-    <string name="action_logout">התנתק</string>
-    <string name="action_exit">יציאה</string>
-    <string name="title_activity_exercises">תרגילים</string>
-    <string name="title_activity_theorical_background">רקע תאורטי</string>
-    <string name="title_activity_voice_hygiene">הגיינה קולית</string>
-    <string name="description_voice_hygiene">Description</string>
-    <string name="pdfList_description_voiceHygiene" />
+    <string name="pdf_title_voice_hygiene">רשימת משימות</string>
+    <string name="description_pdf_voice_hygiene">להלן רשימת משימות שעליך לבצע:</string>
+    <string name="title_notification_voice_hygiene">התראות</string>
+    <string name="description_notification_voice_hygiene">להלן רשימת התנהגויות עליהם תקבל התראה:</string>
+    <string name="description_theoretical_background">ברוכים הבאים לרקע תאורטי</string>
+    <string name="title_link_theoretical_background">הסבר בסרטון</string>
+    <string name="description_link_theoretical_background">יש לצפות בסרטון להסבר על התנהגות הקול:</string>
+    <string name="pdf_title_theoreticalBackground">רשימת משימות</string>
+    <string name="description_pdf_theoreticalBackground">להלן רשימת משימות שעליך לבצע:</string>
+    <string name="description_exercises">לביצוע שעורי הבית עליכם לעשות את התרגילים של שתי הקטגוריות הבאות:</string>
+    <string name="relaxation">הרפייה</string>
+    <string name="breathing">נשימה</string>
+    <string name="title_activity_breathing">Breathing</string>
+    <string name="title_activity_relaxation">Relaxation</string>
+    <string name="description_relaxation">התרגילים הבאים מומלצים לפני שימוש אינטנסיבי בקול. מדובר בחימום הגוף ומיתרי הקול לשם הכנתם לדיבור ממושך או יותר מאומץ. התרגילים מומלצים גם לפני ביצוע תרגילי הקול של הטיפול.
+מובאים התרגילים העיקריים בלבד. ניתן להוסיף תרגילי מתיחה והרפיה שונים במידת הצורך, אך מומלץ לבצע לפחות את הבאים.
+לסיום לחץ "סיום".
+</string>
+    <string name="description_breathing">בכל תרגילי הנשימה יש לזכור את על הטיפים שלעיל. להלן סיכום קצר של התחושות העיקריות שצריכות להיות:  -\tבנשימה (אוויר נכנס): בטן מתמלאת ויוצאת החוצה (תחושה של בלון)  -\tבשאיפה (אוויר יוצא): בטן נכנסת פנימה לאט  -\tבית חזה וכתפיים בכלל לא מעורבים ולא זזים  -\tגרון רפוי ולא עוצר את האוויר כלל להלן רשימת תרגילי נשימה עם העלאה בדרגות הקושי:</string>
+    <string name="button_pdf">Open PDF</string>
 
 </resources>

@@ -5,4 +5,36 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!--Title style-->
+    <style name="Title" parent="android:Theme">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <!--Description style-->
+    <style name="Description" parent="android:Theme">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#ff686760</item>
+    </style>
+
+    <!--Subtitle style-->
+    <style name="Subtitle" parent="android:Theme">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">#e028aada</item>
+    </style>
+
+    <!--SubDescription style-->
+    <style name="SubDescription" parent="android:Theme">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#ffb2b1aa</item>
+    </style>
+
+    <!--Linear style-->
+    <style name="LinearStyle" parent="android:Theme">
+        <item name="android:paddingTop">20dp</item>
+    </style>
+
+    <!--Folder style-->
+    <style name="Folder" parent="android:Theme">
+        <item name="android:textSize">20dp</item>
+    </style>
 </resources>

@@ -83,7 +83,7 @@ public class PatientActivity extends Activity
         button3.setHeight((int)Math.round(0.15*screenHeightPx));
         button3.setWidth((int) Math.round(0.25*screenWidthPx));
 
-        linearLayout_home.setPadding(0, 0, 0, (int)Math.round(0.1*screenHeightPx));
+        linearLayout_home.setPadding(0, 0, 0, (int)Math.round(0.1*screenHeightPx)); // left, top, right, bottom
 
     }
 
@@ -126,7 +126,7 @@ public class PatientActivity extends Activity
 
     public void onClick_theory(View view)
     {
-        Intent i = new Intent(this, TheoricalBackgroundActivity.class);
+        Intent i = new Intent(this, TheoreticalBackgroundActivity.class);
         startActivity(i);           // go to activity
     }
 
