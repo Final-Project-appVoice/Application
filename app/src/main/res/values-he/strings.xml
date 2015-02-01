@@ -19,10 +19,9 @@
     <string name="patient_name"> מטופל </string>
 
     <!--title-->
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_patient">PatientActivity</string>
-    <string name="app_name">My Project</string>
-    <string name="voice_hygiene" >הגינה קולית</string>
+    <string name="title_activity_login">עמוד התחברות</string>
+    <string name="title_activity_patient">עמוד מטופל</string>
+    <string name="voice_hygiene" >הגיינה קולית</string>
     <string name="theory" >רקע תאורטי</string>
     <string name="exercise" >תרגילים</string>
     <string name="welcome_voiceHygiene" />
@@ -33,6 +32,13 @@
     <string name="title_activity_voice_hygiene">הגיינה קולית</string>
     <string name="relaxation">הרפייה</string>
     <string name="breathing">נשימה</string>
+    <string name="title_notification_voice_hygiene">התראות</string>
+    <string name="title_activity_breathing">נשימה</string>
+    <string name="title_activity_relaxation">הרפייה</string>
+    <string name="pdf_title_theoreticalBackground">רשימת משימות</string>
+    <string name="pdf_title_voice_hygiene">רשימת משימות</string>
+    <string name="pdfList_description_voiceHygiene">להלן רשימת משימות עליכם לבצע:</string>
+    <string name="title_link_theoretical_background">הסבר בסרטון</string>
     <!--<string name="description_voice_hygiene">Description</string>-->
     <!--<string name="pdfList_description_voiceHygiene" />-->
 

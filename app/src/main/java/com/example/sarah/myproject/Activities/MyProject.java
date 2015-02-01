@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.sarah.myproject.Class.AlertDialogManager;
 import com.example.sarah.myproject.Class.Patient;
@@ -25,26 +27,22 @@ public class MyProject extends Activity
     Patient patient;
     EditText userName_editText;
     EditText password_editText;
-//    public static final String MyPREFERENCES = "MyPrefsFile" ;
-//    public static final String PATIENT_ID = "PatientId";
-//    //public static final String PATIENT_PWD = "PatientPwd";
     public static boolean isLoggedIn = false;
     SharedPreferences settings;
-    // Alert Dialog Manager
-    AlertDialogManager alert = new AlertDialogManager();
+    AlertDialogManager alert = new AlertDialogManager();     // Alert Dialog Manager
+    SessionManager session;    // Session Manager Class
 
-    // Session Manager Class
-    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_project);
 
+        setupUI(findViewById(R.id.main_layout));
         // Session Manager
         session = new SessionManager(getApplicationContext());
 
-        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         userName_editText = (EditText)findViewById(R.id.username);
         password_editText = (EditText)findViewById(R.id.pwd);
@@ -108,41 +106,6 @@ public class MyProject extends Activity
 
         Log.w("Check", username +" "+ password);
 
-//        if(username.trim().length() > 0 && password.trim().length() > 0)
-//        {
-//            // check if patient exists and keep the patient details in Cursor c
-//            Cursor c = dalPatient.findPatientByIdAndPwd(username, password, this);
-//            SharedPreferences.Editor editor = settings.edit();
-//
-//            //if exists, change activity
-//            if (dalPatient.isPatientExists(c)) {
-//                Log.w("exist", "the patient exists!!");
-//                Intent i = new Intent(this, PatientActivity.class);            //change to PatientActivity
-//                String str = dalPatient.showDetails(username, this);           // save patient details in str
-//                i.putExtra("PatientText", str);                                 //save preference
-//               // i.putExtra("PatientId", username);
-//                i.putExtra(session.PATIENT_ID, username);
-//                //i.putExtra("PatientPwd", password);
-//                //isLoggedIn = true;
-//
-//                //editor.commit();
-//                editor.apply();            // commit with the preferences
-//                startActivity(i);           // go to activity
-//            }
-//            else
-//            {
-//                Log.w("exist", "the patient NOT exists!!");
-//                // username / password doesn't match
-//                alert.showAlertDialog(MyProject.this, "Login failed..", "Username/Password is incorrect", false);
-//            }
-//
-//        }
-//        else
-//        {
-//            alert.showAlertDialog(MyProject.this, "Login failed..", "Please enter username and password", false);
-//        }
-
-
         if(username.trim().length() > 0 && password.trim().length() > 0)
         {
 
@@ -171,5 +134,38 @@ public class MyProject extends Activity
             alert.showAlertDialog(MyProject.this, "Login failed..", "Please enter username and password", false);
         }
 
+    }
+//    Dismiss keyboard
+    public static void hideSoftKeyboard(Activity activity)
+    {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public void setupUI(View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(MyProject.this);
+                    return false;
+                }
+
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                setupUI(innerView);
+            }
+        }
     }
 }
