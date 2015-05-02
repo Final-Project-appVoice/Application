@@ -54,11 +54,6 @@ public class VoiceHygieneActivity extends Activity
         fillListViewPDF();
         //welcome_voiceHygiene.setText("Hello " + p.getFName());
 
-
-        createPDF = (Button)findViewById(R.id.button_test_pdf_create);
-
-
-
         openPDF = (Button)findViewById(R.id.button_test_pdf);
 
     }

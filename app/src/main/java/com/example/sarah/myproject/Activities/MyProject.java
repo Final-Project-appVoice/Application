@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,14 +17,18 @@ import android.widget.EditText;
 
 import com.example.sarah.myproject.Class.AlertDialogManager;
 import com.example.sarah.myproject.Class.Patient;
+import com.example.sarah.myproject.Class.Patients;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalPatient;
+import com.example.sarah.myproject.Dal.MySqlDal;
 import com.example.sarah.myproject.R;
-
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
 
 public class MyProject extends Activity
 {
     DalPatient dalPatient;
+    MySqlDal mySqlDal;
     Patient patient;
     EditText userName_editText;
     EditText password_editText;
@@ -31,12 +36,22 @@ public class MyProject extends Activity
     SharedPreferences settings;
     AlertDialogManager alert = new AlertDialogManager();     // Alert Dialog Manager
     SessionManager session;    // Session Manager Class
+    private MobileServiceClient mClient;
+    private MobileServiceTable<Patients> mToDoTable;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_project);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+        //StorageService storage = new StorageService(this);
+
 
         setupUI(findViewById(R.id.main_layout));
         // Session Manager
@@ -49,33 +64,25 @@ public class MyProject extends Activity
         //patient_textView = (TextView)findViewById(R.id.patientTextView);
         settings = getSharedPreferences(session.MyPREFERENCES, MODE_PRIVATE);
         addNewPatient();
+        mySqlDal = new MySqlDal(this, this, getTaskId());
+        mySqlDal.execute();
 
     }
-
-
-//    protected void onResume()
-//    {
-//        settings = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-//        if (settings.contains(PATIENT_ID))
-//        {
-//            Log.w("sharePref: ", "settings CONTAINS!");
-//            if(settings.contains(PATIENT_PWD))
-//            {
-//                Intent i = new Intent(this, PatientActivity.class);
-//                startActivity(i);
-//            }
-//        }
-//        super.onResume();
-//    }
 
 
     private void addNewPatient()
     {
+
         dalPatient = new DalPatient();
         patient = new Patient("3", "David", "Cohen", "davidco@gmail.com", "Jerusalem", "0525234327", "Clalit");
         Log.w("warning:", patient.toString());
+        Patients mPatient = new Patients("3", "David", "Levy");
         dalPatient.addNewPatient(patient, "p", this);
+
+
+
     }
+
 
 
     @Override
