@@ -45,25 +45,23 @@ public class MySqlDal extends AsyncTask<String,String,String>
             boolean running = true;
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-           // Connection con = DriverManager.getConnection(connectionString);
 
             String result = "\nDatabase connection success\n";
             Statement st = con.createStatement();
             Log.d("AFTER CONNECTION ", "HEREE");
-            Statement st2 = con.createStatement();
+           // Statement st2 = con.createStatement();
 //            while(running) {
                 String query = "SELECT FirstName FROM SpeechTherapist WHERE LicenseId = '123'";
+                String query1 = "SELECT Patientcol FROM Patient WHERE idPatient = '1'";
                 //String query2 = "SELECT AverageTime FROM Queue WHERE BusinessId = '" + branchId + "'";
                 Log.d("RUNNING ", "HEREE");
-                ResultSet rs = st.executeQuery(query);
-               // ResultSet rs2 = st2.executeQuery(query2);
-                while (rs.next()){//&& rs2.next()) {
-                    //int currentQueue = rs.getInt("CurrentQueue");
-                    String name = rs.getString("FirstName");
+                ResultSet rs = st.executeQuery(query1);
+                while (rs.next()){
+                   // String name = rs.getString("FirstName");
+                    String name = rs.getString("Patientcol");
                     Log.d("WHILE ", "HEREE");
                     Log.d("NAME ", name);
-                    //Time t=rs2.getTime("AverageTime");
-                    //System.out.println("The Time From DB Id : "+ t );
+
                     responseName = name;
                     publishProgress(name);
                 }
@@ -82,7 +80,6 @@ public class MySqlDal extends AsyncTask<String,String,String>
     {
         Log.v("ON PROGRESS", progress[0]);
         sqltry.setText(progress[0]);
-        //averageTextView.setText(progress[1]);
     }
 }
 
