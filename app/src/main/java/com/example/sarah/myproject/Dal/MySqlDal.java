@@ -71,7 +71,7 @@ public class MySqlDal extends AsyncTask<String,String,String>
          //   }
             Log.d("RESULT ", result);
         } catch (Exception e) {
-            Log.d("EXCEPTION ", "HEREE");
+            Log.d("EXCEPTION ", "HERRREE");
             e.printStackTrace();
         }
         return responseName;
