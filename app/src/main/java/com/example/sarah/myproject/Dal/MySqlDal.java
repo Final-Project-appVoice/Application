@@ -37,7 +37,8 @@ public class MySqlDal extends AsyncTask<String,String,String>
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected String doInBackground(String... params)
+    {
         int response = 0;
         String responseName = "";
         Log.d("BACKGROUND ", "HEREE");
@@ -53,7 +54,6 @@ public class MySqlDal extends AsyncTask<String,String,String>
 //            while(running) {
                 String query = "SELECT FirstName FROM SpeechTherapist WHERE LicenseId = '123'";
                 String query1 = "SELECT Patientcol FROM Patient WHERE idPatient = '1'";
-                //String query2 = "SELECT AverageTime FROM Queue WHERE BusinessId = '" + branchId + "'";
                 Log.d("RUNNING ", "HEREE");
                 ResultSet rs = st.executeQuery(query1);
                 while (rs.next()){
@@ -65,8 +65,9 @@ public class MySqlDal extends AsyncTask<String,String,String>
                     responseName = name;
                     publishProgress(name);
                 }
-                if(isCancelled())
-                    running=false;
+                if(isCancelled()) {
+                    running = false;
+                }
          //   }
             Log.d("RESULT ", result);
         } catch (Exception e) {
