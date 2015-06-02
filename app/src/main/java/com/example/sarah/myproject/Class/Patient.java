@@ -12,8 +12,9 @@ public class Patient
     String address;
     String phone;
     String HMO;
+    String therapistId;
 
-    public Patient(String id, String fName, String lName, String mail, String address, String phone, String HMO)
+    public Patient(String id, String fName, String lName, String mail, String address, String phone, String HMO, String therapistId)
     {
         this.id = id;
         this.fName = fName;
@@ -22,6 +23,7 @@ public class Patient
         this.address = address;
         this.phone = phone;
         this.HMO = HMO;
+        this.therapistId = therapistId;
     }
 
     public String getId()
@@ -94,17 +96,25 @@ public class Patient
         this.HMO = HMO;
     }
 
+    public String getTherapistId() {
+        return therapistId;
+    }
+
+    public void setTherapistId(String therapistId) {
+        this.therapistId = therapistId;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Patient{" +
-                "id=" + id +
+                "address='" + address + '\'' +
+                ", id='" + id + '\'' +
                 ", fName='" + fName + '\'' +
                 ", lName='" + lName + '\'' +
                 ", mail='" + mail + '\'' +
-                ", address='" + address + '\'' +
-                ", phone=" + phone +
+                ", phone='" + phone + '\'' +
                 ", HMO='" + HMO + '\'' +
+                ", therapistId='" + therapistId + '\'' +
                 '}';
     }
 }

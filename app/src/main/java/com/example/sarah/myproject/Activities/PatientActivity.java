@@ -18,9 +18,10 @@ import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalPatient;
 import com.example.sarah.myproject.R;
 
+import java.util.Set;
 
-public class PatientActivity extends Activity
-{
+
+public class PatientActivity extends Activity {
 
     private TextView patient_textView;
     private Intent i;
@@ -31,11 +32,13 @@ public class PatientActivity extends Activity
     private Button button1, button2, button3;
     private LinearLayout linearLayout_home;
     private SessionManager session;
-    String patientId;
+    private Set<String> patientDetails;
+    private String[] patientArray;
+    private String patientId, patientName;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
 
@@ -49,62 +52,60 @@ public class PatientActivity extends Activity
          * */
         session.checkLogin();
 
-        // get user data from session
-        patientId = session.getUserDetails();
+        // get user ID from session
+        patientArray = session.getPatientDetails();
+        if (patientArray.length > 0)
+        {
+            patientId = patientArray[0];
+            patientName = patientArray[1];
+        }
 
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
         // get the size of the screen in order to set buttons' size relative to the screen
         displayMetrics = this.getResources().getDisplayMetrics();
-        screenHeightPx = (int)(Math.round(displayMetrics.heightPixels));        // height on screen
-        screenWidthPx = (int)(Math.round(displayMetrics.widthPixels));          //width of screen
+        screenHeightPx = (int) (Math.round(displayMetrics.heightPixels));        // height on screen
+        screenWidthPx = (int) (Math.round(displayMetrics.widthPixels));          //width of screen
 
         dalPatient = new DalPatient();
 
-        patient_textView = (TextView)findViewById(R.id.patientNameTextView);
-        button1 = (Button)findViewById(R.id.imageButton);
-        button2 = (Button)findViewById(R.id.imageButton2);
-        button3 = (Button)findViewById(R.id.imageButton3);
-        linearLayout_home = (LinearLayout)findViewById(R.id.linearLayout_hello);
+        patient_textView = (TextView) findViewById(R.id.patientNameTextView);
+        button1 = (Button) findViewById(R.id.imageButton);
+        button2 = (Button) findViewById(R.id.imageButton2);
+        button3 = (Button) findViewById(R.id.imageButton3);
+        linearLayout_home = (LinearLayout) findViewById(R.id.linearLayout_hello);
 
         i = getIntent();
-        p = dalPatient.patientDetails(patientId, this);
 
-        if(p != null)
-        {
-            fieldTextView();
-        }
+        fieldTextView();
 
 
-        button1.setHeight((int)Math.round(0.15*screenHeightPx));
-        button1.setWidth((int) Math.round(0.25*screenWidthPx));
-        button2.setHeight((int)Math.round(0.15*screenHeightPx));
-        button2.setWidth((int) Math.round(0.25*screenWidthPx));
-        button3.setHeight((int)Math.round(0.15*screenHeightPx));
-        button3.setWidth((int) Math.round(0.25*screenWidthPx));
+        button1.setHeight((int) Math.round(0.15 * screenHeightPx));
+        button1.setWidth((int) Math.round(0.25 * screenWidthPx));
+        button2.setHeight((int) Math.round(0.15 * screenHeightPx));
+        button2.setWidth((int) Math.round(0.25 * screenWidthPx));
+        button3.setHeight((int) Math.round(0.15 * screenHeightPx));
+        button3.setWidth((int) Math.round(0.25 * screenWidthPx));
 
-        linearLayout_home.setPadding(0, 0, 0, (int)Math.round(0.1*screenHeightPx)); // left, top, right, bottom
+        linearLayout_home.setPadding(0, 0, 0, (int) Math.round(0.1 * screenHeightPx)); // left, top, right, bottom
 
     }
 
-    private void fieldTextView()
-    {
-        patient_textView.setText(getString(R.string.welcome_user)+ " " + p.getFName());
+    private void fieldTextView() {
+        patient_textView.setText(getString(R.string.welcome_user) + " " + patientName);
 
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_patient, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -118,27 +119,23 @@ public class PatientActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick_voiceHygiene(View view)
-    {
+    public void onClick_voiceHygiene(View view) {
         Intent i = new Intent(this, VoiceHygieneActivity.class);
         startActivity(i);           // go to activity
     }
 
-    public void onClick_theory(View view)
-    {
+    public void onClick_theory(View view) {
         Intent i = new Intent(this, TheoreticalBackgroundActivity.class);
         startActivity(i);           // go to activity
     }
 
-    public void onClick_exercises(View view)
-    {
+    public void onClick_exercises(View view) {
         Intent i = new Intent(this, ExercisesActivity.class);
         startActivity(i);           // go to activity
     }
 
 
-    public void onClick_action_logout(MenuItem item)
-    {
+    public void onClick_action_logout(MenuItem item) {
 //        SharedPreferences sharedpreferences = getSharedPreferences(MyProject.MyPREFERENCES, Context.MODE_PRIVATE);
 //        Editor editor = sharedpreferences.edit();
 //        editor.clear();
@@ -153,8 +150,7 @@ public class PatientActivity extends Activity
         session.logoutUser();
     }
 
-    public void onClick_action_exit(MenuItem item)
-    {
+    public void onClick_action_exit(MenuItem item) {
         //String id = i.getStringExtra(MyProject.PATIENT_ID);
         String id = i.getStringExtra(session.PATIENT_ID);
         Log.e("exit", id);
@@ -175,7 +171,7 @@ public class PatientActivity extends Activity
 //        session.logoutUser();
 //    }
 
- //   @Override
+    //   @Override
 //    protected void onResume()
 //    {
 //        super.onResume();

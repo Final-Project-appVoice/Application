@@ -4,10 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.example.sarah.myproject.DB.MyDbHelper;
 import com.example.sarah.myproject.Class.Patient;
+import com.example.sarah.myproject.DB.MyDbHelper;
 import com.example.sarah.myproject.DB.Patients_db;
 
 /**
@@ -95,42 +94,42 @@ public class DalPatient
         return true;
     }
 
-    public String showDetails(String username, Context context)
-    {
-        dbHelper = new MyDbHelper(context);
-        db = dbHelper.getWritableDatabase();
+//    public String showDetails(String username, Context context)
+//    {
+//        dbHelper = new MyDbHelper(context);
+//        db = dbHelper.getWritableDatabase();
+//
+//        Cursor c = db.rawQuery("SELECT * FROM patients WHERE id='"+username+"'", null);
+//    String str = "";
+//        Patient p;
+//
+//        if(c.moveToFirst())
+//        {
+//            Log.w("DataBase:", c.getString(1)+"\n"+ c.getString(2)+"\n"+ c.getString(3)+"\n"+ c.getString(4)+"\n"+ c.getString(5)+"\n"+ c.getString(6)+"\n"+ c.getString(7)+"\n"+ c.getString(8));
+//            p = new Patient(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
+//            str += p.toString();
+////            editName.setText();
+////            editMarks.setText(c.getString(2));
+//           // patient_textView.setText(p.toString());
+//        }
+//        return str;
+//    }
 
-        Cursor c = db.rawQuery("SELECT * FROM patients WHERE id='"+username+"'", null);
-    String str = "";
-        Patient p;
-
-        if(c.moveToFirst())
-        {
-            Log.w("DataBase:", c.getString(1)+"\n"+ c.getString(2)+"\n"+ c.getString(3)+"\n"+ c.getString(4)+"\n"+ c.getString(5)+"\n"+ c.getString(6)+"\n"+ c.getString(7)+"\n"+ c.getString(8));
-            p = new Patient(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
-            str += p.toString();
-//            editName.setText();
-//            editMarks.setText(c.getString(2));
-           // patient_textView.setText(p.toString());
-        }
-        return str;
-    }
-
-    public Patient patientDetails(String username, Context context)
-    {
-        dbHelper = new MyDbHelper(context);
-        db = dbHelper.getWritableDatabase();
-
-        Cursor c = db.rawQuery("SELECT * FROM patients WHERE id='"+username+"'", null);
-        String str = "";
-        Patient p;
-
-        if(c.moveToFirst())
-        {
-            Log.w("DataBAse:", c.getString(1) + "\n" + c.getString(2) + "\n" + c.getString(3) + "\n" + c.getString(4) + "\n" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7) + "\n" + c.getString(8));
-            p = new Patient(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
-            return p;
-        }
-        return null;
-    }
+//    public Patient patientDetails(String username, Context context)
+//    {
+//        dbHelper = new MyDbHelper(context);
+//        db = dbHelper.getWritableDatabase();
+//
+//        Cursor c = db.rawQuery("SELECT * FROM patients WHERE id='"+username+"'", null);
+//        String str = "";
+//        Patient p;
+//
+//        if(c.moveToFirst())
+//        {
+//            Log.w("DataBAse:", c.getString(1) + "\n" + c.getString(2) + "\n" + c.getString(3) + "\n" + c.getString(4) + "\n" + c.getString(5) + "\n" + c.getString(6) + "\n" + c.getString(7) + "\n" + c.getString(8));
+//            p = new Patient(c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
+//            return p;
+//        }
+//        return null;
+//    }
 }

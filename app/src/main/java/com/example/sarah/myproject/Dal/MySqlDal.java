@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.sarah.myproject.R;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,22 +14,21 @@ import java.sql.Statement;
 /**
  * Created by Sarah on 26-Apr-15.
  */
-public class MySqlDal extends AsyncTask<String,String,String>
+public class MySqlDal extends AsyncTask<String, String, String>  // <Params, Progress, Result>
 {
     private final Activity activity;
     private final Context context;
     private int branchId;
     TextView sqltry;
-    private static final String DB_URL = "jdbc:mysql://259a2693-7bcb-46e5-adb2-a47a0101d17f.mysql.sequelizer.com:3306/db259a26937bcb46e5adb2a47a0101d17f";
-    private static final String USER = "oosbszkpqgotoeqb";
-    private static final String PASS = "4Cu2nEaWFcZNZVKsx2vbuSYdTw46T5wipApPhfTdG4FQeSSZKpwPWKPjLrhXJcdJ";
+    public static final String DB_URL = DalConstant.DB_URL;
+    public static final String USER = DalConstant.USER;
+    public static final String PASS = DalConstant.PASS;
 
-    public MySqlDal(Activity activity,Context context,int branchId)
+    public MySqlDal(Activity activity, Context context, int branchId)
     {
         this.activity = activity;
-        this.context=context;
+        this.context = context;
         this.branchId=branchId;
-        sqltry = (TextView) activity.findViewById(R.id.sql_try);
         Log.d("MY SQL ", "HEREEEE");
         //averageTextView = (TextView) activity.findViewById(R.id.timeTextView);
     }
@@ -51,7 +48,8 @@ public class MySqlDal extends AsyncTask<String,String,String>
             Statement st = con.createStatement();
             Log.d("AFTER CONNECTION ", "HEREE");
            // Statement st2 = con.createStatement();
-//            while(running) {
+           while(running)
+           {
                 String query = "SELECT FirstName FROM SpeechTherapist WHERE LicenseId = '123'";
                 String query1 = "SELECT Patientcol FROM Patient WHERE idPatient = '1'";
                 Log.d("RUNNING ", "HEREE");
@@ -65,10 +63,11 @@ public class MySqlDal extends AsyncTask<String,String,String>
                     responseName = name;
                     publishProgress(name);
                 }
-                if(isCancelled()) {
+                if(isCancelled())
+                {
                     running = false;
                 }
-         //   }
+           }
             Log.d("RESULT ", result);
         } catch (Exception e) {
             Log.d("EXCEPTION ", "HERRREE");

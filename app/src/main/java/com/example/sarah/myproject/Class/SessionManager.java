@@ -7,6 +7,9 @@ import android.content.SharedPreferences.Editor;
 
 import com.example.sarah.myproject.Activities.MyProject;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Created by Sarah on 07-Jan-15.
  */
@@ -23,7 +26,10 @@ public class SessionManager
 //    public static final String KEY_EMAIL = "PatientEmail";     // Email address (make variable public to access from outside)
     public static final String MyPREFERENCES = "MyPrefsFile" ;
     public static final String PATIENT_ID = "PatientId";
+    public static final String PATIENT_SET = "PatientSet";
+    public static final String PATIENT_NAME = "PatientName";
     private static final String IS_LOGIN = "IsLoggedIn";        // All Shared Preferences Keys
+    private static final Patient LOGIN_PATIENT = null;
     //public static final String PATIENT_PWD = "PatientPwd";
 
     // Constructor
@@ -38,22 +44,40 @@ public class SessionManager
     /**
      * Create login session
      * */
-    public void createLoginSession(String name, String email)
+    public void createLoginSession(String patientId, String name)
     {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
         // Storing name in pref
         //editor.putString(KEY_ID, name);
-        editor.putString(PATIENT_ID, name);
+        editor.putString(PATIENT_ID, patientId);
 
         // Storing email in pref
-        //editor.putString(KEY_EMAIL, email);
+        editor.putString(PATIENT_NAME, name);
 
         // commit changes
         editor.commit();
     }
 
+    public void createPatientLoginSession(Patient patient)
+    {
+        // Storing login value as TRUE
+        editor.putBoolean(IS_LOGIN, true);
+
+        Set<String> set = new TreeSet<>();
+        set.add(patient.getId());
+        set.add(patient.getFName());
+        set.add(patient.getLName());
+        set.add(patient.getMail());
+        set.add(patient.getPhone());
+        set.add(patient.getAddress());
+        set.add(patient.getHMO());
+        set.add(patient.getTherapistId());
+
+        editor.putStringSet(PATIENT_SET, set);
+        editor.commit();
+    }
     public String getUserDetails()
     {
         String user = pref.getString(PATIENT_ID, null);
@@ -68,6 +92,33 @@ public class SessionManager
         return user;
     }
 
+    public String[] getPatientDetails()
+    {
+        String patientId = pref.getString(PATIENT_ID, null);
+        String patientName = pref.getString(PATIENT_NAME, null);
+        String[] array = {patientId, patientName};
+
+        return array;
+    }
+//    public Set<String> getPatientDetails()
+//    {
+//        return pref.getStringSet(PATIENT_SET, null);
+//    }
+
+    /*
+    public Patient getPatientFromSet(Set<String> set)
+    {
+        Iterator it = set.iterator();
+
+        Object[] array = set.toArray();
+
+        while(it.hasNext())
+        {
+            String value=(String)it.next();
+
+            System.out.println("Value :"+value);
+        }
+    } */
     public void checkLogin() {
         // Check login status
         if (!this.isLoggedIn())

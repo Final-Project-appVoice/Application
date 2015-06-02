@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sarah.myproject.Class.Patient;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalPatient;
 import com.example.sarah.myproject.R;
@@ -49,7 +48,7 @@ public class VoiceHygieneActivity extends Activity
 
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
-        Patient p = dalPatient.patientDetails(patientId, this);
+        //Patient p = dalPatient.patientDetails(patientId, this);
 
         fillListViewPDF();
         //welcome_voiceHygiene.setText("Hello " + p.getFName());

@@ -1,9 +1,7 @@
 package com.example.sarah.myproject.Activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -20,15 +18,15 @@ import com.example.sarah.myproject.Class.Patient;
 import com.example.sarah.myproject.Class.Patients;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalPatient;
-import com.example.sarah.myproject.Dal.MySqlDal;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.LoginTask;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceTable;
 
 public class MyProject extends Activity
 {
     DalPatient dalPatient;
-    MySqlDal mySqlDal;
+    LoginTask loginTask;
     Patient patient;
     EditText userName_editText;
     EditText password_editText;
@@ -61,12 +59,7 @@ public class MyProject extends Activity
 
         userName_editText = (EditText)findViewById(R.id.username);
         password_editText = (EditText)findViewById(R.id.pwd);
-        //patient_textView = (TextView)findViewById(R.id.patientTextView);
         settings = getSharedPreferences(session.MyPREFERENCES, MODE_PRIVATE);
-        addNewPatient();
-        mySqlDal = new MySqlDal(this, this, getTaskId());
-        mySqlDal.execute();
-
     }
 
 
@@ -74,7 +67,7 @@ public class MyProject extends Activity
     {
 
         dalPatient = new DalPatient();
-        patient = new Patient("3", "David", "Cohen", "davidco@gmail.com", "Jerusalem", "0525234327", "Clalit");
+        patient = new Patient("3", "David", "Cohen", "davidco@gmail.com", "Jerusalem", "0525234327", "Clalit", "123");
         Log.w("warning:", patient.toString());
         Patients mPatient = new Patients("3", "David", "Levy");
         dalPatient.addNewPatient(patient, "p", this);
@@ -116,8 +109,17 @@ public class MyProject extends Activity
         if(username.trim().length() > 0 && password.trim().length() > 0)
         {
 
+            // TODO: create task
+            //LoginTask loginTask = new LoginTask(username, password);
+
+            LoginTask loginTask = new LoginTask(this);
+            loginTask.execute(username,password);
+            /*
             // check if patient exists and keep the patient details in Cursor c
             Cursor c = dalPatient.findPatientByIdAndPwd(username, password, this);
+            dalLogin = new DalLogin(this, this);
+            dalLogin.execute();
+
 
             //if exists, change activity
             if(dalPatient.isPatientExists(c))
@@ -135,6 +137,7 @@ public class MyProject extends Activity
                 // username / password doesn't match
                 alert.showAlertDialog(MyProject.this, "Login failed..", "Username/Password is incorrect", false);
             }
+            */
         }
         else
         {
