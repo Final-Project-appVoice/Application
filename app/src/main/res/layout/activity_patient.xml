@@ -49,36 +49,13 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:id="@+id/linearLayout_buttons">
 
-        <Button
-            style="@style/Folder"
+        <!-- list of folder button -->
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageButton"
-            android:background="#646762bf"
-            android:text="@string/voice_hygiene"
-            android:layout_margin="5dp"
-            android:onClick="onClick_voiceHygiene"
-            />
+            android:id="@+id/folderList">
+        </ListView>
 
-        <Button
-            style="@style/Folder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageButton2"
-            android:background="#73bb604c"
-            android:text="@string/theory"
-            android:layout_margin="5dp"
-            android:onClick="onClick_theory"/>
-
-        <Button
-            style="@style/Folder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imageButton3"
-            android:background="#9956c9da"
-            android:text="@string/exercise"
-            android:layout_margin="5dp"
-            android:onClick="onClick_exercises"/>
     </LinearLayout>
 
 

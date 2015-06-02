@@ -1,11 +1,15 @@
 package com.example.sarah.myproject.Tasks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
+import com.example.sarah.myproject.Adapters.FoldersAdapter;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalConstant;
+import com.example.sarah.myproject.R;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,10 +29,13 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
     public static final String PASS = DalConstant.PASS;
     public LinearLayout bar;
     private Context context;
+    private FoldersAdapter foldersAdapter;
+
 
     public SessionManager session;    // Session Manager Class
 
-    public PatientFolderTask(Context context) {
+    public PatientFolderTask(Context context)
+    {
         this.context = context;
 
         // Session Manager
@@ -40,7 +47,7 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
     protected List<String> doInBackground(String... params)      // the params we send from execute()
     {
         String patientId = params[0];    // patientId
-        String password = params[1];    // password
+
         List<String> folders = new ArrayList<String>();
         try {
             // Connecting to the database
@@ -49,7 +56,7 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
             Statement statement = con.createStatement();
 
             // After connection
-            String query = "SELECT FolderName FROM AssignedExercise WHERE PatientId = '" + patientId + "' AND Password = '" + password + "'";
+            String query = "SELECT FolderName FROM AssignedExercise WHERE PatientId = '" + patientId + "'";
 
             ResultSet rs = statement.executeQuery(query);
 
@@ -76,10 +83,10 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
     {
         super.onPostExecute(folders);
 
-        for(int i = 0; i < folders.size(); i++)
-        {
+        foldersAdapter = new FoldersAdapter(context, android.R.layout.activity_list_item, R.id.folderList, folders);       // calling to the adapter list -- folderList = list without adapter
+        ListView listView = (ListView)((Activity)context).findViewById(R.id.folderList);     // the list of folders
+        listView.setAdapter(foldersAdapter);        // adapting to the folder list the adapter list
 
-        }
     }
 
 

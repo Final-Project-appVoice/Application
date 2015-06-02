@@ -10,13 +10,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sarah.myproject.Adapters.FoldersAdapter;
 import com.example.sarah.myproject.Class.Patient;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalPatient;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.PatientFolderTask;
 
 import java.util.Set;
 
@@ -35,10 +38,12 @@ public class PatientActivity extends Activity {
     private Set<String> patientDetails;
     private String[] patientArray;
     private String patientId, patientName;
-
+    private ListView listView;
+    private FoldersAdapter foldersAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
 
@@ -70,24 +75,34 @@ public class PatientActivity extends Activity {
         dalPatient = new DalPatient();
 
         patient_textView = (TextView) findViewById(R.id.patientNameTextView);
-        button1 = (Button) findViewById(R.id.imageButton);
-        button2 = (Button) findViewById(R.id.imageButton2);
-        button3 = (Button) findViewById(R.id.imageButton3);
+
+//        button1 = (Button) findViewById(R.id.imageButton);
+//        button2 = (Button) findViewById(R.id.imageButton2);
+//        button3 = (Button) findViewById(R.id.imageButton3);
         linearLayout_home = (LinearLayout) findViewById(R.id.linearLayout_hello);
 
         i = getIntent();
 
         fieldTextView();
 
+        Log.w("Check", "BEFORE");
+        PatientFolderTask patientFolderTask = new PatientFolderTask(this);      // calling to task in order to pull from db the folders assigned
+        patientFolderTask.execute(patientId);       // execute task
 
-        button1.setHeight((int) Math.round(0.15 * screenHeightPx));
-        button1.setWidth((int) Math.round(0.25 * screenWidthPx));
-        button2.setHeight((int) Math.round(0.15 * screenHeightPx));
-        button2.setWidth((int) Math.round(0.25 * screenWidthPx));
-        button3.setHeight((int) Math.round(0.15 * screenHeightPx));
-        button3.setWidth((int) Math.round(0.25 * screenWidthPx));
+        Log.w("Check", "AFTER");
+
+
+
+//        button1.setHeight((int) Math.round(0.15 * screenHeightPx));
+//        button1.setWidth((int) Math.round(0.25 * screenWidthPx));
+//        button2.setHeight((int) Math.round(0.15 * screenHeightPx));
+//        button2.setWidth((int) Math.round(0.25 * screenWidthPx));
+//        button3.setHeight((int) Math.round(0.15 * screenHeightPx));
+//        button3.setWidth((int) Math.round(0.25 * screenWidthPx));
 
         linearLayout_home.setPadding(0, 0, 0, (int) Math.round(0.1 * screenHeightPx)); // left, top, right, bottom
+
+
 
     }
 
