@@ -3,6 +3,8 @@ package com.example.sarah.myproject.Tasks;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -21,7 +23,7 @@ import java.util.List;
 /**
  * Created by Sarah on 31-May-15.
  */
-public class PatientFolderTask extends AsyncTask<String, List<String>, List<String>>  // <Params, Progress, Result>
+public class PatientFolderTask extends AsyncTask<String, List<String>, List<String>> implements AdapterView.OnItemClickListener  // <Params, Progress, Result>
 {
     // constant to log in the DB
     public static final String DB_URL = DalConstant.DB_URL;
@@ -87,7 +89,16 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
         ListView listView = (ListView)((Activity)context).findViewById(R.id.folderList);     // the list of folders
         listView.setAdapter(foldersAdapter);        // adapting to the folder list the adapter list
 
+        //AdapterView.OnItemClickListener mOnItemClickListener = (AdapterView.OnItemClickListener) ((Activity) context).getActionBar();
+        //listView.setOnItemClickListener((AdapterView.OnItemClickListener) ((Activity) context).getActionBar());
+
     }
 
 
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+
+    }
 }

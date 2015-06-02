@@ -74,31 +74,18 @@ public class PatientActivity extends Activity {
 
         dalPatient = new DalPatient();
 
-        patient_textView = (TextView) findViewById(R.id.patientNameTextView);
+        patient_textView = (TextView) findViewById(R.id.patientNameTextView);       // patient name to fill
 
-//        button1 = (Button) findViewById(R.id.imageButton);
-//        button2 = (Button) findViewById(R.id.imageButton2);
-//        button3 = (Button) findViewById(R.id.imageButton3);
         linearLayout_home = (LinearLayout) findViewById(R.id.linearLayout_hello);
 
         i = getIntent();
 
-        fieldTextView();
+        fieldTextView();        // fill fields
 
         Log.w("Check", "BEFORE");
         PatientFolderTask patientFolderTask = new PatientFolderTask(this);      // calling to task in order to pull from db the folders assigned
-        patientFolderTask.execute(patientId);       // execute task
-
+        patientFolderTask.execute(patientId);       // execute task and add buttons for each folder assigned
         Log.w("Check", "AFTER");
-
-
-
-//        button1.setHeight((int) Math.round(0.15 * screenHeightPx));
-//        button1.setWidth((int) Math.round(0.25 * screenWidthPx));
-//        button2.setHeight((int) Math.round(0.15 * screenHeightPx));
-//        button2.setWidth((int) Math.round(0.25 * screenWidthPx));
-//        button3.setHeight((int) Math.round(0.15 * screenHeightPx));
-//        button3.setWidth((int) Math.round(0.25 * screenWidthPx));
 
         linearLayout_home.setPadding(0, 0, 0, (int) Math.round(0.1 * screenHeightPx)); // left, top, right, bottom
 

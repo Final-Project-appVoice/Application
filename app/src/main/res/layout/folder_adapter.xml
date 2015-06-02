@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/folderButton"
-        android:background="#646762bf"
+        android:background="#993366"
         android:layout_margin="5dp"
         />
 </LinearLayout>
