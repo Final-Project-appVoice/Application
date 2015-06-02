@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by Sarah on 31-May-15.
  */
-public class PatientFolderTask extends AsyncTask<String, List<String>, List<String>> implements AdapterView.OnItemClickListener  // <Params, Progress, Result>
+public class FolderTask extends AsyncTask<String, List<String>, List<String>> implements AdapterView.OnItemClickListener  // <Params, Progress, Result>
 {
     // constant to log in the DB
     public static final String DB_URL = DalConstant.DB_URL;
@@ -36,7 +36,7 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
 
     public SessionManager session;    // Session Manager Class
 
-    public PatientFolderTask(Context context)
+    public FolderTask(Context context)
     {
         this.context = context;
 
@@ -89,8 +89,6 @@ public class PatientFolderTask extends AsyncTask<String, List<String>, List<Stri
         ListView listView = (ListView)((Activity)context).findViewById(R.id.folderList);     // the list of folders
         listView.setAdapter(foldersAdapter);        // adapting to the folder list the adapter list
 
-        //AdapterView.OnItemClickListener mOnItemClickListener = (AdapterView.OnItemClickListener) ((Activity) context).getActionBar();
-        //listView.setOnItemClickListener((AdapterView.OnItemClickListener) ((Activity) context).getActionBar());
 
     }
 

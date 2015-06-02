@@ -19,7 +19,7 @@ import com.example.sarah.myproject.Class.Patient;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalPatient;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.PatientFolderTask;
+import com.example.sarah.myproject.Tasks.FolderTask;
 
 import java.util.Set;
 
@@ -83,8 +83,8 @@ public class PatientActivity extends Activity {
         fieldTextView();        // fill fields
 
         Log.w("Check", "BEFORE");
-        PatientFolderTask patientFolderTask = new PatientFolderTask(this);      // calling to task in order to pull from db the folders assigned
-        patientFolderTask.execute(patientId);       // execute task and add buttons for each folder assigned
+        FolderTask folderTask = new FolderTask(this);      // calling to task in order to pull from db the folders assigned
+        folderTask.execute(patientId);       // execute task and add buttons for each folder assigned
         Log.w("Check", "AFTER");
 
         linearLayout_home.setPadding(0, 0, 0, (int) Math.round(0.1 * screenHeightPx)); // left, top, right, bottom

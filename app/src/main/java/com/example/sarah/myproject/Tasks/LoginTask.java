@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.sarah.myproject.Activities.PatientActivity;
@@ -29,6 +30,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
     public static final String PASS = DalConstant.PASS;
     public LinearLayout bar;
     private Context context;
+    private Button loginButton;
 
     public SessionManager session;    // Session Manager Class
 
@@ -36,14 +38,15 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
     {
         this.context = context;
         bar = (LinearLayout)((Activity)context).findViewById(R.id.ProgressBar);
-
+        loginButton = (Button)((Activity)context).findViewById(R.id.button);
         // Session Manager
         session = new SessionManager(context);
     }
 
     protected void onPreExecute()
     {
-        bar.setVisibility(View.VISIBLE);
+        bar.setVisibility(View.VISIBLE);            // set progress bar visible
+        loginButton.setClickable(false);
     }
     @Override
     protected Patient doInBackground(String... params)      // the params we send from execute()
@@ -95,7 +98,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
     {
         super.onPostExecute(patient);
         bar.setVisibility(View.GONE);
-
+        loginButton.setClickable(true);
 
         if (patient != null)
         {

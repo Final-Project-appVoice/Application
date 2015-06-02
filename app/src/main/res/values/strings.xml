@@ -56,5 +56,6 @@
     <string name="description_breathing">בכל תרגילי הנשימה יש לזכור את על הטיפים שלעיל. להלן סיכום קצר של התחושות העיקריות שצריכות להיות:  -\tבנשימה (אוויר נכנס): בטן מתמלאת ויוצאת החוצה (תחושה של בלון)  -\tבשאיפה (אוויר יוצא): בטן נכנסת פנימה לאט  -\tבית חזה וכתפיים בכלל לא מעורבים ולא זזים  -\tגרון רפוי ולא עוצר את האוויר כלל להלן רשימת תרגילי נשימה עם העלאה בדרגות הקושי:</string>
     <string name="button_pdf">Open PDF</string>
     <string name="app_name" translatable="false">appVoice</string>
+    <string name="title_activity_exercise_list">ExerciseListActivity</string>
 
 </resources>

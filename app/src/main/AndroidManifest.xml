@@ -29,8 +29,8 @@
 
         <activity
             android:name=".Activities.MyProject"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,5 +90,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.ExercisesActivity" />
         </activity>
+        <activity
+            android:name=".Activities.ExerciseListActivity"
+            android:label="@string/title_activity_exercise_list" >
+        </activity>
     </application>
+
 </manifest>
