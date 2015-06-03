@@ -3,6 +3,7 @@ package com.example.sarah.myproject.Tasks;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -55,21 +56,27 @@ public class FolderTask extends AsyncTask<String, List<String>, List<String>> im
             // Connecting to the database
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement statement = con.createStatement();
-
+            Statement statement1 = con.createStatement();
+            Statement statement2 = con.createStatement();
             // After connection
-            String query = "SELECT FolderName FROM AssignedExercise WHERE PatientId = '" + patientId + "'";
+            String query = "SELECT FolderId FROM AssignedExercise WHERE PatientId = '" + patientId + "'";
 
-            ResultSet rs = statement.executeQuery(query);
-
-            while (rs.next()) {
+            ResultSet rs1 = statement1.executeQuery(query);
+            Log.d("SIZE DB FOLDER", rs1.getFetchSize()+"");
+            while (rs1.next())
+            {
                 // User exist
-                String folderName = rs.getString("FolderName");
-                if (!folders.contains(folderName))
+                int folderId = rs1.getInt("FolderId");
+                String query1 = "SELECT Name FROM Folder WHERE FolderId = '" + folderId + "'";
+                ResultSet rs2 = statement2.executeQuery(query1);
+                if(rs2.next())
                 {
-                    folders.add(folderName);
+                    String folderName = folderId + "," + rs2.getString("Name");
+                    if (!folders.contains(folderName))
+                    {
+                        folders.add(folderName);
+                    }
                 }
-
             }
 
         } catch (Exception e)         // if connection to db didn't succeed

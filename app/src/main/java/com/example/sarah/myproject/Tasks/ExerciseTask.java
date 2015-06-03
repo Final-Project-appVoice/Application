@@ -3,13 +3,14 @@ package com.example.sarah.myproject.Tasks;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.sarah.myproject.Adapters.FoldersAdapter;
-import com.example.sarah.myproject.Class.SessionManager;
+import com.example.sarah.myproject.Adapters.ExercisesAdapter;
 import com.example.sarah.myproject.Dal.DalConstant;
 import com.example.sarah.myproject.R;
 
@@ -31,15 +32,14 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
     public static final String PASS = DalConstant.PASS;
     public LinearLayout bar;
     private Context context;
-    private FoldersAdapter foldersAdapter;
-
-    public SessionManager session;    // Session Manager Class
+    private ExercisesAdapter exercisesAdapter;
+    private TextView folderDescription;
+    private String description;
 
     public ExerciseTask(Context context)
     {
         this.context = context;
 
-        session = new SessionManager(context);         // Session Manager
 
     }
 
@@ -47,45 +47,76 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
     @Override
     protected List<String> doInBackground(String... params)      // the params we send from execute()
     {
-        String patientId = params[0];    // patientId
+        String patientId = params[0].trim();    // patientId
+        String folderId = params[1].trim();
+        //int folderId = Integer.getInteger(params[1].trim());  // folderId
 
-        List<String> folders = new ArrayList<String>();
-        try {
+        List<String> exercises = new ArrayList<String>();
+
+        try
+        {
             // Connecting to the database
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement statement = con.createStatement();
 
+            folderDescription = (TextView)((Activity) context).findViewById(R.id.folderDescription);
+
+            Statement statement1 = con.createStatement();
+            Statement statement2 = con.createStatement();
+            Statement statement3 = con.createStatement();
+
+            Log.d("ExerciseTask - patienId", "*"+patientId+"*");
+            Log.d("ExerciseTask = folderId", "*"+folderId+"*");
             // After connection
-            String query = "SELECT FolderName FROM AssignedExercise WHERE PatientId = '" + patientId + "'";
+            String query = "SELECT ExerciseId FROM AssignedExercise WHERE PatientId = '" + patientId + "' AND FolderId = '" + folderId + "'";
+            String query3 = "SELECT Description FROM Folder WHERE FolderId = '" + folderId + "'";
 
-            ResultSet rs = statement.executeQuery(query);
-
-            while (rs.next()) {
-                // User exist
-                String folderName = rs.getString("FolderName");
-                if (!folders.contains(folderName)) {
-                    folders.add(folderName);
-                }
+            ResultSet rs3 = statement3.executeQuery(query3);
+            if(rs3.next())
+            {
+                description = rs3.getString("Description");
 
             }
+            ResultSet rs1 = statement1.executeQuery(query);
+            while (rs1.next())
+            {
+                Log.d("ExerciseTask", "IN WHILE");
+                // User exist
+                int exerciseId = rs1.getInt("ExerciseId");
+                Log.w("EXERCISE id", exerciseId + "");
+                String query2 = "SELECT Title FROM Exercise WHERE ExerciseId = '" + exerciseId + "'";
 
+                ResultSet rs2 = statement2.executeQuery(query2);
+                if (rs2.next())
+                {
+                    Log.d("ExerciseTask", "IN IF");
+                    String exerciseName = rs2.getString("Title");
+                    if(!exercises.contains(exerciseName))
+                    {
+                        Log.d("ExerciseTask", "IN LIST CONTAINS");
+                        Log.d("Exercise Title", exerciseName);
+                        exercises.add(exerciseName);
+                    }
+                }
+            }
+            Log.d("ExerciseTask", "AFTER");
         } catch (Exception e)         // if connection to db didn't succeed
         {
             e.printStackTrace();
         }
-        return folders;
+        return exercises;
     }
 
 
     @Override
-    protected void onPostExecute(List<String> folders)      // The result of the operation computed by doInBackground(Params...)
+    protected void onPostExecute(List<String> exercises)      // The result of the operation computed by doInBackground(Params...)
     {
-        super.onPostExecute(folders);
+        super.onPostExecute(exercises);
 
-        foldersAdapter = new FoldersAdapter(context, android.R.layout.activity_list_item, R.id.folderList, folders);       // calling to the adapter list -- folderList = list without adapter
-        ListView listView = (ListView) ((Activity) context).findViewById(R.id.folderList);     // the list of folders
-        listView.setAdapter(foldersAdapter);        // adapting to the folder list the adapter list
+        folderDescription.setText(description);
+        exercisesAdapter = new ExercisesAdapter(context, android.R.layout.activity_list_item, R.id.exerciseList, exercises);       // calling to the adapter list -- folderList = list without adapter
+        ListView listView = (ListView) ((Activity) context).findViewById(R.id.exerciseList);     // the list of folders
+        listView.setAdapter(exercisesAdapter);        // adapting to the folder list the adapter list
 
 
     }
