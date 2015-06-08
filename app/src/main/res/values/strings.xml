@@ -57,5 +57,6 @@
     <string name="button_pdf">Open PDF</string>
     <string name="app_name" translatable="false">appVoice</string>
     <string name="title_activity_exercise_list">ExerciseListActivity</string>
+    <string name="title_activity_task_exercise">TaskExerciseActivity</string>
 
 </resources>

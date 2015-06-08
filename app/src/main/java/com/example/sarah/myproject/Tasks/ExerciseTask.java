@@ -2,6 +2,7 @@ package com.example.sarah.myproject.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sarah.myproject.Activities.TaskExerciseActivity;
 import com.example.sarah.myproject.Adapters.ExercisesAdapter;
 import com.example.sarah.myproject.Dal.DalConstant;
 import com.example.sarah.myproject.R;
@@ -23,6 +25,8 @@ import java.util.List;
 
 /**
  * Created by Sarah on 02-Jun-15.
+ *
+ * Getting the list of all exercises using folderId and patientId, and folder description.
  */
 public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> implements AdapterView.OnItemClickListener  // <Params, Progress, Result>
 {
@@ -95,7 +99,7 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
                     {
                         Log.d("ExerciseTask", "IN LIST CONTAINS");
                         Log.d("Exercise Title", exerciseName);
-                        exercises.add(exerciseName);
+                        exercises.add(exerciseName + "," + exerciseId);     // return exercise details: <exerciseName,exerciseId>
                     }
                 }
             }
@@ -117,12 +121,23 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
         exercisesAdapter = new ExercisesAdapter(context, android.R.layout.activity_list_item, R.id.exerciseList, exercises);       // calling to the adapter list -- folderList = list without adapter
         ListView listView = (ListView) ((Activity) context).findViewById(R.id.exerciseList);     // the list of folders
         listView.setAdapter(exercisesAdapter);        // adapting to the folder list the adapter list
-
+        listView.setOnItemClickListener(this);
 
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        TextView exerciseIdTextView = (TextView)view.findViewById(R.id.exerciseId);
+        TextView exerciseTitleTextView = (TextView)view.findViewById(R.id.exerciseTitle);
 
+        String exerciseTitle = exerciseTitleTextView.getText().toString();        // getting exercise name from exercise selected
+        String exerciseId = exerciseIdTextView.getText().toString();       // getting exercise id from exercise selected
+        Log.d("ON CLICK", exerciseTitle + " " + exerciseId);
+
+        Intent i = new Intent(view.getContext(), TaskExerciseActivity.class);      // opening selected exercise
+        i.putExtra("exerciseTitle", exerciseTitle);       // passing folderName to the new intent
+        i.putExtra("exerciseId", exerciseId);       // passing folderId to the new intent
+        view.getContext().startActivity(i);
     }
 }

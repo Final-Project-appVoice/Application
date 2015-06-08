@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="right"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.sarah.myproject.Activities.ExerciseListActivity"
+    android:orientation="vertical">
+
+    <!--Title-->
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            style="@style/Title"
+            android:id="@+id/exerciseTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#956762bf"
+            />
+    </LinearLayout>
+
+    <!--Description Exercise-->
+    <LinearLayout
+        style="@style/LinearStyle"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/Description"
+            android:id="@+id/exerciseDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
+    </LinearLayout>
+
+    <!-- Description List Task -->
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/SubDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pdfList_description_voiceHygiene"/>
+
+    </LinearLayout>
+
+    <!-- List Tasks -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        >
+
+
+        <ListView
+            android:id="@+id/tasksList"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </LinearLayout>
+</LinearLayout>

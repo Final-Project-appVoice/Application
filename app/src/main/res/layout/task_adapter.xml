@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Task layout adapter -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:orientation="vertical"
+
+    >
+
+    <!-- Task Title -->
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/taskTitle"
+
+            style="@style/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="כותרת משימה" />
+
+        <TextView
+            android:id="@+id/taskId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <!-- Task description -->
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/taskDescription"
+
+            style="@style/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <!-- Task url -->
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/urlTitle"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:id="@+id/buttonTaskFile"
+            android:gravity="right"
+            style="@style/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="פתח קובץ" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_action_file"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- Task description -->
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/taskComment"
+
+            style="@style/Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>

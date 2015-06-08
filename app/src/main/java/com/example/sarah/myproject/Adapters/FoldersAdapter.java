@@ -36,7 +36,7 @@ public class FoldersAdapter extends ArrayAdapter<String> implements AdapterView.
     @Override
     public View getView(int position, View convertView, final ViewGroup parent)       // what happens in each row of list
     {
-        View view = inflater.inflate(R.layout.folder_adapter, null);      // calling to the relevant layout
+        final View view = inflater.inflate(R.layout.folder_adapter, null);      // calling to the relevant layout
         convertView = view;
 
         Button button = (Button)view.findViewById(R.id.folderButton);
@@ -58,7 +58,7 @@ public class FoldersAdapter extends ArrayAdapter<String> implements AdapterView.
             public void onClick(View v)     // on folder click
             {
                 Button button = (Button)v.findViewById(R.id.folderButton);
-                TextView folderIdTextView = (TextView)parent.findViewById(R.id.folderId);
+                TextView folderIdTextView = (TextView)view.findViewById(R.id.folderId);
 
                 String folderName = button.getText().toString();        // getting folder name from folder selected
                 String folderID = folderIdTextView.getText().toString();       // getting folder id from folder selected
