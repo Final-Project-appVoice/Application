@@ -29,5 +29,7 @@ dependencies {
     compile 'com.android.support:support-v4:22.0.0'
     compile 'mysql:mysql-connector-java:5.1.35'
     compile project(':dropboxChooserSDK')
+    compile files('libs/dropbox-android-sdk-1.6.3.jar')
+    compile files('libs/json_simple-1.1.jar')
 }
 

@@ -23,12 +23,18 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
     private LayoutInflater inflater;
     private List<Task> tasks;       // list of exercise names
 
+
+
+
     public TasksAdapter(Context context, int resource, int textViewResourceId, List<Task> items)
     {
         super(context, resource, textViewResourceId, items);
         this.tasks = items;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Log.d("TasksAdapter", "HERE2");
+
+
+
     }
 
     @Override
@@ -69,4 +75,6 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
     {
 
     }
+
+
 }

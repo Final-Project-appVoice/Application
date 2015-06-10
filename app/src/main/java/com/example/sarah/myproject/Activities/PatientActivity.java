@@ -1,7 +1,9 @@
 package com.example.sarah.myproject.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -14,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
 import com.example.sarah.myproject.Adapters.FoldersAdapter;
 import com.example.sarah.myproject.Class.Patient;
 import com.example.sarah.myproject.Class.SessionManager;
@@ -40,10 +44,21 @@ public class PatientActivity extends Activity {
     private String patientId, patientName;
     private ListView listView;
     private FoldersAdapter foldersAdapter;
+    // In the class declaration section:
+    private DropboxAPI<AndroidAuthSession> mDBApi;
+
+
+    private SharedPreferences pref;     // Shared Preferences
+    private SharedPreferences.Editor editor;      // Editor for Shared preferences
+    private Context context;       // Context
+
+    int PRIVATE_MODE = 0;       // Shared pref mode
+
+    public static final String MyPREFERENCES = "MyPrefsFile" ;
+    public static final String DROPBOX = "Dropbox";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
 
@@ -59,8 +74,7 @@ public class PatientActivity extends Activity {
 
         // get user ID from session
         patientArray = session.getPatientDetails();
-        if (patientArray.length > 0)
-        {
+        if (patientArray.length > 0) {
             patientId = patientArray[0];
             patientName = patientArray[1];
         }
@@ -89,7 +103,12 @@ public class PatientActivity extends Activity {
 
         linearLayout_home.setPadding(0, 0, 0, (int) Math.round(0.1 * screenHeightPx)); // left, top, right, bottom
 
-
+        // DROPBOX session
+//        AppKeyPair appKeys = new AppKeyPair(Constant.APP_KEY, Constant.APP_SECRET);     // initialize key for dropbox folders
+//        AndroidAuthSession session = new AndroidAuthSession(appKeys);       // create authentication
+//        mDBApi = new DropboxAPI<AndroidAuthSession>(session);       // new dropbox session
+////
+//        mDBApi.getSession().startOAuth2Authentication(PatientActivity.this);     // wait for authorization and go back to specific activity
 
     }
 
@@ -160,19 +179,32 @@ public class PatientActivity extends Activity {
         PatientActivity.this.finish();
     }
 
-//    @Override
-//    protected void onPause()
-//    {
-//        super.onPause();
-//    }
-//
-//    @Override
-//    protected void onStop()
-//    {
-//        super.onStop();
-//        session.logoutUser();
-//    }
+    //
+    protected void onResume()
+    {
+        super.onResume();
 
+//        if (session.isLoggedIn())
+//        {
+//            session.createLoginSession(p.getFName(), p.getMail());
+//        }
+//        if (mDBApi.getSession().authenticationSuccessful())
+//        {
+//            try {
+//                // Required to complete auth, sets the access token on the session
+//                mDBApi.getSession().finishAuthentication();
+//
+//                String accessToken = mDBApi.getSession().getOAuth2AccessToken();
+//                SharedPreferences settings = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+//                SharedPreferences.Editor editor;
+//                editor = settings.edit();
+//                editor.putString(DROPBOX, accessToken);
+//
+//            } catch (IllegalStateException e) {
+//                Log.i("DbAuthLog", "Error authenticating", e);
+//            }
+//        }
+    }
     //   @Override
 //    protected void onResume()
 //    {
@@ -184,5 +216,16 @@ public class PatientActivity extends Activity {
 //        }
 //    }
 
-
+    //  @Override
+//    protected void onPause()
+//    {
+//        super.onPause();
+//    }
+//
+//    @Override
+//    protected void onStop()
+//    {
+//        super.onStop();
+//        session.logoutUser();
+//    }
 }

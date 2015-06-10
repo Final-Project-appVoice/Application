@@ -29,6 +29,8 @@ public class SessionManager
     public static final String PATIENT_SET = "PatientSet";
     public static final String PATIENT_NAME = "PatientName";
     private static final String IS_LOGIN = "IsLoggedIn";        // All Shared Preferences Keys
+    public static final String DROPBOX = "Dropbox";
+
     private static final Patient LOGIN_PATIENT = null;
     //public static final String PATIENT_PWD = "PatientPwd";
 
@@ -100,25 +102,7 @@ public class SessionManager
 
         return array;
     }
-//    public Set<String> getPatientDetails()
-//    {
-//        return pref.getStringSet(PATIENT_SET, null);
-//    }
 
-    /*
-    public Patient getPatientFromSet(Set<String> set)
-    {
-        Iterator it = set.iterator();
-
-        Object[] array = set.toArray();
-
-        while(it.hasNext())
-        {
-            String value=(String)it.next();
-
-            System.out.println("Value :"+value);
-        }
-    } */
     public void checkLogin() {
         // Check login status
         if (!this.isLoggedIn())
@@ -163,4 +147,6 @@ public class SessionManager
     {
         return pref.getBoolean(IS_LOGIN, false);
     }
+
+
 }

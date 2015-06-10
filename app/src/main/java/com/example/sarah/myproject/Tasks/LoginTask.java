@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.sarah.myproject.Activities.PatientActivity;
+import com.example.sarah.myproject.Class.AlertDialogManager;
 import com.example.sarah.myproject.Class.Patient;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalConstant;
@@ -31,7 +32,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
     public LinearLayout bar;
     private Context context;
     private Button loginButton;
-
+    public AlertDialogManager alert;
     public SessionManager session;    // Session Manager Class
 
     public LoginTask(Context context)
@@ -41,6 +42,8 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
         loginButton = (Button)((Activity)context).findViewById(R.id.button);
         // Session Manager
         session = new SessionManager(context);
+
+        alert = new AlertDialogManager();     // Alert Dialog Manager
     }
 
     protected void onPreExecute()
@@ -84,6 +87,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
             else
             {
                 // TODO: user doesnt exist
+                alert.showAlertDialog(context, "Login failed..", "Please enter username and password", false);
             }
         } catch (Exception e)         // if connection to db didn't succeed
         {

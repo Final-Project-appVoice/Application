@@ -59,7 +59,7 @@
 
     <!-- List Tasks -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         >
@@ -67,8 +67,8 @@
 
         <ListView
             android:id="@+id/tasksList"
-
-            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
         </ListView>

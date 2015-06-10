@@ -31,13 +31,11 @@ public class MyProject extends Activity
     EditText userName_editText;
     EditText password_editText;
     public static boolean isLoggedIn = false;
-    SharedPreferences settings;
+    public SharedPreferences settings;
     AlertDialogManager alert = new AlertDialogManager();     // Alert Dialog Manager
     SessionManager session;    // Session Manager Class
     private MobileServiceClient mClient;
     private MobileServiceTable<Patients> mToDoTable;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,22 +58,14 @@ public class MyProject extends Activity
         userName_editText = (EditText)findViewById(R.id.username);
         password_editText = (EditText)findViewById(R.id.pwd);
         settings = getSharedPreferences(session.MyPREFERENCES, MODE_PRIVATE);
-    }
 
 
-    private void addNewPatient()
-    {
-
-        dalPatient = new DalPatient();
-        patient = new Patient("3", "David", "Cohen", "davidco@gmail.com", "Jerusalem", "0525234327", "Clalit", "123");
-        Log.w("warning:", patient.toString());
-        Patients mPatient = new Patients("3", "David", "Levy");
-        dalPatient.addNewPatient(patient, "p", this);
 
 
+
+        SharedPreferences.Editor editor;    // create editor to edit the share preferences
 
     }
-
 
 
     @Override
@@ -178,4 +168,6 @@ public class MyProject extends Activity
             }
         }
     }
+
+
 }

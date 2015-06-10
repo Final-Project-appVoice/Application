@@ -88,9 +88,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="mysql-connector-java-5.1.35" level="project" />
     <orderEntry type="library" exported="" name="notification-hubs-0.4" level="project" />
+    <orderEntry type="library" exported="" name="dropbox-android-sdk-1.6.3" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="mobileservices-1.1.5" level="project" />
     <orderEntry type="library" exported="" name="notification-hubs-0.3-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="json_simple-1.1" level="project" />
     <orderEntry type="library" exported="" name="notifications-1.0.1-sources" level="project" />
     <orderEntry type="library" exported="" name="notification-hubs-0.4-sources" level="project" />
     <orderEntry type="library" exported="" name="notifications-1.0.1-javadoc" level="project" />
