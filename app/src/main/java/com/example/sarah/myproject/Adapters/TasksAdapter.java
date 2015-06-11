@@ -10,8 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.sarah.myproject.Class.DropboxSession;
 import com.example.sarah.myproject.Class.Task;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.DownloadFileTask;
 
 import java.util.List;
 
@@ -63,7 +65,9 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
             @Override
             public void onClick(View v)
             {
-
+                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
+                DownloadFileTask download = new DownloadFileTask(v.getContext(), DropboxSession.getDropboxSession(), "/");
+                download.execute();
             }
         });
         return convertView;
