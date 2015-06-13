@@ -39,6 +39,9 @@
     <string name="pdf_title_voice_hygiene">רשימת משימות</string>
     <string name="pdfList_description_voiceHygiene">להלן רשימת משימות עליכם לבצע:</string>
     <string name="title_link_theoretical_background">הסבר בסרטון</string>
+    <string name="folders">תקיות</string>
+    <string name="messages">הודעות</string>
+    <string name="account">חשבון שלי</string>
     <!--<string name="description_voice_hygiene">Description</string>-->
     <!--<string name="pdfList_description_voiceHygiene" />-->
 

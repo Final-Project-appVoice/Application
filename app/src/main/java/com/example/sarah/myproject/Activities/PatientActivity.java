@@ -132,23 +132,41 @@ public class PatientActivity extends Activity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_patient, menu);
+        getMenuInflater().inflate(R.menu.common_menu, menu);
+        getActionBar().setTitle(patientName);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Intent i = null;
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id)
+        {
+            case R.id.folders_icon:
+            {
+                 i = new Intent(this, PatientActivity.class);
+            }
+            case R.id.messages_icon:
+            {
+                i = new Intent(this, MessagesActivity.class);
+            }
+            case R.id.account_icon:
+            {
+                i = new Intent(this, AccountActivity.class);
+            }
         }
+
+        this.startActivity(i);
+        this.finish();
 
         return super.onOptionsItemSelected(item);
     }

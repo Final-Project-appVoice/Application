@@ -1,6 +1,7 @@
 package com.example.sarah.myproject.Tasks;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -30,6 +31,8 @@ public class FolderTask extends AsyncTask<String, List<String>, List<String>> im
     public static final String DB_URL = DalConstant.DB_URL;
     public static final String USER = DalConstant.USER;
     public static final String PASS = DalConstant.PASS;
+
+    private ProgressDialog dialog;
     public LinearLayout bar;
     private Context context;
     private FoldersAdapter foldersAdapter;
@@ -43,6 +46,9 @@ public class FolderTask extends AsyncTask<String, List<String>, List<String>> im
 
         // Session Manager
         session = new SessionManager(context);
+
+        dialog = new ProgressDialog(this.context);
+        bar = (LinearLayout)((Activity)context).findViewById(R.id.ProgressBar);
     }
 
 
@@ -92,6 +98,7 @@ public class FolderTask extends AsyncTask<String, List<String>, List<String>> im
     {
         super.onPostExecute(folders);
 
+        bar.setVisibility(View.GONE);
         foldersAdapter = new FoldersAdapter(context, android.R.layout.activity_list_item, R.id.folderList, folders);       // calling to the adapter list -- folderList = list without adapter
         ListView listView = (ListView)((Activity)context).findViewById(R.id.folderList);     // the list of folders
         listView.setAdapter(foldersAdapter);        // adapting to the folder list the adapter list
@@ -99,7 +106,10 @@ public class FolderTask extends AsyncTask<String, List<String>, List<String>> im
 
     }
 
-
+    protected void onPreExecute()
+    {
+        bar.setVisibility(View.VISIBLE);            // set progress bar visible
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

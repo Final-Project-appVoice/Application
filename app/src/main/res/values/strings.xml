@@ -14,7 +14,7 @@
     <string name="help">עזרה</string>
 
     <!-- labels -->
-    <string name="user_name">שם משתמש</string>
+    <string name="user_name">תעודת זהות</string>
     <string name="password">סיסמה</string>
     <string name="patient_name">מטופל</string>
     <string name="theory">רקע תאורטי</string>
@@ -58,5 +58,11 @@
     <string name="app_name" translatable="false">appVoice</string>
     <string name="title_activity_exercise_list">ExerciseListActivity</string>
     <string name="title_activity_task_exercise">TaskExerciseActivity</string>
+    <string name="folders">תקיות</string>
+    <string name="messages">הודעות</string>
+    <string name="account">חשבון שלי</string>
+    <string name="title_activity_messages">MessagesActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="list_exercises">להלן רשימת התרגילים עליכם לבצע:</string>
 
 </resources>

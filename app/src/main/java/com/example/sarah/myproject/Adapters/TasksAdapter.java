@@ -10,11 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.exception.DropboxException;
 import com.example.sarah.myproject.Class.DropboxSession;
 import com.example.sarah.myproject.Class.Task;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.DownloadFileTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -52,7 +56,7 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
         TextView taskUrl = (TextView)convertView.findViewById(R.id.urlTitle);
         Button buttonFile = (Button)convertView.findViewById(R.id.buttonTaskFile);
 
-        Task actualTask = tasks.get(position);
+        final Task actualTask = tasks.get(position);
         Log.d("Actual Task", actualTask.toString());
         taskTitle.setText(actualTask.getTaskTitle());
         taskId.setText(actualTask.getTaskId() + "");
@@ -65,15 +69,73 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
             @Override
             public void onClick(View v)
             {
-                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
-                DownloadFileTask download = new DownloadFileTask(v.getContext(), DropboxSession.getDropboxSession(), "/");
-                download.execute();
+//                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
+//                DownloadFileTask download = new DownloadFileTask(v.getContext(), DropboxSession.getDropboxSession(), "/");
+//                download.execute();
+                File file = new File("/"+actualTask.getImagePath().trim());
+                Log.d("File", actualTask.getImagePath());
+                FileOutputStream outputStream = null;
+                try
+                {
+                    outputStream = new FileOutputStream(file);
+                } catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                DropboxAPI.DropboxFileInfo info = null;
+                try
+                {
+
+                    Log.w("API",DropboxSession.getDropboxSession().toString());
+                    info = (DropboxSession.getDropboxSession()).getFile("/Applications/AppVoice/"+actualTask.getImagePath().trim(), null, outputStream, null);
+                    Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
+                }
+                catch (DropboxException e)
+                {
+                    Log.d("ERROR", "e");
+                    e.printStackTrace();
+                }
+
             }
         });
         return convertView;
     }
 
-
+//    private boolean downloadDropboxFile(String dbPath, File localFile) throws IOException {
+//
+//        BufferedInputStream br = null;
+//        BufferedOutputStream bw = null;
+//
+//        try {
+//            if (!localFile.exists()) {
+//                localFile.createNewFile(); //otherwise dropbox client will fail silently
+//            }
+//
+//            FileDownload fd = DropboxSession.getDropboxSession().getFileStream("dropbox", dbPath, null);
+//            br = new BufferedInputStream(fd.is);
+//            bw = new BufferedOutputStream(new FileOutputStream(localFile));
+//
+//            byte[] buffer = new byte[4096];
+//            int read;
+//            while (true) {
+//                read = br.read(buffer);
+//                if (read <= 0) {
+//                    break;
+//                }
+//                bw.write(buffer, 0, read);
+//            }
+//        } finally {
+//            //in finally block:
+//            if (bw != null) {
+//                bw.close();
+//            }
+//            if (br != null) {
+//                br.close();
+//            }
+//        }
+//
+//        return true;
+//    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {

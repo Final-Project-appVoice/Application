@@ -52,7 +52,8 @@ public class TaskExerciseActivity extends Activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_task_exercise, menu);
+        getMenuInflater().inflate(R.menu.common_menu, menu);
+        getActionBar().setTitle(exerciseTitle);
         return true;
     }
 
@@ -63,10 +64,25 @@ public class TaskExerciseActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Intent i = null;
+        switch(id)
+        {
+            case R.id.folders_icon:
+            {
+                i = new Intent(this, PatientActivity.class);
+            }
+            case R.id.messages_icon:
+            {
+                i = new Intent(this, MessagesActivity.class);
+            }
+            case R.id.account_icon:
+            {
+                i = new Intent(this, AccountActivity.class);
+            }
         }
+
+        this.startActivity(i);
+        this.finish();
 
         return super.onOptionsItemSelected(item);
     }

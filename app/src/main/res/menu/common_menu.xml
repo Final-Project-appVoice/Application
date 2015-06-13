@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/group_icons">
+        <item
+            android:id="@+id/folders_icon"
+            android:icon="@drawable/ic_folders"
+            android:title="@string/folders"
+            android:showAsAction="always" />
+
+        <item
+            android:id="@+id/messages_icon"
+            android:icon="@drawable/ic_message"
+            android:title="@string/messages"
+            android:showAsAction="always"/>
+
+        <item
+            android:id="@+id/account_icon"
+            android:icon="@drawable/ic_person"
+            android:title="@string/account"
+            android:showAsAction="always" />
+    </group>
+
+</menu>

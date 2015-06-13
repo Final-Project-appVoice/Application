@@ -50,6 +50,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
     {
         bar.setVisibility(View.VISIBLE);            // set progress bar visible
         loginButton.setClickable(false);
+        loginButton.setEnabled(false);
     }
     @Override
     protected Patient doInBackground(String... params)      // the params we send from execute()
@@ -92,6 +93,13 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
         } catch (Exception e)         // if connection to db didn't succeed
         {
             e.printStackTrace();
+            ((Activity)context).runOnUiThread(new Runnable() {
+                public void run() {
+                    //Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
+                    alert.showAlertDialog(context, "Login failed..", "Username or password is not valid", false);
+                }
+            });
+
         }
         return null;
     }
@@ -103,7 +111,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
         super.onPostExecute(patient);
         bar.setVisibility(View.GONE);
         loginButton.setClickable(true);
-
+        loginButton.setEnabled(true);
         if (patient != null)
         {
             //session.createPatientLoginSession(patient);
@@ -116,6 +124,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
             activity.startActivity(i);
             activity.finish();
         }
+
     }
 
 

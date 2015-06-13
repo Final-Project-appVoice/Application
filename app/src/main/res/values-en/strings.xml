@@ -41,6 +41,9 @@
     <string name="pdf_title_voice_hygiene">List of tasks</string>
     <string name="pdfList_description_voiceHygiene">List of tasks you have to do:</string>
     <string name="breathing">Breathing</string>
+    <string name="folders">תקיות</string>
+    <string name="messages">הודעות</string>
+    <string name="account">חשבון שלי</string>
     <!--<string name="description_voice_hygiene">Description</string>-->
     <!--<string name="pdfList_description_voiceHygiene" />-->
 
