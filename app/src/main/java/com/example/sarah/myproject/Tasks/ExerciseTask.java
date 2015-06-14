@@ -44,7 +44,7 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
     {
         this.context = context;
 
-
+        bar = (LinearLayout)((Activity)context).findViewById(R.id.ProgressBar);
     }
 
 
@@ -111,12 +111,17 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
         return exercises;
     }
 
+    protected void onPreExecute()
+    {
+        bar.setVisibility(View.VISIBLE);            // set progress bar visible
+    }
 
     @Override
     protected void onPostExecute(List<String> exercises)      // The result of the operation computed by doInBackground(Params...)
     {
         super.onPostExecute(exercises);
 
+        bar.setVisibility(View.GONE);            // set progress bar not visible
         folderDescription.setText(description);
         exercisesAdapter = new ExercisesAdapter(context, android.R.layout.activity_list_item, R.id.exerciseList, exercises);       // calling to the adapter list -- folderList = list without adapter
         ListView listView = (ListView) ((Activity) context).findViewById(R.id.exerciseList);     // the list of folders

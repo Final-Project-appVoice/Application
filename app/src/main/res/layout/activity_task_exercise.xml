@@ -11,6 +11,25 @@
     tools:context="com.example.sarah.myproject.Activities.ExerciseListActivity"
     android:orientation="vertical">
 
+    <!-- Progress Bar -->
+    <LinearLayout
+        android:id="@+id/ProgressBar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/marker_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:indeterminate="true" />
+
+    </LinearLayout>
+
     <!--Title-->
     <LinearLayout
 

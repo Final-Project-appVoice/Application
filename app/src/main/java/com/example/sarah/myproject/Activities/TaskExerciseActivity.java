@@ -64,25 +64,32 @@ public class TaskExerciseActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        Intent i = null;
         switch(id)
         {
             case R.id.folders_icon:
             {
-                i = new Intent(this, PatientActivity.class);
+                Intent i = new Intent(this, PatientActivity.class);
+                this.startActivity(i);
+                this.finish();
+                break;
             }
             case R.id.messages_icon:
             {
-                i = new Intent(this, MessagesActivity.class);
+                Intent i = new Intent(this, MessagesActivity.class);
+                this.startActivity(i);
+                this.finish();
+                break;
             }
             case R.id.account_icon:
             {
-                i = new Intent(this, AccountActivity.class);
+                Intent i = new Intent(this, AccountActivity.class);
+                this.startActivity(i);
+                this.finish();
+                break;
             }
         }
 
-        this.startActivity(i);
-        this.finish();
+
 
         return super.onOptionsItemSelected(item);
     }
