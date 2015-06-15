@@ -99,6 +99,7 @@
 
             <Button
                 android:id="@+id/button_tasks_done"
+                android:onClick="onClick_button_exercise_done"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

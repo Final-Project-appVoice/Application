@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.SubmittedExerciseTask;
 import com.example.sarah.myproject.Tasks.TaskTask;
 
-public class TaskExerciseActivity extends Activity {
+public class TaskExerciseActivity extends Activity
+{
     public TextView exercsieTitleTextView, descriptionTextView;
-    public String exerciseName, exerciseTitle, exerciseId, patientId, patientName;
+    public String exerciseName, exerciseId, patientId, patientName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +50,17 @@ public class TaskExerciseActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.common_menu, menu);
-        getActionBar().setTitle(exerciseTitle);
+        getActionBar().setTitle(exerciseName);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -87,5 +92,12 @@ public class TaskExerciseActivity extends Activity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick_button_exercise_done(View view)
+    {
+        SubmittedExerciseTask submittedExerciseTask = new SubmittedExerciseTask(this);
+        submittedExerciseTask.execute(exerciseId, exerciseName);
+        this.finish();
     }
 }

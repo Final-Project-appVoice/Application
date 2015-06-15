@@ -29,7 +29,7 @@ public class SessionManager
     public static final String PATIENT_SET = "PatientSet";
     public static final String PATIENT_NAME = "PatientName";
     private static final String IS_LOGIN = "IsLoggedIn";        // All Shared Preferences Keys
-    public static final String DROPBOX = "Dropbox";
+    public static final String THERAPIST_ID = "TherapistId";
 
     private static final Patient LOGIN_PATIENT = null;
     //public static final String PATIENT_PWD = "PatientPwd";
@@ -46,7 +46,7 @@ public class SessionManager
     /**
      * Create login session
      * */
-    public void createLoginSession(String patientId, String name)
+    public void createLoginSession(String patientId, String name, String therapistId)
     {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
@@ -55,8 +55,11 @@ public class SessionManager
         //editor.putString(KEY_ID, name);
         editor.putString(PATIENT_ID, patientId);
 
-        // Storing email in pref
+        // Storing name in pref
         editor.putString(PATIENT_NAME, name);
+
+        // Storing therapist id in pref
+        editor.putString(THERAPIST_ID, therapistId);
 
         // commit changes
         editor.commit();
@@ -98,7 +101,8 @@ public class SessionManager
     {
         String patientId = pref.getString(PATIENT_ID, null);
         String patientName = pref.getString(PATIENT_NAME, null);
-        String[] array = {patientId, patientName};
+        String patientTherapistId = pref.getString(THERAPIST_ID, null);
+        String[] array = {patientId, patientName, patientTherapistId};
 
         return array;
     }

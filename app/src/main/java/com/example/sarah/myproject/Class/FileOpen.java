@@ -12,16 +12,19 @@ import java.io.IOException;
  */
 public class FileOpen
 {
-    public static void openFile(Context context, File url) throws IOException {
+
+    public static void openFile(Context context, String filePath) throws IOException {
         // Create URI
-        File file=url;
+        File file= new File(filePath);
         Uri uri = Uri.fromFile(file);
+        String url = filePath.split("/")[filePath.split("/").length-1];
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         // Check what kind of file you are trying to open, by comparing the url with extensions.
         // When the if condition is matched, plugin sets the correct intent (mime) type,
         // so Android knew what application to use to open the file
-        if (url.toString().contains(".doc") || url.toString().contains(".docx")) {
+        // TODO: change to endswith
+        if (url.toString().endsWith(".doc") || url.toString().endsWith(".docx")) {
             // Word document
             intent.setDataAndType(uri, "application/msword");
         } else if(url.toString().contains(".pdf")) {

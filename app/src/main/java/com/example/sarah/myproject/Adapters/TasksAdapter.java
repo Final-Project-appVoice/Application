@@ -10,15 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.exception.DropboxException;
-import com.example.sarah.myproject.Class.DropboxSession;
 import com.example.sarah.myproject.Class.Task;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.DownloadFileTask;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -28,7 +23,7 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
 {
     private LayoutInflater inflater;
     private List<Task> tasks;       // list of exercise names
-
+    Context context;
 
 
 
@@ -36,6 +31,7 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
     {
         super(context, resource, textViewResourceId, items);
         this.tasks = items;
+        this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Log.d("TasksAdapter", "HERE2");
 
@@ -72,30 +68,41 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
 //                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
 //                DownloadFileTask download = new DownloadFileTask(v.getContext(), DropboxSession.getDropboxSession(), "/");
 //                download.execute();
-                File file = new File("/Applications/AppVoice/"+actualTask.getImagePath().trim());
-                Log.d("File", actualTask.getImagePath());
-                FileOutputStream outputStream = null;
-                try
-                {
-                    outputStream = new FileOutputStream(file);
-                } catch (FileNotFoundException e)
-                {
-                    e.printStackTrace();
-                }
-                DropboxAPI.DropboxFileInfo info = null;
-                try
-                {
+                DownloadFileTask downloadFileTask = new DownloadFileTask(context);
+                downloadFileTask.execute(actualTask);
 
-                    Log.w("API",DropboxSession.getDropboxSession().toString());
-                    info = (DropboxSession.getDropboxSession()).getFile("/Applications/AppVoice/"+actualTask.getImagePath().trim(), null, outputStream, null);
-                    Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
-                }
-                catch (DropboxException e)
-                {
-                    Log.d("ERROR", "e");
-                    e.printStackTrace();
-                }
 
+//                File file = new File("/sdcard/" + actualTask.getImagePath().trim());
+//                        Log.d("File", actualTask.getImagePath());
+//                FileOutputStream outputStream = null;
+//                try
+//                {
+//                    outputStream = new FileOutputStream(file);
+//                } catch (FileNotFoundException e)
+//                {
+//                    e.printStackTrace();
+//                }
+//                DropboxAPI.DropboxFileInfo info = null;
+//                try
+//                {
+//
+//                    Log.w("API",DropboxSession.getDropboxSession().toString());
+//                    info = (DropboxSession.getDropboxSession()).getFile("/"+actualTask.getImagePath().trim(), null, outputStream, null);
+//                    Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
+//                    Thread.sleep(10000);
+//                    // TODO: open new activity and pass the filename
+//                    FileOpen.openFile(context,file.getPath().toString());
+//
+//                }
+//                catch (DropboxException e)
+//                {
+//                    Log.d("ERROR", "e");
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
 
 
             }

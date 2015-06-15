@@ -121,7 +121,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
         if (patient != null)
         {
             //session.createPatientLoginSession(patient);
-            session.createLoginSession(patient.getId(), patient.getFName()+ " " + patient.getLName());
+            session.createLoginSession(patient.getId(), patient.getFName()+ " " + patient.getLName(), patient.getTherapistId());
 
             // Staring MainActivity
             Intent i = new Intent(context, PatientActivity.class);
