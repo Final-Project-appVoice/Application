@@ -11,18 +11,16 @@ import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
 import com.example.sarah.myproject.Tasks.TaskTask;
 
-public class TaskExerciseActivity extends Activity
-{
+public class TaskExerciseActivity extends Activity {
     public TextView exercsieTitleTextView, descriptionTextView;
     public String exerciseName, exerciseTitle, exerciseId, patientId, patientName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_exercise);
 
-        exercsieTitleTextView = (TextView)findViewById(R.id.exerciseTitle);
+        exercsieTitleTextView = (TextView) findViewById(R.id.exerciseTitle);
 
         Intent i = getIntent();         // get information from intent
         exerciseName = i.getStringExtra("exerciseTitle");    // get exercise name
@@ -39,8 +37,7 @@ public class TaskExerciseActivity extends Activity
 
         // get user ID from session
         String[] patientArray = session.getPatientDetails();
-        if (patientArray.length > 0)
-        {
+        if (patientArray.length > 0) {
             patientId = patientArray[0];        // get patient id
             patientName = patientArray[1];      // get patient name
         }
@@ -64,31 +61,29 @@ public class TaskExerciseActivity extends Activity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch(id)
+        Intent i = null;
+        switch (id)
         {
             case R.id.folders_icon:
             {
-                Intent i = new Intent(this, PatientActivity.class);
-                this.startActivity(i);
-                this.finish();
+                i = new Intent(this, PatientActivity.class);
                 break;
             }
             case R.id.messages_icon:
             {
-                Intent i = new Intent(this, MessagesActivity.class);
-                this.startActivity(i);
-                this.finish();
+                i = new Intent(this, MessagesActivity.class);
                 break;
             }
             case R.id.account_icon:
             {
-                Intent i = new Intent(this, AccountActivity.class);
-                this.startActivity(i);
-                this.finish();
+                i = new Intent(this, AccountActivity.class);
                 break;
             }
-        }
 
+
+        }
+        this.startActivity(i);
+        this.finish();
 
 
         return super.onOptionsItemSelected(item);

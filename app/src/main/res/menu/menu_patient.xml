@@ -1,7 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.sarah.myproject.Activities.PatientActivity">
-    <item
+
+    <group
+        android:id="@+id/group_icons">
+        <item
+            android:id="@+id/folders_icon"
+            android:icon="@drawable/ic_folders"
+            android:title="@string/folders"
+            android:showAsAction="always" />
+
+        <item
+            android:id="@+id/messages_icon"
+            android:icon="@drawable/ic_message"
+            android:title="@string/messages"
+            android:showAsAction="always"/>
+
+        <item
+            android:id="@+id/account_icon"
+            android:icon="@drawable/ic_person"
+            android:title="@string/account"
+            android:showAsAction="always" />
+    </group>
+
+   <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"

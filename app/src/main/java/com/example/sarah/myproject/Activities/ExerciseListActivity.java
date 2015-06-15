@@ -96,7 +96,20 @@ public class ExerciseListActivity extends Activity
                 this.finish();
                 break;
             }
+            case R.id.action_logout:
+            {
+                session.logoutUser();
+                break;
+            }
+            case  R.id.action_exit:
+            {
+                moveTaskToBack(true);
+                ExerciseListActivity.this.finish();
+                break;
+            }
+
         }
+
 
 
         return super.onOptionsItemSelected(item);

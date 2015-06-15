@@ -72,7 +72,7 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
 //                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
 //                DownloadFileTask download = new DownloadFileTask(v.getContext(), DropboxSession.getDropboxSession(), "/");
 //                download.execute();
-                File file = new File("/"+actualTask.getImagePath().trim());
+                File file = new File("/Applications/AppVoice/"+actualTask.getImagePath().trim());
                 Log.d("File", actualTask.getImagePath());
                 FileOutputStream outputStream = null;
                 try
@@ -95,6 +95,8 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
                     Log.d("ERROR", "e");
                     e.printStackTrace();
                 }
+
+
 
             }
         });

@@ -88,7 +88,13 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
             else
             {
                 // TODO: user doesnt exist
-                alert.showAlertDialog(context, "Login failed..", "Please enter username and password", false);
+                ((Activity)context).runOnUiThread(new Runnable() {
+                    public void run() {
+                        //Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
+                        alert.showAlertDialog(context, "Login failed..", "Username or password is not valid", false);
+                    }
+                });
+
             }
         } catch (Exception e)         // if connection to db didn't succeed
         {
@@ -96,7 +102,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
             ((Activity)context).runOnUiThread(new Runnable() {
                 public void run() {
                     //Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
-                    alert.showAlertDialog(context, "Login failed..", "Username or password is not valid", false);
+                    alert.showAlertDialog(context, "Login failed..", "Error in connecting to database", false);
                 }
             });
 

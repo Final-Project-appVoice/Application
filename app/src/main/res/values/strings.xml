@@ -64,5 +64,14 @@
     <string name="title_activity_messages">MessagesActivity</string>
     <string name="title_activity_account">AccountActivity</string>
     <string name="list_exercises">להלן רשימת התרגילים עליכם לבצע:</string>
+    <string name="done">משימות בוצעו</string>
+    <string name="address">כתובת</string>
+    <string name="phone">מספר טלפון</string>
+    <string name="hmo">קופת חולים</string>
+    <string name="mail">מייל</string>
+    <string name="therapist">קלינאית תקשורת</string>
+    <string name="contact">צור קשר</string>
+    <string name="update">עדכן פרטים</string>
+    <string name="save">שמור</string>
 
 </resources>

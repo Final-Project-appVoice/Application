@@ -1,7 +1,9 @@
 package com.example.sarah.myproject.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -160,7 +162,7 @@ public class PatientActivity extends Activity {
             case R.id.messages_icon:
             {
                 Intent i = new Intent(this, MessagesActivity.class);
-                this.startActivity(i);
+                this.startActivityForResult(i, PRIVATE_MODE);
                 this.finish();
                 break;
             }
@@ -171,13 +173,38 @@ public class PatientActivity extends Activity {
                 this.finish();
                 break;
             }
+            case R.id.action_logout:
+            {
+                session.logoutUser();
+                break;
+            }
+            case  R.id.action_exit:
+            {
+                moveTaskToBack(true);
+                PatientActivity.this.finish();
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void onBackPressed()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-    public void onClick_action_logout(MenuItem item) {
+                    public void onClick(DialogInterface arg0, int arg1)
+                    {
+                        PatientActivity.super.onBackPressed();
+                    }
+                }).create().show();
+    }
+    public void onClick_action_logout(MenuItem item)
+    {
 //        SharedPreferences sharedpreferences = getSharedPreferences(MyProject.MyPREFERENCES, Context.MODE_PRIVATE);
 //        Editor editor = sharedpreferences.edit();
 //        editor.clear();
@@ -189,16 +216,18 @@ public class PatientActivity extends Activity {
         // Clear the session data
         // This will clear all session data and
         // redirect user to LoginActivity
-        session.logoutUser();
+
+
+        //session.logoutUser();
     }
 
     public void onClick_action_exit(MenuItem item)
     {
         //String id = i.getStringExtra(MyProject.PATIENT_ID);
         // String id = i.getStringExtra(session.PATIENT_ID);
-        Log.e("exit", patientName);
-        moveTaskToBack(true);
-        PatientActivity.this.finish();
+//        Log.e("exit", patientName);
+//        moveTaskToBack(true);
+//        PatientActivity.this.finish();
     }
     protected void onResume()
 
@@ -226,7 +255,8 @@ public class PatientActivity extends Activity {
         }
     }
 
-    private void showToast(String msg) {
+    private void showToast(String msg)
+    {
         Toast error = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         error.show();
     }

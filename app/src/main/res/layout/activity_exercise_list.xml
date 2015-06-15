@@ -41,7 +41,7 @@
             android:id="@+id/folderTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#956762bf"
+
             />
     </LinearLayout>
 
@@ -49,7 +49,8 @@
     <LinearLayout
         style="@style/LinearStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="right">
 
         <TextView
             style="@style/Description"
@@ -63,31 +64,33 @@
     <!--PDF List-->
     <LinearLayout
         style="@style/LinearStyle"
-        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dbx_action_bar_default_height"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--Title-->
-        <TextView
-            style="@style/Subtitle"
-            android:id="@+id/title_pdf_voiceHygiene"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/list_exercises"
-            />
-        <!--Description-->
-        <TextView
-            style="@style/SubDescription"
-            android:id="@+id/description_pdf_voiceHygiene"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+        <!--&lt;!&ndash;Title&ndash;&gt;-->
+        <!--<TextView-->
+            <!--style="@style/Subtitle"-->
+            <!--android:id="@+id/title_pdf_voiceHygiene"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/list_exercises"-->
+            <!--/>-->
+        <!--&lt;!&ndash;Description&ndash;&gt;-->
+        <!--<TextView-->
+            <!--style="@style/SubDescription"-->
+            <!--android:id="@+id/description_pdf_voiceHygiene"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--/>-->
 
         <!--List-->
         <ListView
             android:id="@+id/exerciseList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/galleryChromeTransparencyBackgroundLight"
             >
 
         </ListView>

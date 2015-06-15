@@ -2,16 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:orientation="horizontal"
+
     android:gravity="center"
+
     >
 
 
     <!-- V image -->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:gravity="right|center"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         >
@@ -26,18 +29,20 @@
 
     <!-- Exercise Title -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="right|center"
         android:orientation="horizontal"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        >
 
         <TextView
-            style="@style/Description"
+            style="@style/ListItem"
 
             android:id="@+id/exerciseTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
             android:text="תרגיל" />
 
         <TextView
@@ -45,5 +50,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/exerciseId"
             android:visibility="invisible"/>
+
     </LinearLayout>
+
 </LinearLayout>

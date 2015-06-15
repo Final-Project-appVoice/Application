@@ -2,21 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:baselineAligned="true">
+    android:baselineAligned="true"
+    android:orientation="vertical">
 
     <!-- Task Title -->
     <LinearLayout
-        android:gravity="right"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="right"
         android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_done">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="@drawable/ic_read_exercise" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/taskTitle"
 
-            style="@style/Description"
-            android:layout_width="wrap_content"
+            style="@style/ListItem"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="כותרת משימה" />
 
@@ -25,14 +37,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible" />
+
+
     </LinearLayout>
 
     <!-- Task description -->
     <LinearLayout
-        android:gravity="right"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
@@ -49,46 +63,46 @@
 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:gravity="right"
-        android:layout_gravity="center">
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/urlTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/urlTitle"
-            android:visibility="visible"
-            />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/buttonTaskFile"
-            android:gravity="right"
             style="@style/Description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="פתח קובץ" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_action_file"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@drawable/ic_action_file" />
 
     </LinearLayout>
 
     <!-- Task description -->
     <LinearLayout
-        android:gravity="right"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/taskComment"
 
-            style="@style/Description"
+            style="@style/SubDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="" />
