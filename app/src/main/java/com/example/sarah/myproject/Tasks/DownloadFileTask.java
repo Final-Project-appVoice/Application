@@ -1,12 +1,9 @@
 package com.example.sarah.myproject.Tasks;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
@@ -16,7 +13,6 @@ import com.example.sarah.myproject.Class.FileOpen;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Class.Task;
 import com.example.sarah.myproject.Dal.DalConstant;
-import com.example.sarah.myproject.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -103,7 +99,7 @@ public class DownloadFileTask extends AsyncTask<Task, Void, Void>  // <Params, P
                 Statement statement1 = con.createStatement();
 
                 // After connection
-                String query1 = "INSERT INTO SubmittedTask (TaskId, PatientId, TherapistId) VALUES (?, ?, ?, ?)";
+                String query1 = "INSERT INTO SubmittedTask (TaskId, PatientId, TherapistId, ExerciseId) VALUES (?, ?, ?, ?)";
                 PreparedStatement preparedStmt = con.prepareStatement(query1);
                 preparedStmt.setInt(1, actualTask.getTaskId());
                 preparedStmt.setString(2, patientId);
@@ -139,8 +135,8 @@ public class DownloadFileTask extends AsyncTask<Task, Void, Void>  // <Params, P
         super.onPostExecute(object);
         progressDialog.dismiss();
 
-        ImageView image = (ImageView)((Activity)context).findViewById(R.id.read_task);
-        image.setVisibility(View.VISIBLE);
+//        ImageView image = (ImageView)((Activity)context).findViewById(R.id.read_task);
+//        image.setVisibility(View.VISIBLE);
 
 
     }

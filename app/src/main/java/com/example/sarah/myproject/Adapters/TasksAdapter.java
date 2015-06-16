@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sarah.myproject.Class.Task;
@@ -51,6 +52,7 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
         TextView taskId = (TextView)convertView.findViewById(R.id.taskId);
         TextView taskUrl = (TextView)convertView.findViewById(R.id.urlTitle);
         Button buttonFile = (Button)convertView.findViewById(R.id.buttonTaskFile);
+        ImageView imageView = (ImageView)convertView.findViewById(R.id.read_task);
 
         final Task actualTask = tasks.get(position);
         Log.d("Actual Task", actualTask.toString());
@@ -60,91 +62,29 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
         taskComment.setText(actualTask.getComment());
         taskUrl.setText(actualTask.getImagePath());
 
+        if(actualTask.isDone())
+        {
+            imageView.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            imageView.setVisibility(View.INVISIBLE);
+        }
+
         buttonFile.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 //                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
-//                DownloadFileTask download = new DownloadFileTask(v.getContext(), DropboxSession.getDropboxSession(), "/");
-//                download.execute();
                 DownloadFileTask downloadFileTask = new DownloadFileTask(context);
                 downloadFileTask.execute(actualTask);
-
-
-//                File file = new File("/sdcard/" + actualTask.getImagePath().trim());
-//                        Log.d("File", actualTask.getImagePath());
-//                FileOutputStream outputStream = null;
-//                try
-//                {
-//                    outputStream = new FileOutputStream(file);
-//                } catch (FileNotFoundException e)
-//                {
-//                    e.printStackTrace();
-//                }
-//                DropboxAPI.DropboxFileInfo info = null;
-//                try
-//                {
-//
-//                    Log.w("API",DropboxSession.getDropboxSession().toString());
-//                    info = (DropboxSession.getDropboxSession()).getFile("/"+actualTask.getImagePath().trim(), null, outputStream, null);
-//                    Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
-//                    Thread.sleep(10000);
-//                    // TODO: open new activity and pass the filename
-//                    FileOpen.openFile(context,file.getPath().toString());
-//
-//                }
-//                catch (DropboxException e)
-//                {
-//                    Log.d("ERROR", "e");
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-
 
             }
         });
         return convertView;
     }
 
-//    private boolean downloadDropboxFile(String dbPath, File localFile) throws IOException {
-//
-//        BufferedInputStream br = null;
-//        BufferedOutputStream bw = null;
-//
-//        try {
-//            if (!localFile.exists()) {
-//                localFile.createNewFile(); //otherwise dropbox client will fail silently
-//            }
-//
-//            FileDownload fd = DropboxSession.getDropboxSession().getFileStream("dropbox", dbPath, null);
-//            br = new BufferedInputStream(fd.is);
-//            bw = new BufferedOutputStream(new FileOutputStream(localFile));
-//
-//            byte[] buffer = new byte[4096];
-//            int read;
-//            while (true) {
-//                read = br.read(buffer);
-//                if (read <= 0) {
-//                    break;
-//                }
-//                bw.write(buffer, 0, read);
-//            }
-//        } finally {
-//            //in finally block:
-//            if (bw != null) {
-//                bw.close();
-//            }
-//            if (br != null) {
-//                br.close();
-//            }
-//        }
-//
-//        return true;
-//    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {

@@ -70,6 +70,7 @@ public class TaskTask extends AsyncTask<String, List<Task>, List<Task>> implemen
 
             Statement statement1 = con.createStatement();
             Statement statement2 = con.createStatement();
+            Statement statement3 = con.createStatement();
 
             Log.d("Task - patienId", "*" + patientId + "*");
             Log.d("Task = exId", "*"+exerciseId+"*");
@@ -90,7 +91,18 @@ public class TaskTask extends AsyncTask<String, List<Task>, List<Task>> implemen
                 Log.d("Task", "IN WHILE");
                 int taskId = rs2.getInt("TaskId");      // gte task id from db
                 Log.w("TASK id", taskId + "");
-                Task task = new Task(taskId, rs2.getString("TaskTitle"), rs2.getString("Comment"), rs2.getString("Description"), rs2.getInt("ExerciseId"), rs2.getString("ImagePath"));
+                String query3 = "SELECT TaskId FROM SubmittedTask WHERE TaskId = '" + taskId + "' AND PatientId = '" + patientId + "'";   // get all tasks
+                ResultSet rs3 = statement3.executeQuery(query3);
+                Task task;
+                if(rs3.next())      // the task is submitted
+                {
+                    task = new Task(taskId, rs2.getString("TaskTitle"), rs2.getString("Comment"), rs2.getString("Description"), rs2.getInt("ExerciseId"), rs2.getString("ImagePath"), true);
+                }
+                else        // the task is not submitted
+                {
+                    task = new Task(taskId, rs2.getString("TaskTitle"), rs2.getString("Comment"), rs2.getString("Description"), rs2.getInt("ExerciseId"), rs2.getString("ImagePath"), false);
+                }
+
                 taskList.add(task);
                 Log.d("Task", task.toString());
             }

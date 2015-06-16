@@ -7,8 +7,9 @@ public class Task
 {
     private int taskId, exerciseId;
     private String taskTitle, description, imagePath, comment;
+    private boolean isDone;
 
-    public Task(int taskId, String taskTitle, String comment, String description, int exerciseId, String imagePath)
+    public Task(int taskId, String taskTitle, String comment, String description, int exerciseId, String imagePath, boolean isDone)
     {
         this.taskTitle = taskTitle;
         this.taskId = taskId;
@@ -16,6 +17,15 @@ public class Task
         this.description = description;
         this.exerciseId = exerciseId;
         this.imagePath = imagePath;
+        this.isDone = isDone;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getComment() {
