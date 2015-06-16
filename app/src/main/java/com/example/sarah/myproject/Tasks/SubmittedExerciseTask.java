@@ -59,7 +59,7 @@ public class SubmittedExerciseTask extends AsyncTask<String, List<Task>, List<Ta
         try
         {
             // Connecting to the database
-            Class.forName("com.mysql.jdbc.Driver/embeddedChat?useUnicode=true&characterEncoding=UTF-8").newInstance();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
 
             Statement statement1 = con.createStatement();
