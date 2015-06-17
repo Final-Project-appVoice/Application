@@ -52,7 +52,8 @@ public class SubmittedExerciseTask extends AsyncTask<String, List<Task>, List<Ta
     }
 
     @Override
-    protected List<Task> doInBackground(String... params) {
+    protected List<Task> doInBackground(String... params)
+    {
         exerciseId = params[0];
         exerciseName = params[1];
 

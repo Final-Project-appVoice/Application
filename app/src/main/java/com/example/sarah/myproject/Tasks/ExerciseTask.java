@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,12 +40,14 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
     private ExercisesAdapter exercisesAdapter;
     private TextView folderDescription;
     private String description;
+    private ImageView exerciseDone;
 
     public ExerciseTask(Context context)
     {
         this.context = context;
 
         bar = (LinearLayout)((Activity)context).findViewById(R.id.ProgressBar);
+
     }
 
 
@@ -68,6 +71,7 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
             Statement statement1 = con.createStatement();
             Statement statement2 = con.createStatement();
             Statement statement3 = con.createStatement();
+            Statement statement4 = con.createStatement();
 
             Log.d("ExerciseTask - patienId", "*"+patientId+"*");
             Log.d("ExerciseTask = folderId", "*"+folderId+"*");
@@ -89,6 +93,7 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
                 int exerciseId = rs1.getInt("ExerciseId");
                 Log.w("EXERCISE id", exerciseId + "");
                 String query2 = "SELECT Title FROM Exercise WHERE ExerciseId = '" + exerciseId + "'";
+                String query4 = "SELECT ExerciseId FROM SubmittedExercise WHERE ExerciseId = '" + exerciseId + "'";
 
                 ResultSet rs2 = statement2.executeQuery(query2);
                 if (rs2.next())
@@ -99,9 +104,19 @@ public class ExerciseTask extends AsyncTask<String, List<String>, List<String>> 
                     {
                         Log.d("ExerciseTask", "IN LIST CONTAINS");
                         Log.d("Exercise Title", exerciseName);
-                        exercises.add(exerciseName + "," + exerciseId);     // return exercise details: <exerciseName,exerciseId>
+                        ResultSet rs4 = statement4.executeQuery(query4);
+                        if(rs4.next())      // if the exercise is already done
+                        {
+                            exercises.add(exerciseName + "," + exerciseId + "," + "true");     // return exercise details: <exerciseName,exerciseId>
+                        }
+                        else
+                        {
+                            exercises.add(exerciseName + "," + exerciseId + "," + "false");     // return exercise details: <exerciseName,exerciseId>
+                        }
+
                     }
                 }
+
             }
             Log.d("ExerciseTask", "AFTER");
         } catch (Exception e)         // if connection to db didn't succeed

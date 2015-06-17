@@ -73,5 +73,9 @@
     <string name="contact">צור קשר</string>
     <string name="update">עדכן פרטים</string>
     <string name="save">שמור</string>
+    <string name="newMessage">הודעה חדשה</string>
+    <string name="title_activity_new_message">NewMessageActivity</string>
+    <string name="newMessageTo">הודעה חדשה עבור:</string>
+    <string name="send_message">שלח הודעה</string>
 
 </resources>

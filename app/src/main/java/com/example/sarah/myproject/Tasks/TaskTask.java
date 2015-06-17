@@ -3,10 +3,12 @@ package com.example.sarah.myproject.Tasks;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,12 +45,13 @@ public class TaskTask extends AsyncTask<String, List<Task>, List<Task>> implemen
     private TextView exerciseDescription;
     private String description;
     private List<Task> taskList;
+    private Button button;
 
     public TaskTask(Context context)
     {
         this.context = context;
         bar = (LinearLayout)((Activity)context).findViewById(R.id.ProgressBar);
-
+        button = (Button)((Activity)context).findViewById(R.id.button_tasks_done);
     }
 
 
@@ -71,13 +74,14 @@ public class TaskTask extends AsyncTask<String, List<Task>, List<Task>> implemen
             Statement statement1 = con.createStatement();
             Statement statement2 = con.createStatement();
             Statement statement3 = con.createStatement();
+            Statement statement4 = con.createStatement();
 
             Log.d("Task - patienId", "*" + patientId + "*");
             Log.d("Task = exId", "*"+exerciseId+"*");
             // After connection
             String query1 = "SELECT Description FROM Exercise WHERE ExerciseId = '" + exerciseId + "'";       // get exercise description
             String query2 = "SELECT * FROM Task WHERE ExerciseId = '" + exerciseId + "'";   // get all tasks
-
+            String query4 = "SELECT ExerciseId FROM SubmittedExercise WHERE ExerciseId = '" + exerciseId + "'";
             ResultSet rs1 = statement1.executeQuery(query1);
             if(rs1.next())
             {
@@ -105,6 +109,17 @@ public class TaskTask extends AsyncTask<String, List<Task>, List<Task>> implemen
 
                 taskList.add(task);
                 Log.d("Task", task.toString());
+            }
+            ResultSet rs4 = statement4.executeQuery(query4);
+            if(rs4.next())      // if the exercise is already done
+            {
+                button.setEnabled(false);
+                button.setBackgroundColor(Color.GRAY);
+            }
+            else
+            {
+                button.setEnabled(true);
+                button.setBackgroundColor(Color.RED);
             }
             Log.d("ExerciseTask", "AFTER");
         } catch (Exception e)         // if connection to db didn't succeed

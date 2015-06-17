@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sarah.myproject.Activities.TaskExerciseActivity;
@@ -28,6 +29,7 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         super(context, resource, textViewResourceId, items);
         this.exercises = items;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
     @Override
@@ -37,13 +39,24 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         convertView = view;
         TextView exerciseTitle = (TextView)view.findViewById(R.id.exerciseTitle);
         TextView exerciseIdTextView = (TextView)view.findViewById(R.id.exerciseId);
+        ImageView exerciseDone = (ImageView)view.findViewById(R.id.exercise_done);
         String exercise = exercises.get(position);
         String[] exerciseSplit = exercise.split(",");       // get exercise details from the list using the position
         String exerciseName = exerciseSplit[0];     // split to get title
         String exerciseId = exerciseSplit[1];       // split to get id
+        String isDone = exerciseSplit[2];
         String title = position+1 + ". " + exerciseName;
         exerciseTitle.setText(title);       // fill text view to be the title of the exercise
         exerciseIdTextView.setText(exerciseId);     // fill text view to be the id of the exercise
+
+        if(isDone.equals("true"))     // the exercise is already done
+        {
+            exerciseDone.setVisibility(View.VISIBLE);
+        }
+        else        // the exercise is not done yet
+        {
+            exerciseDone.setVisibility(View.INVISIBLE);
+        }
 
         return convertView;
     }

@@ -43,13 +43,14 @@ public class MessagesActivity extends Activity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.common_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_messages, menu);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -58,6 +59,8 @@ public class MessagesActivity extends Activity
         //noinspection SimplifiableIfStatement
         switch(id)
         {
+            case android.R.id.home:
+                finish();
             case R.id.folders_icon:
             {
                 Intent i = new Intent(this, PatientActivity.class);
@@ -65,13 +68,7 @@ public class MessagesActivity extends Activity
                 this.finish();
                 break;
             }
-            case R.id.messages_icon:
-            {
-                Intent i = new Intent(this, MessagesActivity.class);
-                this.startActivity(i);
-                this.finish();
-                break;
-            }
+
             case R.id.account_icon:
             {
                 Intent i = new Intent(this, AccountActivity.class);
@@ -88,6 +85,13 @@ public class MessagesActivity extends Activity
             {
                 moveTaskToBack(true);
                 MessagesActivity.this.finish();
+                break;
+            }
+            case R.id.newMessage_icon:
+            {
+                Intent i = new Intent(this, NewMessageActivity.class);
+                this.startActivity(i);
+                this.finish();
                 break;
             }
         }

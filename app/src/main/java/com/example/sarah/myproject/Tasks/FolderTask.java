@@ -58,7 +58,8 @@ public class FolderTask extends AsyncTask<String, List<String>, List<String>> im
         String patientId = params[0];    // patientId
 
         List<String> folders = new ArrayList<String>();
-        try {
+        try
+        {
             // Connecting to the database
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
