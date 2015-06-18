@@ -73,7 +73,7 @@ public class SendMessageTask extends AsyncTask<String, Boolean, Boolean>
             preparedStmt.setString (1, patientId);
             preparedStmt.setString(2, therapistId);
             preparedStmt.setString(3, message);
-            preparedStmt.setInt(4, 1);  // isRead = false
+            preparedStmt.setInt(4, 0);  // isRead = false
 
             // execute the preparedstatement
             if(preparedStmt.execute())
