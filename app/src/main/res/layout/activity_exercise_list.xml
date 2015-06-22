@@ -133,7 +133,7 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
-                        android:background="@drawable/stop_recorder1"
+                        android:background="@drawable/stop_record"
                         android:onClick="onClick_buttonStopRecorder"
                         android:visibility="gone" />
                 </LinearLayout>

@@ -19,9 +19,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.sarah.myproject.Class.CameraPreview;
+import com.example.sarah.myproject.Class.DropboxSession;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
 import com.example.sarah.myproject.Tasks.ExerciseTask;
+import com.example.sarah.myproject.Tasks.UploadVideo;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +35,7 @@ public class ExerciseListActivity extends Activity
     private TextView folderTitle, folderDescription;
     private String folderName, patientId, patientName, folderID;
     private SessionManager session;
-
+    private File mediaFile;
     public static final int MEDIA_TYPE_VIDEO = 2;
     private static final String TAG = "Recorder";
     private SurfaceView mSurfaceView;
@@ -290,6 +292,8 @@ public class ExerciseListActivity extends Activity
             releaseMediaRecorder(); // release the MediaRecorder object
             mCamera.lock();         // take camera access back from MediaRecorder
             isRecording = false;
+            UploadVideo upload = new UploadVideo(this, DropboxSession.getDropboxSession(), "/", mediaFile);
+            upload.execute();
         }
     }
 
@@ -311,17 +315,17 @@ public class ExerciseListActivity extends Activity
 
 
     /** Create a file Uri for saving an image or video */
-    private static Uri getOutputMediaFileUri(int type){
+    private  Uri getOutputMediaFileUri(int type){
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
     /** Create a File for saving an image or video */
-    private static File getOutputMediaFile(int type)
-    {
+    private File getOutputMediaFile(int type) {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyCameraApp");
+
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
@@ -335,12 +339,34 @@ public class ExerciseListActivity extends Activity
 
         // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile;
+
         if(type == MEDIA_TYPE_VIDEO)
         {
             Log.d(TAG, "save media");
+            String mediaName = File.separator +
+                    "VID_"+ timeStamp + ".mp4";
+            Log.d("Media Name", mediaName);
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                     "VID_"+ timeStamp + ".mp4");
+//            FileInputStream inputStream = null;
+//            try
+//            {
+//                inputStream = new FileInputStream(mediaFile);
+//            } catch (FileNotFoundException e)
+//            {
+//                e.printStackTrace();
+//                Log.d(TAG, "FILE INPUT STREAM ERROR");
+//            }
+//            try {
+//                KeyStore.Entry response = (KeyStore.Entry) DropboxSession.getDropboxSession().putFile(mediaName, inputStream,
+//                        mediaFile.length(), null, null);
+//            } catch (DropboxException e)
+//            {
+//                e.printStackTrace();
+//                Log.d(TAG, "FILE KEY ENTRY STREAM ERROR");
+//            }
+
+
             Log.d(TAG, mediaFile.getAbsolutePath().toString());
         }
         else
