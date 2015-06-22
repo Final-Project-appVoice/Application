@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sarah.myproject">
+    package="com.example.sarah.myproject" >
 
     <!-- &lt;!&ndash; To access Google+ APIs: &ndash;&gt; -->
 
@@ -25,7 +25,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo">
+        android:theme="@android:style/Theme.Holo" >
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -34,7 +34,7 @@
             android:name=".Activities.MyProject"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,14 +46,13 @@
         <!-- android:PATIENT_ID="com.google.android.gms.version" -->
         <!-- android:value="@integer/google_play_services_version" /> -->
 
-
         <activity
             android:name=".Activities.PatientActivity"
             android:label="@string/title_activity_patient" />
         <activity
             android:name=".Activities.VoiceHygieneActivity"
             android:label="@string/title_activity_voice_hygiene"
-            android:parentActivityName=".Activities.PatientActivity">
+            android:parentActivityName=".Activities.PatientActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
@@ -61,7 +60,7 @@
         <activity
             android:name=".Activities.TheoreticalBackgroundActivity"
             android:label="@string/title_activity_theorical_background"
-            android:parentActivityName=".Activities.PatientActivity">
+            android:parentActivityName=".Activities.PatientActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
@@ -69,7 +68,7 @@
         <activity
             android:name=".Activities.ExercisesActivity"
             android:label="@string/title_activity_exercises"
-            android:parentActivityName=".Activities.PatientActivity">
+            android:parentActivityName=".Activities.PatientActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
@@ -77,7 +76,7 @@
         <activity
             android:name=".Activities.BreathingActivity"
             android:label="@string/title_activity_breathing"
-            android:parentActivityName=".Activities.ExercisesActivity">
+            android:parentActivityName=".Activities.ExercisesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.ExercisesActivity" />
@@ -85,7 +84,7 @@
         <activity
             android:name=".Activities.RelaxationActivity"
             android:label="@string/title_activity_relaxation"
-            android:parentActivityName=".Activities.ExercisesActivity">
+            android:parentActivityName=".Activities.ExercisesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.ExercisesActivity" />
@@ -93,26 +92,23 @@
         <activity
             android:name=".Activities.ExerciseListActivity"
             android:label="@string/title_activity_exercise_list"
-            android:parentActivityName=".Activities.PatientActivity">
-
+            android:parentActivityName=".Activities.PatientActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
         </activity>
-
         <activity
             android:name=".Activities.TaskExerciseActivity"
             android:label="@string/title_activity_task_exercise"
-            android:parentActivityName=".Activities.ExerciseListActivity">
+            android:parentActivityName=".Activities.ExerciseListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.ExerciseListActivity" />
         </activity>
-
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask" >
             <intent-filter>
 
                 <!-- Change this to be db- followed by your app key -->
@@ -127,7 +123,7 @@
         <activity
             android:name=".Activities.MessagesActivity"
             android:label="@string/title_activity_messages"
-            android:parentActivityName=".Activities.PatientActivity">
+            android:parentActivityName=".Activities.PatientActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
@@ -139,15 +135,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.PatientActivity" />
-
         </activity>
         <activity
             android:name=".Activities.NewMessageActivity"
             android:label="@string/title_activity_new_message"
-            android:parentActivityName=".Activities.MessagesActivity">
+            android:parentActivityName=".Activities.MessagesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.MessagesActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.CameraRecorder"
+            android:label="@string/title_activity_camera_recorder" >
         </activity>
     </application>
 
