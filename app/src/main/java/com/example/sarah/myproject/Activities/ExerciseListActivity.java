@@ -128,6 +128,7 @@ public class ExerciseListActivity extends Activity
 //            finish();
 //        }
         mCamera = getCameraInstance();
+        mCamera.setDisplayOrientation(90);
         mPreview = new CameraPreview(this, mCamera, mSurfaceView);
         isRecording = false;
 
@@ -338,16 +339,17 @@ public class ExerciseListActivity extends Activity
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
+        String copyPatientName = patientName;
+        copyPatientName = copyPatientName.replace(" ", "_");
         if(type == MEDIA_TYPE_VIDEO)
         {
             Log.d(TAG, "save media");
             String mediaName = File.separator +
-                    "VID_"+ timeStamp + ".mp4";
+                    "VID_"+ copyPatientName +"_"+ timeStamp + ".mp4";
             Log.d("Media Name", mediaName);
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_"+ timeStamp + ".mp4");
+                    "VID_"+ copyPatientName + "_" + timeStamp + ".mp4");
 //            FileInputStream inputStream = null;
 //            try
 //            {
