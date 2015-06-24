@@ -22,7 +22,7 @@ import com.example.sarah.myproject.Class.CameraPreview;
 import com.example.sarah.myproject.Class.DropboxSession;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.ExerciseTask;
+import com.example.sarah.myproject.Tasks.ExerciseListTask;
 import com.example.sarah.myproject.Tasks.UploadVideo;
 
 import java.io.File;
@@ -88,51 +88,12 @@ public class ExerciseListActivity extends Activity
         Log.w("Patient ID", patientId);
         Log.w("Folder ID", folderName);
 
+//        mCamera = getCameraInstance();
+//        mCamera.setDisplayOrientation(90);
+//        mPreview = new CameraPreview(this, mCamera, mSurfaceView);
+//        isRecording = false;
 
-//        cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-//        CameraCaptureSession.StateCallback stateCallback= new CameraCaptureSession.StateCallback()
-//        {
-//            @Override
-//            public void onConfigured(CameraCaptureSession session)
-//            {
-//
-//            }
-//
-//            @Override
-//            public void onConfigureFailed(CameraCaptureSession session)
-//            {
-//
-//            }
-//        };
-//        TextView listCamera = (TextView)findViewById(R.id.listCamera);
-//        String list = "";
-//        try
-//        {
-//            String[] listC = cameraManager.getCameraIdList();
-//            for(int j = 0; j<listC.length; j++)
-//            {
-//                list += listC[j] + "\n";
-//            }
-//            cameraManager.openCamera(listC[0], stateCallback, Handler handler);
-//        }
-//        catch (CameraAccessException e)
-//        {
-//            e.printStackTrace();
-//        }
-
-     //   listCamera.setText(list);
-//        cameraManager = this.getCameraInstance();
-//        if(cameraManager == null)
-//        {
-//            Toast.makeText(this, "Error in opening camera", Toast.LENGTH_LONG).show();
-//            finish();
-//        }
-        mCamera = getCameraInstance();
-        mCamera.setDisplayOrientation(90);
-        mPreview = new CameraPreview(this, mCamera, mSurfaceView);
-        isRecording = false;
-
-        ExerciseTask exerciseTask = new ExerciseTask(this);      // calling to task in order to pull from db the folders assigned
+        ExerciseListTask exerciseTask = new ExerciseListTask(this);      // calling to task in order to pull from db the folders assigned
         exerciseTask.execute(patientId, folderID+"");       // execute task and add buttons for each folder assigned
         Log.w("Check", "AFTER");
     }

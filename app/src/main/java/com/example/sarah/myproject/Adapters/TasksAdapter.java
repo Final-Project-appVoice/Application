@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.sarah.myproject.Class.Task;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.DownloadFileTask;
 
 import java.util.List;
 
@@ -71,17 +70,17 @@ public class TasksAdapter extends ArrayAdapter<Task> implements AdapterView.OnIt
             imageView.setVisibility(View.INVISIBLE);
         }
 
-        buttonFile.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-//                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
-                DownloadFileTask downloadFileTask = new DownloadFileTask(context);
-                downloadFileTask.execute(actualTask);
-
-            }
-        });
+//        buttonFile.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+////                Log.d("Dropbox session", DropboxSession.getDropboxSession().toString());
+//                DownloadFileTask downloadFileTask = new DownloadFileTask(context);
+//                downloadFileTask.execute(actualTask);
+//
+//            }
+//        });
         return convertView;
     }
 

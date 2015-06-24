@@ -9,9 +9,9 @@ import android.widget.Toast;
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
 import com.example.sarah.myproject.Class.DropboxSession;
+import com.example.sarah.myproject.Class.Exercise;
 import com.example.sarah.myproject.Class.FileOpen;
 import com.example.sarah.myproject.Class.SessionManager;
-import com.example.sarah.myproject.Class.Task;
 import com.example.sarah.myproject.Dal.DalConstant;
 
 import java.io.File;
@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
@@ -30,7 +30,7 @@ import java.sql.Statement;
  * control for an app that downloads a file from Dropbox.
  */
 
-public class DownloadFileTask extends AsyncTask<Task, Void, Void>  // <Params, Progress, Result>
+public class DownloadFileTask extends AsyncTask<Exercise, Void, Void>  // <Params, Progress, Result>
 {
 
     private Context context;
@@ -61,13 +61,13 @@ public class DownloadFileTask extends AsyncTask<Task, Void, Void>  // <Params, P
     }
 
     @Override
-    protected Void doInBackground(Task... params)
+    protected Void doInBackground(Exercise... params)
     {
-        Task actualTask = params[0];
+        Exercise exercise = params[0];
 
         // create new file to save the one we are downloading
-        File file = new File("/sdcard/AppVoice" + actualTask.getImagePath().trim());
-        Log.d("File", actualTask.getImagePath());
+        File file = new File("/sdcard/AppVoice" + exercise.getFilePath().trim());
+        Log.d("File", exercise.getFilePath());
         FileOutputStream outputStream = null;
         try
         {
@@ -85,7 +85,7 @@ public class DownloadFileTask extends AsyncTask<Task, Void, Void>  // <Params, P
 
             Log.w("API", DropboxSession.getDropboxSession().toString());
             // connect to dropbox and get file we need
-            info = (DropboxSession.getDropboxSession()).getFile("/" + actualTask.getImagePath().trim(), null, outputStream, null);
+            info = (DropboxSession.getDropboxSession()).getFile("/" + exercise.getImagePath().trim(), null, outputStream, null);
             Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
             // opening the downloaded file
             FileOpen.openFile(context, file.getPath().toString());      // open new activity and open file
@@ -99,15 +99,9 @@ public class DownloadFileTask extends AsyncTask<Task, Void, Void>  // <Params, P
                 Statement statement1 = con.createStatement();
 
                 // After connection
-                String query1 = "INSERT INTO SubmittedTask (TaskId, PatientId, TherapistId, ExerciseId) VALUES (?, ?, ?, ?)";
-                PreparedStatement preparedStmt = con.prepareStatement(query1);
-                preparedStmt.setInt(1, actualTask.getTaskId());
-                preparedStmt.setString(2, patientId);
-                preparedStmt.setString(3, therapistId);
-                preparedStmt.setInt(4, actualTask.getExerciseId());
+                String query1 = "UPDATE SubmittedExercise SET OpenedFile = '1' WHERE ExerciseId = '" + exercise.getId()+"'";
+                ResultSet rs1 = statement1.executeQuery(query1);
 
-                // execute the preparedstatement
-                preparedStmt.execute();
             }
             catch (Exception e)         // if connection to db didn't succeed
             {

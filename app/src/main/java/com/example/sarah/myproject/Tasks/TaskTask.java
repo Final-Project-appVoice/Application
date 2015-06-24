@@ -3,7 +3,6 @@ package com.example.sarah.myproject.Tasks;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -113,13 +112,13 @@ public class TaskTask extends AsyncTask<String, List<Task>, List<Task>> implemen
             ResultSet rs4 = statement4.executeQuery(query4);
             if(rs4.next())      // if the exercise is already done
             {
-                button.setEnabled(false);
-                button.setBackgroundColor(Color.GRAY);
+//                button.setEnabled(false);
+//                button.setBackgroundColor(Color.GRAY);
             }
             else
             {
-                button.setEnabled(true);
-                button.setBackgroundColor(Color.RED);
+//                button.setEnabled(true);
+//                button.setBackgroundColor(Color.RED);
             }
             Log.d("ExerciseTask", "AFTER");
         } catch (Exception e)         // if connection to db didn't succeed

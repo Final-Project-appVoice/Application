@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sarah.myproject.Activities.TaskExerciseActivity;
+import com.example.sarah.myproject.Activities.ExerciseActivity;
 import com.example.sarah.myproject.R;
 
 import java.util.List;
@@ -40,11 +40,15 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         TextView exerciseTitle = (TextView)view.findViewById(R.id.exerciseTitle);
         TextView exerciseIdTextView = (TextView)view.findViewById(R.id.exerciseId);
         ImageView exerciseDone = (ImageView)view.findViewById(R.id.exercise_done);
+        ImageView exerciseVideo = (ImageView)view.findViewById(R.id.video_icon);
+
+
         String exercise = exercises.get(position);
         String[] exerciseSplit = exercise.split(",");       // get exercise details from the list using the position
         String exerciseName = exerciseSplit[0];     // split to get title
         String exerciseId = exerciseSplit[1];       // split to get id
-        String isDone = exerciseSplit[2];
+        String isDone = exerciseSplit[2];           // split to know if IsDone
+        String isVideo = exerciseSplit[3];           // split to know if IsVideo
         String title = position+1 + ". " + exerciseName;
         exerciseTitle.setText(title);       // fill text view to be the title of the exercise
         exerciseIdTextView.setText(exerciseId);     // fill text view to be the id of the exercise
@@ -56,6 +60,14 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         else        // the exercise is not done yet
         {
             exerciseDone.setVisibility(View.INVISIBLE);
+        }
+        if(isVideo.equals("1"))
+        {
+            exerciseVideo.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            exerciseVideo.setVisibility(View.INVISIBLE);
         }
 
         return convertView;
@@ -72,7 +84,7 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         String exerciseId = exerciseIdTextView.getText().toString();       // getting exercise id from exercise selected
         Log.d("ON CLICK", exerciseTitle + " " + exerciseId);
 
-        Intent i = new Intent(view.getContext(), TaskExerciseActivity.class);      // opening selected exercise
+        Intent i = new Intent(view.getContext(), ExerciseActivity.class);      // opening selected exercise
         i.putExtra("exerciseTitle", exerciseTitle);       // passing folderName to the new intent
         i.putExtra("exerciseId", exerciseId);       // passing folderId to the new intent
         view.getContext().startActivity(i);

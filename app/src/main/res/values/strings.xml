@@ -54,7 +54,7 @@
 לסיום לחץ "סיום".
 </string>
     <string name="description_breathing">בכל תרגילי הנשימה יש לזכור את על הטיפים שלעיל. להלן סיכום קצר של התחושות העיקריות שצריכות להיות:  -\tבנשימה (אוויר נכנס): בטן מתמלאת ויוצאת החוצה (תחושה של בלון)  -\tבשאיפה (אוויר יוצא): בטן נכנסת פנימה לאט  -\tבית חזה וכתפיים בכלל לא מעורבים ולא זזים  -\tגרון רפוי ולא עוצר את האוויר כלל להלן רשימת תרגילי נשימה עם העלאה בדרגות הקושי:</string>
-    <string name="button_pdf">Open PDF</string>
+    <string name="button_pdf">פתח קובץ מצורף</string>
     <string name="app_name" translatable="false">appVoice</string>
     <string name="title_activity_exercise_list">ExerciseListActivity</string>
     <string name="title_activity_task_exercise">TaskExerciseActivity</string>
@@ -78,5 +78,6 @@
     <string name="newMessageTo">הודעה חדשה עבור:</string>
     <string name="send_message">שלח הודעה</string>
     <string name="title_activity_camera_recorder">CameraRecorder</string>
+    <string name="title_activity_exercise">ExerciseActivity</string>
 
 </resources>

@@ -99,7 +99,7 @@
                 android:id="@+id/button_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/play_button"
+                android:src="@drawable/play_video_button_youtube"
                 android:clickable="true"
                  />
 
