@@ -97,18 +97,8 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
         delegate.processFinish(exercise);       // using interface to pass the Exercise we've received from doInBackground
         final Exercise copyExercise = exercise;
         final String link;
-//        ImageButton startRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_start_recorder);
-//        ImageButton stopRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_stop_recorder);
-//        SurfaceView surfaceView = (SurfaceView)((Activity)context).findViewById(R.id.surfaceView);
         TextView exerciseDescription = (TextView)((Activity)context).findViewById(R.id.exerciseDescription);
-//        ImageView imageView = (ImageView)((Activity)context).findViewById(R.id.imageView);
-//        ImageButton linkButton = (ImageButton)((Activity)context).findViewById(R.id.button_link);
-//        Button fileButton = (Button)((Activity)context).findViewById(R.id.button_file);
-//        LinearLayout layoutButtons = (LinearLayout)((Activity)context).findViewById(R.id.layout_buttons);
-
         bar.setVisibility(View.GONE);            // set progress bar not visible
-        //ExerciseActivity.returnedExercise = exercise;
-//        final String filePath = exercise.getFilePath();
 
         if(exercise.getDescription()!=null)
         {
@@ -120,55 +110,6 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
         }
 
 
-     /*   if(exercise.getIsVideo() == 1)
-        {
-            Log.i("Video", "YES VIDEO");
-            surfaceView.setVisibility(View.VISIBLE);
-            layoutButtons.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            Log.i("Video", "NO VIDEO");
-            surfaceView.setVisibility(View.GONE);
-            layoutButtons.setVisibility(View.GONE);
-        }
-
-        //  if the exercise contains a link to follow
-        if(exercise.getLink() != null)
-        {
-            link = exercise.getLink();
-            linkButton.setVisibility(View.VISIBLE);
-            linkButton.setOnClickListener(new View.OnClickListener() {
-
-                public void onClick(View v)
-                {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
-                    Log.i("Video", "Video Playing....");
-
-                }
-            });
-        }
-        else
-        {
-            linkButton.setVisibility(View.GONE);
-        }
-        // if the exercise contains a file to open
-        if(exercise.getFilePath()!=null)
-        {
-            fileButton.setVisibility(View.VISIBLE);
-            fileButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v)
-                {
-                    DownloadFileTask downloadFileTask = new DownloadFileTask(context);
-                    downloadFileTask.execute(copyExercise);
-                }
-            });
-        }
-        else
-        {
-            fileButton.setVisibility(View.GONE);
-        }*/
 
     }
 }

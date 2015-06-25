@@ -2,6 +2,7 @@ package com.example.sarah.myproject.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -24,6 +25,7 @@ import com.example.sarah.myproject.Class.DropboxSession;
 import com.example.sarah.myproject.Class.Exercise;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.DownloadImageTask;
 import com.example.sarah.myproject.Tasks.UploadVideo;
 
 import java.io.File;
@@ -67,6 +69,10 @@ public class ExerciseVideoActivity extends Activity
         SessionManager session = new SessionManager(getApplicationContext());
         session.checkLogin();
 
+        Intent i = getIntent();
+        String exerciseId = i.getStringExtra("ExerciseId");
+
+        Exercise selectedExercise = Exercise.getExerciseById(Integer.parseInt(exerciseId));
 
         // get user ID from session
         String[] patientArray = session.getPatientDetails();
@@ -81,6 +87,12 @@ public class ExerciseVideoActivity extends Activity
         mPreview = new CameraPreview(this, mCamera, mSurfaceView);
         isRecording = false;
         Log.d("ExerciseActivity", "HERE1");
+
+        if(selectedExercise != null)
+        {
+            DownloadImageTask downloadImageTask = new DownloadImageTask(this);
+            downloadImageTask.execute(selectedExercise.getImagePath());
+        }
     }
 
     @Override

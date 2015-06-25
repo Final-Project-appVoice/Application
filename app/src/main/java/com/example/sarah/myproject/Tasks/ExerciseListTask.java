@@ -164,7 +164,7 @@ public class ExerciseListTask extends AsyncTask<String, List<String>, List<Strin
 
         Intent i = new Intent(view.getContext(), ExerciseActivity.class);      // opening selected exercise
         i.putExtra("exerciseTitle", exerciseTitle);       // passing folderName to the new intent
-        i.putExtra("exerciseId", exerciseId);       // passing folderId to the new intent
+        i.putExtra("ExerciseId", exerciseId);       // passing folderId to the new intent
         view.getContext().startActivity(i);
     }
 }

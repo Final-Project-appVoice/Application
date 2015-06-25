@@ -13,7 +13,7 @@ import com.example.sarah.myproject.Class.AsyncResponse;
 import com.example.sarah.myproject.Class.Exercise;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.ExerciseTask;
+import com.example.sarah.myproject.Tasks.DownloadImageTask;
 
 public class ExerciseActivity extends Activity implements AsyncResponse
 {
@@ -30,27 +30,28 @@ public class ExerciseActivity extends Activity implements AsyncResponse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
-        Intent i = getIntent();
-        String exerciseId = i.getStringExtra("ExerciseId");
-        Exercise selectedExercise = Exercise.getExerciseById(Integer.parseInt(exerciseId));
-
-        exerciseTitle = (TextView)findViewById(R.id.exerciseTitle);
-        if(selectedExercise!=null)
-        {
-            exerciseTitle.setText(selectedExercise.getTitle());       // set exercise name to be the exercise name we got from the intent
-        }
         // Session class instance
         SessionManager session = new SessionManager(getApplicationContext());
         session.checkLogin();
 
 
+        Intent i = getIntent();
+        String exerciseId = i.getStringExtra("ExerciseId");
+
+        Exercise selectedExercise = Exercise.getExerciseById(Integer.parseInt(exerciseId));
+
+        exerciseTitle = (TextView)findViewById(R.id.exerciseTitle);
+        if(selectedExercise!=null)
+        {
+            Log.i("ExerciseActivity", "EXERCISE NOT NULL");
+            Log.i("ExerciseActivity", selectedExercise.toString());
+            exerciseTitle.setText(selectedExercise.getTitle());       // set exercise name to be the exercise name we got from the intent
+        }
+
+
         exerciseDescription = (TextView)findViewById(R.id.exerciseDescription);
         imageView = (ImageView)findViewById(R.id.imageView);
-        //linkButton = (ImageButton)findViewById(R.id.button_link);
-        //fileButton = (Button)this.findViewById(R.id.button_file);
-       // startRecorder = (ImageButton)findViewById(R.id.button_start_recorder);
-       // stopRecorder = (ImageButton)findViewById(R.id.button_stop_recorder);
-       // layoutButtons = (LinearLayout)findViewById(R.id.layout_buttons);
+
 
         // get user ID from session
         String[] patientArray = session.getPatientDetails();
@@ -62,21 +63,19 @@ public class ExerciseActivity extends Activity implements AsyncResponse
         Log.d("ExercAcity - patientId", patientId+"");
         Log.d("ExercAcity - exerciseId", exerciseId+"");
 
-        //Log.d("ExerciseActivity", );
-
-        ExerciseTask exerciseTask = new ExerciseTask(this);
-        exerciseTask.delegate = this;
-        exerciseTask.execute(patientId, exerciseId.trim());
-
-        if(returnedExercise!=null)
+        if(selectedExercise!=null)
         {
-            if(returnedExercise.getDescription()!=null)
-            {
-                exerciseDescription.setText(returnedExercise.getDescription());
-            }
-            if(returnedExercise.getImagePath()!=null)
-            {
 
+            if(selectedExercise.getDescription()!=null)
+            {
+                exerciseDescription.setText(selectedExercise.getDescription());
+            }
+            if(selectedExercise.getImagePath()!=null)
+            {
+                Log.i("ExerciseActivity", "BEFORE IMAGE");
+                DownloadImageTask downloadImageTask = new DownloadImageTask(this);
+                downloadImageTask.execute(selectedExercise.getImagePath());
+                Log.i("ExerciseActivity", "AFTER IMAGE");
             }
         }
 
