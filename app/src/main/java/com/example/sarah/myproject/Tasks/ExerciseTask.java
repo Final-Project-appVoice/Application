@@ -2,15 +2,9 @@ package com.example.sarah.myproject.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -103,19 +97,30 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
         delegate.processFinish(exercise);       // using interface to pass the Exercise we've received from doInBackground
         final Exercise copyExercise = exercise;
         final String link;
-        ImageButton startRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_start_recorder);
-        ImageButton stopRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_stop_recorder);
-        SurfaceView surfaceView = (SurfaceView)((Activity)context).findViewById(R.id.surfaceView);
+//        ImageButton startRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_start_recorder);
+//        ImageButton stopRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_stop_recorder);
+//        SurfaceView surfaceView = (SurfaceView)((Activity)context).findViewById(R.id.surfaceView);
         TextView exerciseDescription = (TextView)((Activity)context).findViewById(R.id.exerciseDescription);
-        ImageView imageView = (ImageView)((Activity)context).findViewById(R.id.imageView);
-        ImageButton linkButton = (ImageButton)((Activity)context).findViewById(R.id.button_link);
-        Button fileButton = (Button)((Activity)context).findViewById(R.id.button_file);
-        LinearLayout layoutButtons = (LinearLayout)((Activity)context).findViewById(R.id.layout_buttons);
+//        ImageView imageView = (ImageView)((Activity)context).findViewById(R.id.imageView);
+//        ImageButton linkButton = (ImageButton)((Activity)context).findViewById(R.id.button_link);
+//        Button fileButton = (Button)((Activity)context).findViewById(R.id.button_file);
+//        LinearLayout layoutButtons = (LinearLayout)((Activity)context).findViewById(R.id.layout_buttons);
 
         bar.setVisibility(View.GONE);            // set progress bar not visible
         //ExerciseActivity.returnedExercise = exercise;
 //        final String filePath = exercise.getFilePath();
-        if(exercise.getIsVideo() == 1)
+
+        if(exercise.getDescription()!=null)
+        {
+            exerciseDescription.setText(exercise.getDescription());
+        }
+        else
+        {
+            exerciseDescription.setVisibility(View.GONE);
+        }
+
+
+     /*   if(exercise.getIsVideo() == 1)
         {
             Log.i("Video", "YES VIDEO");
             surfaceView.setVisibility(View.VISIBLE);
@@ -127,14 +132,7 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
             surfaceView.setVisibility(View.GONE);
             layoutButtons.setVisibility(View.GONE);
         }
-        if(exercise.getDescription()!=null)
-        {
-            exerciseDescription.setText(exercise.getDescription());
-        }
-        else
-        {
-            exerciseDescription.setVisibility(View.GONE);
-        }
+
         //  if the exercise contains a link to follow
         if(exercise.getLink() != null)
         {
@@ -170,7 +168,7 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
         else
         {
             fileButton.setVisibility(View.GONE);
-        }
+        }*/
 
     }
 }

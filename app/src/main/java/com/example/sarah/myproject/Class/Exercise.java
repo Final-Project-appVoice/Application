@@ -1,5 +1,8 @@
 package com.example.sarah.myproject.Class;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Sarah on 24-Jun-15.
  */
@@ -7,6 +10,7 @@ public class Exercise
 {
     public String title, description, therapistId, imagePath, filePath, link;
     public int id, folderId, isVideo;
+    public static List<Exercise> exerciseList = new ArrayList<>();
     //public boolean isVideo;
 
     public Exercise(int id, String title, int folderId, String therapistId, String description, String imagePath, String filePath, int isVideo, String link)
@@ -108,4 +112,56 @@ public class Exercise
                 ", isVideo=" + isVideo +
                 '}';
     }
+
+    public static void addExercise(Exercise exercise)
+    {
+        if(exerciseList!=null)
+        {
+            if(exerciseList.size() == 0)
+            {
+                exerciseList.add(exercise);
+            }
+            else if(!exerciseList.contains(exercise))
+            {
+                exerciseList.add(exercise);
+            }
+        }
+
+    }
+
+    public static List<Exercise> getExerciseList()
+    {
+        return exerciseList;
+    }
+    public static Exercise getExerciseById(int exerciseId)
+    {
+        if(exerciseList!=null)
+        {
+            for (int i = 0; i < exerciseList.size(); i++) {
+                Exercise exercise = exerciseList.get(i);
+                if (exercise.getId() == exerciseId) {
+                    return exercise;
+                }
+            }
+        }
+        return null;
+    }
+    public static String getAllExercises()
+    {
+        String str = "";
+        if(exerciseList!=null)
+        {
+            str += "Size of exercises = " + exerciseList.size() + "\n";
+            for(int i= 0; i<exerciseList.size(); i++)
+            {
+                str += exerciseList.get(i).getId() + "_" + exerciseList.get(i).getTitle() + "\n";
+            }
+        }
+        else
+        {
+            str += "list empty\n";
+        }
+        return  str;
+    }
+
 }

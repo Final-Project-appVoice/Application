@@ -33,7 +33,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo" >
-
         <activity
             android:name=".Activities.MyProject"
             android:label="@string/app_name"
@@ -148,7 +147,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.MessagesActivity" />
         </activity>
-
         <activity
             android:name=".Activities.ExerciseActivity"
             android:label="@string/title_activity_exercise"
@@ -163,6 +161,15 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".Activities.ExerciseVideoActivity"
+            android:label="@string/title_activity_exercise_video"
+            android:parentActivityName=".Activities.ExerciseListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sarah.myproject.Activities.ExerciseListActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -42,6 +42,6 @@
     <!--Description style-->
     <style name="ListItem" parent="android:Theme">
         <item name="android:textSize">25dp</item>
-        <item name="android:textColor">@color/lightBlueBackground</item>
+        <item name="android:textColor">@color/grayBlueishText</item>
     </style>
 </resources>

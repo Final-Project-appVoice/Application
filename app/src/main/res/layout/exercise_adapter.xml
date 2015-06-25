@@ -6,7 +6,7 @@
     <!--  Title and V and icon Camera -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -19,6 +19,7 @@
             android:gravity="right|center">
 
             <ImageView
+
                 android:id="@+id/exercise_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
         <!-- Exercise Title -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="50dp"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:gravity="right|center"
             android:orientation="horizontal">
@@ -49,14 +50,108 @@
                 android:layout_height="wrap_content"
                 android:visibility="invisible" />
 
-            <ImageView
-                android:id="@+id/video_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:background="@drawable/ic_video" />
+            <!--<ImageView-->
+                <!--android:id="@+id/video_icon"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+                <!--android:background="@drawable/ic_video" />-->
         </LinearLayout>
 
 
     </LinearLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/LinearLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <ImageView
+                android:clickable="true"
+                android:id="@+id/button_link"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/youtube_icon"/>
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/do_link"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/LinearFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <ImageView
+                android:clickable="true"
+                android:id="@+id/button_file"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/file_icon"/>
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/do_file"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <ImageView
+                android:clickable="true"
+                android:id="@+id/button_video"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/camera_icon"/>
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/do_video"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:clickable="true"
+                android:id="@+id/button_exercise"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/exercise"/>
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/do_exercise"/>
+
+        </LinearLayout>
+
+        </LinearLayout>
 </LinearLayout>

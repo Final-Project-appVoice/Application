@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.sarah.myproject.Activities.ExerciseActivity;
 import com.example.sarah.myproject.Adapters.ExercisesAdapter;
+import com.example.sarah.myproject.Class.Exercise;
 import com.example.sarah.myproject.Dal.DalConstant;
 import com.example.sarah.myproject.R;
 
@@ -101,6 +102,8 @@ public class ExerciseListTask extends AsyncTask<String, List<String>, List<Strin
                     Log.d("ExerciseTask", "IN IF");
                     String exerciseName = rs2.getString("Title");
                     int isVideo = rs2.getInt("IsVideo");
+                    Exercise exercise = new Exercise(exerciseId, exerciseName, rs2.getInt("FolderId"), rs2.getString("TherapistId"), rs2.getString("Description"), rs2.getString("ImagePath"), rs2.getString("FilePath"), isVideo, rs2.getString("Link"));
+                    Exercise.addExercise(exercise);
                     if(!exercises.contains(exerciseName))
                     {
                         Log.d("ExerciseTask", "IN LIST CONTAINS");
@@ -108,6 +111,7 @@ public class ExerciseListTask extends AsyncTask<String, List<String>, List<Strin
                         ResultSet rs4 = statement4.executeQuery(query4);
                         if(rs4.next())      // if the exercise is already done
                         {
+
                             exercises.add(exerciseName + "," + exerciseId + "," + "true," + isVideo);     // return exercise details: <exerciseName,exerciseId, isDone, isVideo>
                         }
                         else
@@ -142,7 +146,8 @@ public class ExerciseListTask extends AsyncTask<String, List<String>, List<Strin
         exercisesAdapter = new ExercisesAdapter(context, android.R.layout.activity_list_item, R.id.exerciseList, exercises);       // calling to the adapter list -- folderList = list without adapter
         ListView listView = (ListView) ((Activity) context).findViewById(R.id.exerciseList);     // the list of folders
         listView.setAdapter(exercisesAdapter);        // adapting to the folder list the adapter list
-        listView.setOnItemClickListener(this);
+
+        //listView.setOnItemClickListener(this);
 
     }
 
