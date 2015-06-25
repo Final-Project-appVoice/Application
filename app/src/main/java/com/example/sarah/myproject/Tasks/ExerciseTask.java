@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +21,6 @@ import com.example.sarah.myproject.R;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -71,21 +72,21 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
                 Log.i("DB EXERCISE", "IN");
                 String title = rs1.getString("Title");
                 int folderId = rs1.getInt("FolderId");
-                exercise = new Exercise(exerciseId, title, folderId, rs1.getString("TherapistId"), rs1.getString("Description"), rs1.getString("ImagePath"), rs1.getString("FilePath"), Boolean.parseBoolean(rs1.getInt("IsVideo")+""), rs1.getString("Link"));
+                exercise = new Exercise(exerciseId, title, folderId, rs1.getString("TherapistId"), rs1.getString("Description"), rs1.getString("ImagePath"), rs1.getString("FilePath"), rs1.getInt("IsVideo"), rs1.getString("Link"));
                 Log.i("DB EXERCISE", exercise.toString());
             }
             else
             {
                 Log.i("DB EXERCISE", "OUT");
             }
-            String query2 = "INSERT INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStmt = con.prepareStatement(query2);
-            preparedStmt.setInt(1, exercise.getId());
-            preparedStmt.setString(2, exercise.getTitle());
-            preparedStmt.setString(3, patientId);
-            preparedStmt.setString(4, exercise.getTherapistId());
-            // execute the preparedstatement
-            preparedStmt.execute();
+//            String query2 = "INSERT INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (?, ?, ?, ?)";
+//            PreparedStatement preparedStmt = con.prepareStatement(query2);
+//            preparedStmt.setInt(1, exercise.getId());
+//            preparedStmt.setString(2, exercise.getTitle());
+//            preparedStmt.setString(3, patientId);
+//            preparedStmt.setString(4, exercise.getTherapistId());
+//            // execute the preparedstatement
+//            preparedStmt.execute();
         }
         catch (Exception e)         // if connection to db didn't succeed
         {
@@ -101,9 +102,75 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
         super.onPostExecute(exercise);
         delegate.processFinish(exercise);       // using interface to pass the Exercise we've received from doInBackground
         final Exercise copyExercise = exercise;
-        bar.setVisibility(View.GONE);            // set progress bar not visible
+        final String link;
+        ImageButton startRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_start_recorder);
+        ImageButton stopRecorder = (ImageButton)((Activity)context).findViewById(R.id.button_stop_recorder);
+        SurfaceView surfaceView = (SurfaceView)((Activity)context).findViewById(R.id.surfaceView);
+        TextView exerciseDescription = (TextView)((Activity)context).findViewById(R.id.exerciseDescription);
+        ImageView imageView = (ImageView)((Activity)context).findViewById(R.id.imageView);
+        ImageButton linkButton = (ImageButton)((Activity)context).findViewById(R.id.button_link);
+        Button fileButton = (Button)((Activity)context).findViewById(R.id.button_file);
+        LinearLayout layoutButtons = (LinearLayout)((Activity)context).findViewById(R.id.layout_buttons);
 
+        bar.setVisibility(View.GONE);            // set progress bar not visible
+        //ExerciseActivity.returnedExercise = exercise;
 //        final String filePath = exercise.getFilePath();
+        if(exercise.getIsVideo() == 1)
+        {
+            Log.i("Video", "YES VIDEO");
+            surfaceView.setVisibility(View.VISIBLE);
+            layoutButtons.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Log.i("Video", "NO VIDEO");
+            surfaceView.setVisibility(View.GONE);
+            layoutButtons.setVisibility(View.GONE);
+        }
+        if(exercise.getDescription()!=null)
+        {
+            exerciseDescription.setText(exercise.getDescription());
+        }
+        else
+        {
+            exerciseDescription.setVisibility(View.GONE);
+        }
+        //  if the exercise contains a link to follow
+        if(exercise.getLink() != null)
+        {
+            link = exercise.getLink();
+            linkButton.setVisibility(View.VISIBLE);
+            linkButton.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v)
+                {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+                    Log.i("Video", "Video Playing....");
+
+                }
+            });
+        }
+        else
+        {
+            linkButton.setVisibility(View.GONE);
+        }
+        // if the exercise contains a file to open
+        if(exercise.getFilePath()!=null)
+        {
+            fileButton.setVisibility(View.VISIBLE);
+            fileButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    DownloadFileTask downloadFileTask = new DownloadFileTask(context);
+                    downloadFileTask.execute(copyExercise);
+                }
+            });
+        }
+        else
+        {
+            fileButton.setVisibility(View.GONE);
+        }
 
     }
 }

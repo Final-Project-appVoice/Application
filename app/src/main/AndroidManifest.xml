@@ -33,6 +33,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo" >
+
         <activity
             android:name=".Activities.MyProject"
             android:label="@string/app_name"
@@ -147,16 +148,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.MessagesActivity" />
         </activity>
-        <activity
-            android:name=".Activities.CameraRecorder"
-            android:label="@string/title_activity_camera_recorder" >
-        </activity>
-
-        <service
-            android:name=".Activities.RecorderService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
 
         <activity
             android:name=".Activities.ExerciseActivity"
@@ -166,6 +157,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sarah.myproject.Activities.ExerciseListActivity" />
         </activity>
+
+        <service
+            android:name=".Service.VideoRecorderService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

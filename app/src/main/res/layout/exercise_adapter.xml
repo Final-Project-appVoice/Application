@@ -1,64 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical">
 
-    android:gravity="center"
-
-    >
-
-
-    <!-- V image -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:gravity="right|center"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_read_exercise"
-            android:id="@+id/exercise_done"
-            />
-
-    </LinearLayout>
-
-    <!-- Exercise Title -->
+    <!--  Title and V and icon Camera -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:gravity="right|center"
-        android:orientation="horizontal"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <TextView
-            style="@style/ListItem"
-
-            android:id="@+id/exerciseTitle"
+        <!-- V image -->
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="right|center"
-            android:text="תרגיל" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/exerciseId"
-            android:visibility="invisible"/>
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:gravity="right|center">
 
             <ImageView
+                android:id="@+id/exercise_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_read_exercise" />
+
+        </LinearLayout>
+
+        <!-- Exercise Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:gravity="right|center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/exerciseTitle"
+
+                style="@style/ListItem"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right|center"
+                android:text="תרגיל" />
+
+            <TextView
+                android:id="@+id/exerciseId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+            <ImageView
                 android:id="@+id/video_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:background="@drawable/ic_video"/>
+                android:background="@drawable/ic_video" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
 </LinearLayout>

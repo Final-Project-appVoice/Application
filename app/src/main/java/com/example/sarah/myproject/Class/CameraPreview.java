@@ -14,13 +14,15 @@ import android.view.SurfaceView;
 
 import java.io.IOException;
 
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
+{
 
     private static final String TAG = "camera preview";
     private SurfaceHolder mHolder;
     private Camera mCamera;
 
-    public CameraPreview(Context context, Camera camera, SurfaceView mView) {
+    public CameraPreview(Context context, Camera camera, SurfaceView mView)
+    {
         super(context);
         mCamera = camera;
         // Install a SurfaceHolder.Callback so we get notified when the

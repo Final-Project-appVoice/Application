@@ -6,10 +6,10 @@ package com.example.sarah.myproject.Class;
 public class Exercise
 {
     public String title, description, therapistId, imagePath, filePath, link;
-    public int id, folderId;
-    public boolean isVideo;
+    public int id, folderId, isVideo;
+    //public boolean isVideo;
 
-    public Exercise(int id, String title, int folderId, String therapistId, String description, String imagePath, String filePath, boolean isVideo, String link)
+    public Exercise(int id, String title, int folderId, String therapistId, String description, String imagePath, String filePath, int isVideo, String link)
     {
         this.description = description;
         this.filePath = filePath;
@@ -62,11 +62,11 @@ public class Exercise
         this.imagePath = imagePath;
     }
 
-    public boolean isVideo() {
+    public int getIsVideo() {
         return isVideo;
     }
 
-    public void setIsVideo(boolean isVideo) {
+    public void setIsVideo(int isVideo) {
         this.isVideo = isVideo;
     }
 

@@ -1,172 +1,88 @@
-package com.example.sarah.myproject.Activities;
+package com.example.sarah.myproject.Tasks;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraManager;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.net.Uri;
-import android.os.Bundle;
+import android.os.AsyncTask;
 import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.sarah.myproject.Class.CameraPreview;
 import com.example.sarah.myproject.Class.DropboxSession;
-import com.example.sarah.myproject.Class.SessionManager;
-import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.ExerciseListTask;
-import com.example.sarah.myproject.Tasks.UploadVideo;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ExerciseListActivity extends Activity
+/**
+ * Created by Sarah on 25-Jun-15.
+ */
+public class VideoTask  extends AsyncTask<Void, Void, Void>
 {
-    private TextView folderTitle, folderDescription;
-    private String folderName, patientId, patientName, folderID;
-    private SessionManager session;
-    private File mediaFile;
+
     public static final int MEDIA_TYPE_VIDEO = 2;
     private static final String TAG = "Recorder";
-    private SurfaceView mSurfaceView;
-    private CameraPreview mPreview;
-    private Camera mCamera;
-    private CameraManager cameraManager;
+
+    private Context context;
     private ImageButton startRecorder, stopRecorder;
-    private String[] patientArray;
-    private Handler mHandler = new Handler();
+    private SurfaceView mSurfaceView;
     private MediaRecorder mMediaRecorder;
+    private CameraPreview mPreview;
+    private File mediaFile;
+    private Camera mCamera;
     private boolean isRecording;
     private static String videoPath;
+    private String patientName;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+
+    public VideoTask(Context context, SurfaceView surfaceView, ImageButton startRecorder, ImageButton stopRecorder, String patientName)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_list);
+        this.context = context;
+        this.mSurfaceView = surfaceView;
+        this.startRecorder = startRecorder;
+        this.stopRecorder = stopRecorder;
+        this.patientName = patientName;
+    }
+    @Override
+    protected Void doInBackground(Void... params)
+    {
+        //VideoRecorder videoRecorder = new VideoRecorder(context, mSurfaceView, startRecorder, stopRecorder, patientName);
 
-        folderTitle = (TextView)findViewById(R.id.folderTitle);
-        folderDescription = (TextView)findViewById(R.id.folderDescription);
-        startRecorder = (ImageButton)findViewById(R.id.button_start_recorder);
-        stopRecorder = (ImageButton)findViewById(R.id.button_stop_recorder);
-        mSurfaceView = (SurfaceView)findViewById(R.id.surfaceView);
-
-        Intent i = getIntent();         // get information from intent
-        folderName = i.getStringExtra("folderName");    // get folder name
-        folderID = i.getStringExtra("folderId");    // get folder id
-
-        Log.w("FOLDER NAME", folderName);
-        Log.w("FOLDER ID", folderID +"");
-
-        folderTitle.setText(folderName);        // set title of page to be folder name
-
-
-        // Session class instance
-        session = new SessionManager(getApplicationContext());
-        session.checkLogin();
-
-        // get user ID from session
-        patientArray = session.getPatientDetails();
-        if (patientArray.length > 0)
-        {
-            patientId = patientArray[0];        // get patient id
-            patientName = patientArray[1];      // get patient name
-        }
-        Log.w("Check", "BEFORE");
-        Log.w("Patient ID", patientId);
-        Log.w("Folder ID", folderName);
-
-//        mCamera = getCameraInstance();
-//        mCamera.setDisplayOrientation(90);
-//        mPreview = new CameraPreview(this, mCamera, mSurfaceView);
-//        isRecording = false;
-
-        ExerciseListTask exerciseTask = new ExerciseListTask(this);      // calling to task in order to pull from db the folders assigned
-        exerciseTask.execute(patientId, folderID+"");       // execute task and add buttons for each folder assigned
-        Log.w("Check", "AFTER");
+        return null;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    protected void onPostExecute(Void aVoid)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.common_menu, menu);
-        getActionBar().setTitle(folderName);
-        return true;
+        super.onPostExecute(aVoid);
+        mCamera = getCameraInstance();
+        mCamera.setDisplayOrientation(90);
+
+        isRecording = false;
+        mPreview = new CameraPreview(context, mCamera, mSurfaceView);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
+    public void onClick_buttonStartRecorder(View view)
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch(id)
-        {
-            case R.id.folders_icon:
-            {
-                Intent i = new Intent(this, PatientActivity.class);
-                this.startActivity(i);
-                this.finish();
-                break;
-            }
-            case R.id.messages_icon:
-            {
-                Intent i = new Intent(this, MessagesActivity.class);
-                this.startActivity(i);
-                this.finish();
-                break;
-            }
-            case R.id.account_icon:
-            {
-                Intent i = new Intent(this, AccountActivity.class);
-                this.startActivity(i);
-                this.finish();
-                break;
-            }
-            case R.id.action_logout:
-            {
-                session.logoutUser();
-                break;
-            }
-            case  R.id.action_exit:
-            {
-                moveTaskToBack(true);
-                ExerciseListActivity.this.finish();
-                break;
-            }
+        startRecorder.setVisibility(View.GONE);
+        stopRecorder.setVisibility(View.VISIBLE);
 
-        }
-
-
-
-        return super.onOptionsItemSelected(item);
+        startMediaRecorder();
     }
-//    public void onClick_buttonStartRecorder(View view)
-//    {
-//        startRecorder.setVisibility(View.GONE);
-//        stopRecorder.setVisibility(View.VISIBLE);
-//
-//        startMediaRecorder();
-//    }
-//
-//    public void onClick_buttonStopRecorder(View view)
-//    {
-//        stopRecorder.setVisibility(View.GONE);
-//        startRecorder.setVisibility(View.VISIBLE);
-//
-//        stopMediaRecorder();
-//    }
+
+    public void onClick_buttonStopRecorder(View view)
+    {
+        stopRecorder.setVisibility(View.GONE);
+        startRecorder.setVisibility(View.VISIBLE);
+
+        stopMediaRecorder();
+    }
 
     /**
      * A safe way to get an instance of the Camera object.
@@ -251,7 +167,7 @@ public class ExerciseListActivity extends Activity
             releaseMediaRecorder(); // release the MediaRecorder object
             mCamera.lock();         // take camera access back from MediaRecorder
             isRecording = false;
-            UploadVideo upload = new UploadVideo(this, DropboxSession.getDropboxSession(), "/", mediaFile);
+            UploadVideo upload = new UploadVideo(context, DropboxSession.getDropboxSession(), "/", mediaFile);
             upload.execute();
         }
     }
@@ -274,7 +190,7 @@ public class ExerciseListActivity extends Activity
 
 
     /** Create a file Uri for saving an image or video */
-    private  Uri getOutputMediaFileUri(int type){
+    private Uri getOutputMediaFileUri(int type){
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
@@ -333,9 +249,7 @@ public class ExerciseListActivity extends Activity
         {
             return null;
         }
-        videoPath = mediaStorageDir.getPath() + File.separator +
-                "VID_"+ timeStamp + ".mp4";
+        videoPath = mediaStorageDir.getPath() + File.separator + "VID_"+ timeStamp + ".mp4";
         return mediaFile;
     }
-
 }
