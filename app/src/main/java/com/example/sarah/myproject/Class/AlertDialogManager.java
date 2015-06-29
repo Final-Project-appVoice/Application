@@ -29,7 +29,7 @@ public class AlertDialogManager
         // Setting Dialog Message
         alertDialog.setMessage(message);
 
-        if(status != null)
+        if(status == true)
             // Setting alert dialog icon
             alertDialog.setIcon(R.drawable.ic_error);
 

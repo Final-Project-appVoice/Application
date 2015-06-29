@@ -74,19 +74,20 @@ public class SendMessageTask extends AsyncTask<String, Boolean, Boolean>
             preparedStmt.setString(2, therapistId);
             preparedStmt.setString(3, message);
             preparedStmt.setInt(4, 0);  // isRead = false
+            preparedStmt.execute();
 
-            // execute the preparedstatement
-            if(preparedStmt.execute())
-            {
-                return true;
-            }
+            // execute the prepared statement
+//            if()
+//            {
+//                return true;
+//            }
         }
         catch (Exception e)         // if connection to db didn't succeed
         {
             e.printStackTrace();
             return false;
         }
-        return false;
+        return true;
     }
     @Override
     protected void onPostExecute(Boolean result)      // The result of the operation computed by doInBackground(Params...)

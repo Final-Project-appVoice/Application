@@ -142,7 +142,13 @@ public class ExerciseListTask extends AsyncTask<String, List<String>, List<Strin
         super.onPostExecute(exercises);
 
         bar.setVisibility(View.GONE);            // set progress bar not visible
-        folderDescription.setText(description);
+        if(description==null)
+        {
+            folderDescription.setVisibility(View.GONE);
+        }
+        else {
+            folderDescription.setText(description);
+        }
         exercisesAdapter = new ExercisesAdapter(context, android.R.layout.activity_list_item, R.id.exerciseList, exercises);       // calling to the adapter list -- folderList = list without adapter
         ListView listView = (ListView) ((Activity) context).findViewById(R.id.exerciseList);     // the list of folders
         listView.setAdapter(exercisesAdapter);        // adapting to the folder list the adapter list

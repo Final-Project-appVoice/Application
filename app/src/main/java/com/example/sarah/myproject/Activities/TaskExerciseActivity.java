@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.SubmittedExerciseTask;
 import com.example.sarah.myproject.Tasks.TaskTask;
 
 public class TaskExerciseActivity extends Activity
@@ -94,10 +92,5 @@ public class TaskExerciseActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick_button_exercise_done(View view)
-    {
-        SubmittedExerciseTask submittedExerciseTask = new SubmittedExerciseTask(this);
-        submittedExerciseTask.execute(exerciseId, exerciseName);
-        this.finish();
-    }
+
 }

@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
+import com.example.sarah.myproject.Tasks.GetMessagesTask;
 
 public class MessagesActivity extends Activity
 {
     private SessionManager session;
     private String[] patientArray;
     private String patientId, patientName;
+    private ListView messagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +40,9 @@ public class MessagesActivity extends Activity
             patientId = patientArray[0];        // get patient id from session
             patientName = patientArray[1];      // get patient name from session
         }
+
+        GetMessagesTask getMessagesTask = new GetMessagesTask(this);
+        getMessagesTask.execute(patientId);
     }
 
     @Override
@@ -65,7 +71,6 @@ public class MessagesActivity extends Activity
             {
                 Intent i = new Intent(this, PatientActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
 
@@ -73,7 +78,6 @@ public class MessagesActivity extends Activity
             {
                 Intent i = new Intent(this, AccountActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
             case R.id.action_logout:
@@ -91,7 +95,6 @@ public class MessagesActivity extends Activity
             {
                 Intent i = new Intent(this, NewMessageActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
         }

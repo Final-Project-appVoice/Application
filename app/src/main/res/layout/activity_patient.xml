@@ -17,7 +17,7 @@
         android:id="@+id/linearLayout_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="60dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="60dp"
         android:layout_gravity="center">
         <!--<TextView-->

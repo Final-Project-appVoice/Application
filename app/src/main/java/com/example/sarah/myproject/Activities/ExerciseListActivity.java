@@ -2,43 +2,23 @@ package com.example.sarah.myproject.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.hardware.camera2.CameraManager;
-import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SurfaceView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.sarah.myproject.Class.CameraPreview;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
 import com.example.sarah.myproject.Tasks.ExerciseListTask;
-
-import java.io.File;
 
 public class ExerciseListActivity extends Activity
 {
     private TextView folderTitle, folderDescription;
     private String folderName, patientId, patientName, folderID;
     private SessionManager session;
-    private File mediaFile;
-    public static final int MEDIA_TYPE_VIDEO = 2;
-    private static final String TAG = "Recorder";
-    private SurfaceView mSurfaceView;
-    private CameraPreview mPreview;
-    private Camera mCamera;
-    private CameraManager cameraManager;
-    private ImageButton startRecorder, stopRecorder;
     private String[] patientArray;
-    private Handler mHandler = new Handler();
-    private MediaRecorder mMediaRecorder;
-    private boolean isRecording;
-    private static String videoPath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,9 +28,7 @@ public class ExerciseListActivity extends Activity
 
         folderTitle = (TextView)findViewById(R.id.folderTitle);
         folderDescription = (TextView)findViewById(R.id.folderDescription);
-        startRecorder = (ImageButton)findViewById(R.id.button_start_recorder);
-        stopRecorder = (ImageButton)findViewById(R.id.button_stop_recorder);
-        mSurfaceView = (SurfaceView)findViewById(R.id.surfaceView);
+
 
         Intent i = getIntent();         // get information from intent
         folderName = i.getStringExtra("folderName");    // get folder name
@@ -104,21 +82,18 @@ public class ExerciseListActivity extends Activity
             {
                 Intent i = new Intent(this, PatientActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
             case R.id.messages_icon:
             {
                 Intent i = new Intent(this, MessagesActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
             case R.id.account_icon:
             {
                 Intent i = new Intent(this, AccountActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
             case R.id.action_logout:

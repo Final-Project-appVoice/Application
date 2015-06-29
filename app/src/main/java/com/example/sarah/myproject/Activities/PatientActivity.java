@@ -156,21 +156,18 @@ public class PatientActivity extends Activity {
             {
                 Intent i = new Intent(this, PatientActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
             case R.id.messages_icon:
             {
                 Intent i = new Intent(this, MessagesActivity.class);
                 this.startActivityForResult(i, PRIVATE_MODE);
-                this.finish();
                 break;
             }
             case R.id.account_icon:
             {
                 Intent i = new Intent(this, AccountActivity.class);
                 this.startActivity(i);
-                this.finish();
                 break;
             }
             case R.id.action_logout:

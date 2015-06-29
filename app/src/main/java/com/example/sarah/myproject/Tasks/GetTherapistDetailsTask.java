@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.sarah.myproject.Activities.NewMessageActivity;
 import com.example.sarah.myproject.Adapters.FoldersAdapter;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.Dal.DalConstant;
@@ -62,13 +62,13 @@ public class GetTherapistDetailsTask extends AsyncTask<String, List<String>, Lis
             if (rs1.next())
             {
                 // User exist
-                String firstName = rs1.getString("LicenseId");
-                String lastName = rs1.getString("FirstName");
-                String mail = rs1.getString("LastName");
+                String firstName = rs1.getString("FirstName");
+                String lastName = rs1.getString("LastName");
+
 
                 therapist.add(firstName);
                 therapist.add(lastName);
-                therapist.add(mail);
+                therapist.add(therapistId);
             }
 
         } catch (Exception e)         // if connection to db didn't succeed
@@ -82,7 +82,8 @@ public class GetTherapistDetailsTask extends AsyncTask<String, List<String>, Lis
     protected void onPostExecute(List<String> strings)
     {
         super.onPostExecute(strings);
-        NewMessageActivity.therapistDetails = strings;
+        Log.i("SIZE STR", strings.size()+"");
+        //NewMessageActivity.therapistDetails = strings;
         TextView therapistNameTextView = (TextView)((Activity)context).findViewById(R.id.therapist_textView);
         therapistNameTextView.setText(strings.get(0) + " " + strings.get(1));
     }

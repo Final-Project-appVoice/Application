@@ -64,7 +64,7 @@ public class ExerciseVideoActivity extends Activity
         startRecorder = (ImageButton)findViewById(R.id.button_start_recorder);
         stopRecorder = (ImageButton)findViewById(R.id.button_stop_recorder);
         mSurfaceView = (SurfaceView)findViewById(R.id.surfaceView);
-
+        stopRecorder.setVisibility(View.GONE);
         // Session class instance
         SessionManager session = new SessionManager(getApplicationContext());
         session.checkLogin();

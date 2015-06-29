@@ -91,7 +91,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
                 ((Activity)context).runOnUiThread(new Runnable() {
                     public void run() {
                         //Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
-                        alert.showAlertDialog(context, "Login failed..", "Username or password is not valid", false);
+                        alert.showAlertDialog(context, "Login failed..", "Username or password is not valid", true);
                     }
                 });
 
@@ -102,7 +102,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
             ((Activity)context).runOnUiThread(new Runnable() {
                 public void run() {
                     //Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
-                    alert.showAlertDialog(context, "Login failed..", "Error in connecting to database", false);
+                    alert.showAlertDialog(context, "Login failed..", "Error in connecting to database", true);
                 }
             });
 

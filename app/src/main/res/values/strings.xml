@@ -80,9 +80,12 @@
     <string name="title_activity_camera_recorder">CameraRecorder</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
     <string name="do_exercise">בצע תרגיל</string>
-    <string name="do_video">בבצע תרגיל עם הקלטת וידאו</string>
+    <string name="do_video">בצע תרגיל עם הקלטת וידאו</string>
     <string name="do_file">פתח קובץ מצורף</string>
     <string name="title_activity_exercise_video">ExerciseVideoActivity</string>
     <string name="do_link">סרטון הדרכה</string>
+    <string name="title_activity_message">MessageActivity</string>
+    <string name="reply">הגב</string>
+    <string name="messageFrom">הודעה מאת:</string>
 
 </resources>

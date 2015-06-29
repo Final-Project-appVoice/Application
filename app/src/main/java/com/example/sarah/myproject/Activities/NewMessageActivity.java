@@ -50,9 +50,11 @@ public class NewMessageActivity extends Activity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_new_message, menu);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
@@ -77,7 +79,7 @@ public class NewMessageActivity extends Activity
         if(message.isEmpty())
         {
             AlertDialogManager alertDialogManager = new AlertDialogManager();
-            alertDialogManager.showAlertDialog(this, "Message Empty", "You cannot send an empty message", false);
+            alertDialogManager.showAlertDialog(this, "Message Empty", "You cannot send an empty message", true);
         }
         else
         {

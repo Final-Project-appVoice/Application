@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,8 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
     private List<String> exercises;       // list of exercise names
     private Context context;
     private String TAG="ExerciseAdapter";
+    private DisplayMetrics displayMetrics;
+    private int screenHeightPx, screenWidthPx;
 
     public ExercisesAdapter(Context context, int resource, int textViewResourceId, List<String> items)
     {
@@ -40,6 +43,14 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         this.exercises = items;
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        // get the size of the screen in order to set buttons' size relative to the screen
+        displayMetrics = context.getResources().getDisplayMetrics();
+        screenHeightPx = (int)(Math.round(displayMetrics.heightPixels));        // height on screen
+        screenWidthPx = (int)(Math.round(displayMetrics.widthPixels));          //width of screen
+
+
+        //button2.setPadding(0, (int)Math.round(0.1*screenHeightPx), 0, 0);
 
     }
 
@@ -52,6 +63,7 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         TextView exerciseTitle = (TextView)view.findViewById(R.id.exerciseTitle);
         TextView exerciseIdTextView = (TextView)view.findViewById(R.id.exerciseId);
         ImageView exerciseDone = (ImageView)view.findViewById(R.id.exercise_done);
+
         //ImageView exerciseVideo = (ImageView)view.findViewById(R.id.video_icon);
         LinearLayout layoutExercise = (LinearLayout)view.findViewById(R.id.LinearDescription);
         LinearLayout layoutVideo = (LinearLayout)view.findViewById(R.id.LinearVideo);
@@ -63,11 +75,20 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         ImageView fileButton = (ImageView)view.findViewById(R.id.button_file);
         ImageView linkButton = (ImageView)view.findViewById(R.id.button_link);
 
+        exerciseButton.getLayoutParams().height = (int) Math.round(0.075 * screenHeightPx);
+        exerciseButton.getLayoutParams().width = (int) Math.round(0.075 * screenHeightPx);
+        videoButton.getLayoutParams().height = (int) Math.round(0.075 * screenHeightPx);
+        videoButton.getLayoutParams().width = (int) Math.round(0.075 * screenHeightPx);
+        fileButton.getLayoutParams().height = (int) Math.round(0.075 * screenHeightPx);
+        fileButton.getLayoutParams().width = (int) Math.round(0.075 * screenHeightPx);
+        linkButton.getLayoutParams().height = (int) Math.round(0.075 * screenHeightPx);
+        linkButton.getLayoutParams().width = (int) Math.round(0.075 * screenHeightPx);
+
         String exercise = exercises.get(position);
         String[] exerciseSplit = exercise.split(",");       // get exercise details from the list using the position
         final String exerciseName = exerciseSplit[0];     // split to get title
         final String exerciseId = exerciseSplit[1];       // split to get id
-        String isDone = exerciseSplit[2];           // split to know if IsDone
+        final String isDone = exerciseSplit[2];           // split to know if IsDone
         String isVideo = exerciseSplit[3];           // split to know if IsVideo
         String title = position+1 + ". " + exerciseName;
         exerciseTitle.setText(title);       // fill text view to be the title of the exercise
@@ -95,6 +116,7 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
                 public void onClick(View v) {           // onClick = open activity to do the exercise
                     Intent i = new Intent(v.getContext(), ExerciseActivity.class);
                     i.putExtra("ExerciseId", exerciseId);
+                    i.putExtra("IsDone", isDone);
                     v.getContext().startActivity(i);
                 }
             });

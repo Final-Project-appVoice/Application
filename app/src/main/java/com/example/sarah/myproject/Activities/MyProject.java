@@ -72,6 +72,7 @@ public class MyProject extends Activity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my_project, menu);
+
         return true;
     }
 
@@ -82,7 +83,10 @@ public class MyProject extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.info)
+        {
+            AlertDialogManager alertDialogManager = new AlertDialogManager();
+            alertDialogManager.showAlertDialog(this, "Info", "In order to log in, you must enter the username and password given by your speech therapist!", false);
             return true;
         }
         return super.onOptionsItemSelected(item);
