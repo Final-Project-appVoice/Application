@@ -16,7 +16,6 @@ import com.example.sarah.myproject.Class.AsyncResponse;
 import com.example.sarah.myproject.Class.Exercise;
 import com.example.sarah.myproject.Class.SessionManager;
 import com.example.sarah.myproject.R;
-import com.example.sarah.myproject.Tasks.DownloadImageTask;
 import com.example.sarah.myproject.Tasks.SubmittedExerciseTask;
 
 public class ExerciseActivity extends Activity implements AsyncResponse
@@ -86,13 +85,17 @@ public class ExerciseActivity extends Activity implements AsyncResponse
             {
                 exerciseDescription.setText(selectedExercise.getDescription());
             }
-            if(selectedExercise.getImagePath()!=null)
+         /*  if(selectedExercise.getImagePath()!=null)
             {
                 Log.i("ExerciseActivity", "BEFORE IMAGE");
                 DownloadImageTask downloadImageTask = new DownloadImageTask(this);
                 downloadImageTask.execute(selectedExercise.getImagePath());
                 Log.i("ExerciseActivity", "AFTER IMAGE");
             }
+            else
+            {
+                imageView.setVisibility(View.GONE);
+            } */
         }
 
     }

@@ -110,6 +110,7 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         if(selectedExercise!=null)
         {
             Log.i(TAG, "exercise not null");
+            Log.i(TAG, selectedExercise.toString());
             exerciseButton.setVisibility(View.VISIBLE);
             exerciseButton.setOnClickListener(new View.OnClickListener() {
                 @Override

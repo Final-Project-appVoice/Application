@@ -51,15 +51,13 @@ public class ReadMessageTask extends AsyncTask<Integer, Boolean, Boolean>
             //Statement statement2 = con.createStatement();
 
             // After connection
-            String query1 = "UPDATE INTO Messages SET IsRead = '1' WHERE MessageId = '" + messageId + "'";
-            //String query1 = "INSERT OR REPLACE INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (" + Integer.parseInt(exerciseId) + ", '" + exerciseName + "', '" + patientId + "', '" + therapistId + "')";       // get exercise description
+            String query1 = "UPDATE Messages SET IsRead = ? WHERE MessageId = '" + messageId + "'";
             PreparedStatement preparedStmt = con.prepareStatement(query1);
+            preparedStmt.setInt(1, 1);
 
-            // execute the preparedstatement
-            preparedStmt.execute();
-
-            //  ResultSet rs1 = statement1.executeQuery(query1);
-
+            // execute the java preparedstatement
+            preparedStmt.executeUpdate();
+            con.close();
 
         }
         catch (Exception e)         // if connection to db didn't succeed

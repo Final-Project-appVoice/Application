@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/message_num"
-            android:text="(4)" />
+             />
         <TextView
             style="@style/Title"
             android:layout_width="wrap_content"

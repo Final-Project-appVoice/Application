@@ -34,7 +34,10 @@
         <TextView
             android:id="@+id/messageText"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/dbx_action_bar_default_height" />
+            android:layout_height="@dimen/dbx_action_bar_default_height"
+            android:maxLines="2"
+            android:maxLength="20"
+            android:ellipsize="end"/>
 
     </LinearLayout>
 

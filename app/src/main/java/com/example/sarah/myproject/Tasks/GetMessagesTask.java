@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sarah.myproject.Adapters.FoldersAdapter;
 import com.example.sarah.myproject.Adapters.MessageAdapter;
@@ -95,6 +96,19 @@ public class GetMessagesTask extends AsyncTask<String, Boolean, List<Message>> i
         bar.setVisibility(View.GONE);
         if(messages!=null)
         {
+            int count = 0;
+            TextView numOfMessage = (TextView)((Activity)context).findViewById(R.id.message_num);
+            for(int i=0; i<messages.size(); i++)
+            {
+                if(messages.get(i).isRead() == 0)
+                {
+                    count++;
+                }
+            }
+            if(count > 0)
+            {
+                numOfMessage.setText("(" + count + ")");
+            }
             MessageAdapter messageAdapter = new MessageAdapter(context, android.R.layout.activity_list_item, R.id.messages_list, messages);       // calling to the adapter list -- folderList = list without adapter
             ListView listView = (ListView) ((Activity) context).findViewById(R.id.messages_list);     // the list of folders
             listView.setAdapter(messageAdapter);        // adapting to the folder list the adapter list
@@ -115,6 +129,6 @@ public class GetMessagesTask extends AsyncTask<String, Boolean, List<Message>> i
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         ReadMessageTask readMessageTask = new ReadMessageTask(parent.getContext(), view);
-        readMessageTask.execute(((Message)parent.getItemAtPosition(position)).getMessageId());
+        readMessageTask.execute(((Message) parent.getItemAtPosition(position)).getMessageId());
     }
 }

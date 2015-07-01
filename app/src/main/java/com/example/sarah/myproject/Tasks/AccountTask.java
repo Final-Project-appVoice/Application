@@ -73,7 +73,7 @@ public class AccountTask extends AsyncTask<String, Patient, Patient> implements 
                 ResultSet rs2 = statement2.executeQuery(query2);
                 if (rs2.next())
                 {
-                    patient.setTherapistId(rs2.getString(1) + " " + rs2.getString(2));
+                    patient.setTherapistId(rs2.getString("FirstName") + " " + rs2.getString("LastName"));
                 }
 
             }

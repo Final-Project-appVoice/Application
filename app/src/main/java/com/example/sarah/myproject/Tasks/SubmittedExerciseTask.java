@@ -15,6 +15,8 @@ import com.example.sarah.myproject.Dal.DalConstant;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -39,59 +41,68 @@ public class SubmittedExerciseTask extends AsyncTask<String, List<Task>, List<Ta
     private SessionManager session;
     private List<Task> taskList;
 
-    public SubmittedExerciseTask(Context context)
-    {
+    public SubmittedExerciseTask(Context context) {
         this.context = context;
         session = new SessionManager(context.getApplicationContext());
         patientArray = session.getPatientDetails();
-        if (patientArray.length > 0)
-        {
+        if (patientArray.length > 0) {
             patientId = patientArray[0];        // get patient id from session
             therapistId = patientArray[2];
         }
     }
 
     @Override
-    protected List<Task> doInBackground(String... params)
-    {
+    protected List<Task> doInBackground(String... params) {
         exerciseId = params[0];
         exerciseName = params[1];
 
-        try
-        {
+        try {
             // Connecting to the database
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection con = DriverManager.getConnection(DB_URL, USER, PASS);
 
             Statement statement1 = con.createStatement();
-            //Statement statement2 = con.createStatement();
+            Statement statement2 = con.createStatement();
 
             // After connection
-            String query1 = "INSERT INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (?, ?, ?, ?)";
-            //String query1 = "INSERT OR REPLACE INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (" + Integer.parseInt(exerciseId) + ", '" + exerciseName + "', '" + patientId + "', '" + therapistId + "')";       // get exercise description
-            PreparedStatement preparedStmt = con.prepareStatement(query1);
-            preparedStmt.setInt (1, Integer.parseInt(exerciseId));
-            preparedStmt.setString(2, exerciseName);
-            preparedStmt.setString(3, patientId);
-            preparedStmt.setString(4, therapistId);
+            String query1 = "INSERT INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId, IsDone) VALUES (?, ?, ?, ?, ?)";
+            String query2 = "SELECT * FROM SubmittedExercise WHERE ExerciseId = '" + exerciseId + "'";
+            String query3 = "UPDATE SubmittedExercise SET IsDone = ? WHERE ExerciseId = '" + exerciseId + "'";
 
-            // execute the preparedstatement
-            preparedStmt.execute();
-
-          //  ResultSet rs1 = statement1.executeQuery(query1);
-
-
-        }
-        catch (Exception e)         // if connection to db didn't succeed
-        {
+            try {
+                ResultSet rs2 = statement2.executeQuery(query2);
+                if (rs2.next())     // if submitted exercise exists
+                {
+                    PreparedStatement preparedStmt = con.prepareStatement(query3);
+                    preparedStmt.setInt(1, 1);
+                } else {
+                    //String query1 = "INSERT OR REPLACE INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (" + Integer.parseInt(exerciseId) + ", '" + exerciseName + "', '" + patientId + "', '" + therapistId + "')";       // get exercise description
+                    PreparedStatement preparedStmt = con.prepareStatement(query1);
+                    preparedStmt.setInt(1, Integer.parseInt(exerciseId));
+                    preparedStmt.setString(2, exerciseName);
+                    preparedStmt.setString(3, patientId);
+                    preparedStmt.setString(4, therapistId);
+                    preparedStmt.setInt(5, 1);
+                    // execute the preparedstatement
+                    preparedStmt.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-            return null;
+        return null;
     }
+        @Override
+        public void onItemClick (AdapterView < ? > parent, View view,int position, long id)
+        {
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-
+        }
     }
-}

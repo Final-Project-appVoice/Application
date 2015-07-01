@@ -66,7 +66,8 @@ public class GetMessageTask extends AsyncTask<String, Boolean, Message> {
 
             String query1 = "SELECT * FROM Messages WHERE MessageId = '" + messageId + "'";
             ResultSet rs1 = statement1.executeQuery(query1);
-            if (rs1.next()) {
+            if (rs1.next())
+            {
                 Log.i("DB MESSAGE", "IN");
                 String messageTo = rs1.getString("MessageTo");
                 String messageFrom = rs1.getString("MessageFrom");
