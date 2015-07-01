@@ -53,13 +53,15 @@ public class DownloadImageTask extends AsyncTask<String, Void, Void>  // <Params
         DropboxAPI.DropboxFileInfo info = null;     // get dropbox info to connect to it
         try
         {
+            if(DropboxSession.getDropboxSession()!=null)
+            {
+                Log.w("API", DropboxSession.getDropboxSession().toString());
 
-            Log.w("API", DropboxSession.getDropboxSession().toString());
-
-            // connect to dropbox and get file we need
-            info = (DropboxSession.getDropboxSession()).getFile("/" + fileName.trim(), null, outputStream, null);
-            Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
-            mDrawable = Drawable.createFromPath(file.getAbsolutePath());
+                // connect to dropbox and get file we need
+                info = (DropboxSession.getDropboxSession()).getFile("/" + fileName.trim(), null, outputStream, null);
+                Log.i("DbExampleLog", "The file's rev is: " + info.getMetadata().rev);
+                mDrawable = Drawable.createFromPath(file.getAbsolutePath());
+            }
         }
         catch (DropboxException e)
         {

@@ -101,14 +101,14 @@ public class Exercise
     @Override
     public String toString() {
         return "Exercise{" +
-                "description='" + description + '\'' +
-                ", title='" + title + '\'' +
-                ", therapistId='" + therapistId + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", filePath='" + filePath + '\'' +
-                ", link='" + link + '\'' +
-                ", id=" + id +
-                ", folderId=" + folderId +
+                "description='" + description + "\n" +
+                ", title='" + title + "\n" +
+                ", therapistId='" + therapistId + "\n" +
+                ", imagePath='" + imagePath + "\n" +
+                ", filePath='" + filePath + "\n" +
+                ", link='" + link + "\n" +
+                ", id=" + id + "\n" +
+                ", folderId=" + folderId + "\n"+
                 ", isVideo=" + isVideo +
                 '}';
     }

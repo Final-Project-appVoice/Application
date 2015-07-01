@@ -55,6 +55,7 @@ public class ExerciseVideoActivity extends Activity
     private static final String TAG = "Recorder";
     public static Exercise returnedExercise;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -83,16 +84,38 @@ public class ExerciseVideoActivity extends Activity
         }
 
         mCamera = getCameraInstance();
-        mCamera.setDisplayOrientation(90);
-        mPreview = new CameraPreview(this, mCamera, mSurfaceView);
-        isRecording = false;
-        Log.d("ExerciseActivity", "HERE1");
 
-        if(selectedExercise != null)
-        {
-            DownloadImageTask downloadImageTask = new DownloadImageTask(this);
-            downloadImageTask.execute(selectedExercise.getImagePath());
-        }
+          mCamera.setDisplayOrientation(90);
+            mPreview = new CameraPreview(this, mCamera, mSurfaceView);
+            isRecording = false;
+            Log.d("ExerciseActivity", "HERE1");
+
+            if (selectedExercise != null)
+            {
+                if(selectedExercise.getImagePath()!=null)
+                {
+                    if(!selectedExercise.getImagePath().equals(""))
+                    {
+                        DownloadImageTask downloadImageTask = new DownloadImageTask(this);
+                        downloadImageTask.execute(selectedExercise.getImagePath());
+                    }
+                }
+            }
+//        }
+//        else
+//        {
+//            Toast.makeText(this, "Error in opening camera", Toast.LENGTH_LONG).show();
+//        }
+    }
+
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        Log.i("On pause", "HERE");
+        stopMediaRecorder();
+        releaseCamera();              // release the camera immediately on pause event
     }
 
     @Override
