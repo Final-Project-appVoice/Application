@@ -77,6 +77,7 @@ public class AccountTask extends AsyncTask<String, Patient, Patient> implements 
                 }
 
             }
+            con.close();
         }
             catch (Exception e)         // if connection to db didn't succeed
             {

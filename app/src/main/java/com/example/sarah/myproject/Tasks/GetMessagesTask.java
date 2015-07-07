@@ -81,6 +81,7 @@ public class GetMessagesTask extends AsyncTask<String, Boolean, List<Message>> i
                 allMessages.add(message);
                 Log.i("DB MESSAGE", message.toString());
             }
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
             Log.i("DB MESSAGE", "ERROR");

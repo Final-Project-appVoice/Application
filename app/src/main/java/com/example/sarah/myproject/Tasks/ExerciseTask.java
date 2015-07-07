@@ -73,6 +73,7 @@ public class ExerciseTask extends AsyncTask<String, Exercise, Exercise>  // <Par
             {
                 Log.i("DB EXERCISE", "OUT");
             }
+            con.close();
 //            String query2 = "INSERT INTO SubmittedExercise (ExerciseId, ExerciseName, PatientId, TherapistId) VALUES (?, ?, ?, ?)";
 //            PreparedStatement preparedStmt = con.prepareStatement(query2);
 //            preparedStmt.setInt(1, exercise.getId());

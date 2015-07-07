@@ -33,8 +33,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ExerciseVideoActivity extends Activity
-{
+public class ExerciseVideoActivity extends Activity {
 
     private Context context;
     private ImageButton startRecorder, stopRecorder;
@@ -62,9 +61,9 @@ public class ExerciseVideoActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_video);
 
-        startRecorder = (ImageButton)findViewById(R.id.button_start_recorder);
-        stopRecorder = (ImageButton)findViewById(R.id.button_stop_recorder);
-        mSurfaceView = (SurfaceView)findViewById(R.id.surfaceView);
+        startRecorder = (ImageButton) findViewById(R.id.button_start_recorder);
+        stopRecorder = (ImageButton) findViewById(R.id.button_stop_recorder);
+        mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         stopRecorder.setVisibility(View.GONE);
         // Session class instance
         SessionManager session = new SessionManager(getApplicationContext());
@@ -84,23 +83,22 @@ public class ExerciseVideoActivity extends Activity
         }
 
         mCamera = getCameraInstance();
+        mCamera.setDisplayOrientation(90);
+        mPreview = new CameraPreview(this, mCamera, mSurfaceView);
+        isRecording = false;
+        Log.d("ExerciseActivity", "HERE1");
 
-          mCamera.setDisplayOrientation(90);
-            mPreview = new CameraPreview(this, mCamera, mSurfaceView);
-            isRecording = false;
-            Log.d("ExerciseActivity", "HERE1");
-
-            if (selectedExercise != null)
+        if (selectedExercise != null)
+        {
+            if (selectedExercise.getImagePath() != null)
             {
-                if(selectedExercise.getImagePath()!=null)
+                if (!selectedExercise.getImagePath().equals(""))
                 {
-                    if(!selectedExercise.getImagePath().equals(""))
-                    {
-                        DownloadImageTask downloadImageTask = new DownloadImageTask(this);
-                        downloadImageTask.execute(selectedExercise.getImagePath());
-                    }
+                    DownloadImageTask downloadImageTask = new DownloadImageTask(this);
+                    downloadImageTask.execute(selectedExercise.getImagePath());
                 }
             }
+        }
 //        }
 //        else
 //        {
@@ -122,6 +120,7 @@ public class ExerciseVideoActivity extends Activity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_exercise_video, menu);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
         return true;
     }
 
@@ -141,22 +140,25 @@ public class ExerciseVideoActivity extends Activity
     }
 
 
-    public void onClick_buttonStartRecorder(View view)
-    {
+    public void onClick_buttonStartRecorder(View view) {
         startRecorder.setVisibility(View.GONE);
         stopRecorder.setVisibility(View.VISIBLE);
 
         startMediaRecorder();
     }
 
-    public void onClick_buttonStopRecorder(View view)
-    {
+    public void onClick_buttonStopRecorder(View view) {
         stopRecorder.setVisibility(View.GONE);
         startRecorder.setVisibility(View.VISIBLE);
 
         stopMediaRecorder();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isRecording = false;
+    }
 
     /**
      * A safe way to get an instance of the Camera object.
@@ -171,8 +173,7 @@ public class ExerciseVideoActivity extends Activity
         return c; // returns null if camera is unavailable
     }
 
-    private boolean prepareVideoRecorder()
-    {
+    private boolean prepareVideoRecorder() {
 
         mMediaRecorder = new MediaRecorder();
 
@@ -191,15 +192,13 @@ public class ExerciseVideoActivity extends Activity
         mMediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString());
 
 
-
         // Step 5: Set the preview output
         mMediaRecorder.setPreviewDisplay(mSurfaceView.getHolder().getSurface());//mPreview.getHolder().getSurface());
 
         // Step 6: Prepare configured MediaRecorder
         try {
             mMediaRecorder.prepare();
-        } catch (IllegalStateException e)
-        {
+        } catch (IllegalStateException e) {
             Log.d(TAG, "IllegalStateException preparing MediaRecorder: " + e.getMessage());
             releaseMediaRecorder();
             return false;
@@ -211,20 +210,15 @@ public class ExerciseVideoActivity extends Activity
         return true;
     }
 
-    private void startMediaRecorder()
-    {
-        if (!isRecording)
-        {
+    private void startMediaRecorder() {
+        if (!isRecording) {
             //initialize video camera
-            if (prepareVideoRecorder())
-            {
+            if (prepareVideoRecorder()) {
                 // Camera is available and unlocked, MediaRecorder is prepared,
                 // now you can start recording
                 mMediaRecorder.start();
                 isRecording = true;
-            }
-            else
-            {
+            } else {
                 // prepare didn't work, release the camera
                 Log.i(TAG, "prepare is false");
                 releaseMediaRecorder();
@@ -247,28 +241,34 @@ public class ExerciseVideoActivity extends Activity
     }
 
     private void releaseMediaRecorder() {
-        if (mMediaRecorder != null) {
+        if (mMediaRecorder != null)
+        {
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
-            mMediaRecorder = null;
+            //mMediaRecorder = null;
             mCamera.lock();           // lock camera for later use
         }
     }
 
-    private void releaseCamera() {
+    private void releaseCamera()
+    {
         if (mCamera != null) {
             mCamera.release();        // release the camera for other applications
-            mCamera = null;
+            //mCamera = null;
         }
     }
 
 
-    /** Create a file Uri for saving an image or video */
-    private Uri getOutputMediaFileUri(int type){
+    /**
+     * Create a file Uri for saving an image or video
+     */
+    private Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
     }
 
-    /** Create a File for saving an image or video */
+    /**
+     * Create a File for saving an image or video
+     */
     private File getOutputMediaFile(int type) {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -279,8 +279,8 @@ public class ExerciseVideoActivity extends Activity
         // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
                 Log.d("MyCameraApp", "failed to create directory");
                 return null;
             }
@@ -290,14 +290,13 @@ public class ExerciseVideoActivity extends Activity
         String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmmss").format(new Date());
         String copyPatientName = patientName;
         copyPatientName = copyPatientName.replace(" ", "_");
-        if(type == MEDIA_TYPE_VIDEO)
-        {
+        if (type == MEDIA_TYPE_VIDEO) {
             Log.d(TAG, "save media");
             String mediaName = File.separator +
-                    "VID_"+ copyPatientName +"_"+ timeStamp + ".mp4";
+                    "VID_" + copyPatientName + "_" + timeStamp + ".mp4";
             Log.d("Media Name", mediaName);
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    "VID_"+ copyPatientName + "_" + timeStamp + ".mp4");
+                    "VID_" + copyPatientName + "_" + timeStamp + ".mp4");
 //            FileInputStream inputStream = null;
 //            try
 //            {
@@ -318,12 +317,10 @@ public class ExerciseVideoActivity extends Activity
 
 
             Log.d(TAG, mediaFile.getAbsolutePath().toString());
-        }
-        else
-        {
+        } else {
             return null;
         }
-        videoPath = mediaStorageDir.getPath() + File.separator + "VID_"+ timeStamp + ".mp4";
+        videoPath = mediaStorageDir.getPath() + File.separator + "VID_" + timeStamp + ".mp4";
         return mediaFile;
     }
 }

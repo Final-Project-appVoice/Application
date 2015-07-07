@@ -70,7 +70,7 @@ public class GetTherapistDetailsTask extends AsyncTask<String, List<String>, Lis
                 therapist.add(lastName);
                 therapist.add(therapistId);
             }
-
+            con.close();
         } catch (Exception e)         // if connection to db didn't succeed
         {
             e.printStackTrace();

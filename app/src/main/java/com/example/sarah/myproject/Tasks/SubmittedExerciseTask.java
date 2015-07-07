@@ -89,6 +89,7 @@ public class SubmittedExerciseTask extends AsyncTask<String, List<Task>, List<Ta
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            con.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -100,9 +101,9 @@ public class SubmittedExerciseTask extends AsyncTask<String, List<Task>, List<Ta
         }
         return null;
     }
-        @Override
-        public void onItemClick (AdapterView < ? > parent, View view,int position, long id)
-        {
 
-        }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
+}

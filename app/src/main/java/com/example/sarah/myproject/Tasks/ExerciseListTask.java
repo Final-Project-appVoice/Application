@@ -122,12 +122,15 @@ public class ExerciseListTask extends AsyncTask<String, List<String>, List<Strin
                     }
                 }
 
+
             }
+            con.close();
             Log.d("ExerciseTask", "AFTER");
         } catch (Exception e)         // if connection to db didn't succeed
         {
             e.printStackTrace();
         }
+
         return exercises;
     }
 

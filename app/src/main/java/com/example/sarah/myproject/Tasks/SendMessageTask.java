@@ -81,6 +81,7 @@ public class SendMessageTask extends AsyncTask<String, Boolean, Boolean>
 //            {
 //                return true;
 //            }
+            con.close();
         }
         catch (Exception e)         // if connection to db didn't succeed
         {

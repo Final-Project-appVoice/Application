@@ -101,7 +101,7 @@ public class DownloadFileTask extends AsyncTask<Exercise, Void, Void>  // <Param
                 // After connection
                 String query1 = "UPDATE SubmittedExercise SET OpenedFile = '1' WHERE ExerciseId = '" + exercise.getId()+"'";
                 ResultSet rs1 = statement1.executeQuery(query1);
-
+                con.close();
             }
             catch (Exception e)         // if connection to db didn't succeed
             {

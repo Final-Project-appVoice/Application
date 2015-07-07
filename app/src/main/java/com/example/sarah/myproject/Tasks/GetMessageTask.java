@@ -76,6 +76,7 @@ public class GetMessageTask extends AsyncTask<String, Boolean, Message> {
                 message = new Message(Integer.parseInt(messageId), messageFrom, messageTo, messageText, isRead);
                 Log.i("DB MESSAGE", message.toString());
             }
+            con.close();
         } catch (Exception e)
         {
             e.printStackTrace();

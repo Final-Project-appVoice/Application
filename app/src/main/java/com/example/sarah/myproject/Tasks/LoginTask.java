@@ -85,6 +85,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
                 return patient;
 
             }
+
             else
             {
                 // TODO: user doesnt exist
@@ -96,6 +97,7 @@ public class LoginTask extends AsyncTask<String, Patient, Patient>  // <Params, 
                 });
 
             }
+            con.close();
         } catch (Exception e)         // if connection to db didn't succeed
         {
             e.printStackTrace();
