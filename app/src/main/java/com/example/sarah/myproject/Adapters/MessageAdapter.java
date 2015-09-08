@@ -38,6 +38,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements AdapterView
 
         TextView messageText = (TextView)view.findViewById(R.id.messageText);
         TextView messageId = (TextView)view.findViewById(R.id.messageId);
+        TextView messageDate = (TextView)view.findViewById(R.id.date_textView);
 
         Message message = getItem(position);
 
@@ -48,7 +49,7 @@ public class MessageAdapter extends ArrayAdapter<Message> implements AdapterView
 
         messageText.setText(message.getMessageText());
         messageId.setText(message.getMessageId()+"");
-        //messageFrom.setText(message.getMessageFrom());
+        messageDate.setText(message.getMessageDate()+"");
 
         return convertView;
     }

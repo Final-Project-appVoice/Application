@@ -15,6 +15,7 @@ import com.dropbox.client2.exception.DropboxParseException;
 import com.dropbox.client2.exception.DropboxPartialFileException;
 import com.dropbox.client2.exception.DropboxServerException;
 import com.dropbox.client2.exception.DropboxUnlinkedException;
+import com.example.sarah.myproject.Class.Exercise;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,12 +35,12 @@ public class UploadVideo extends AsyncTask<Void, Long, Boolean> {
     private Context mContext;
     private final ProgressDialog mDialog;
 
-    private String mErrorMsg;
+    private String mErrorMsg, imagePath;
+    private Exercise mExercise;
 
 
     @SuppressWarnings("deprecation")
-    public UploadVideo(Context context, DropboxAPI<?> api, String dropboxPath,
-                         File file) {
+    public UploadVideo(Context context, DropboxAPI<?> api, String dropboxPath, File file, Exercise exercise) {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
@@ -47,7 +48,7 @@ public class UploadVideo extends AsyncTask<Void, Long, Boolean> {
         mApi = api;
         mPath = dropboxPath;
         mFile = file;
-
+        mExercise = exercise;
         mDialog = new ProgressDialog(context);
         mDialog.setMax(100);
         mDialog.setMessage("Uploading " + file.getName());
@@ -141,9 +142,15 @@ public class UploadVideo extends AsyncTask<Void, Long, Boolean> {
     @Override
     protected void onPostExecute(Boolean result) {
         mDialog.dismiss();
-        if (result) {
+        if (result)
+        {
+            SubmittedVideoTask submittedVideoTask = new SubmittedVideoTask(mContext);
+            submittedVideoTask.execute(String.valueOf(mExercise.getId()), mExercise.getTitle(), mFile.getName());
             showToast("Video successfully uploaded");
-        } else {
+
+        }
+        else
+        {
             showToast(mErrorMsg);
         }
     }

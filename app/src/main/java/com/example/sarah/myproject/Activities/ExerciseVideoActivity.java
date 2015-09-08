@@ -73,6 +73,7 @@ public class ExerciseVideoActivity extends Activity {
         String exerciseId = i.getStringExtra("ExerciseId");
 
         Exercise selectedExercise = Exercise.getExerciseById(Integer.parseInt(exerciseId));
+        returnedExercise = selectedExercise;
 
         // get user ID from session
         String[] patientArray = session.getPatientDetails();
@@ -235,7 +236,7 @@ public class ExerciseVideoActivity extends Activity {
             releaseMediaRecorder(); // release the MediaRecorder object
             mCamera.lock();         // take camera access back from MediaRecorder
             isRecording = false;
-            UploadVideo upload = new UploadVideo(this, DropboxSession.getDropboxSession(), "/", mediaFile);
+            UploadVideo upload = new UploadVideo(this, DropboxSession.getDropboxSession(), "/", mediaFile, returnedExercise);
             upload.execute();
         }
     }

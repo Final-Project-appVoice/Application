@@ -83,8 +83,19 @@ public class GetTherapistDetailsTask extends AsyncTask<String, List<String>, Lis
     {
         super.onPostExecute(strings);
         Log.i("SIZE STR", strings.size()+"");
+        TextView therapistNameTextView;
         //NewMessageActivity.therapistDetails = strings;
-        TextView therapistNameTextView = (TextView)((Activity)context).findViewById(R.id.therapist_textView);
-        therapistNameTextView.setText(strings.get(0) + " " + strings.get(1));
+        if(((Activity)context).findViewById(R.id.therapist_textView) != null)
+        {
+            therapistNameTextView = (TextView) ((Activity) context).findViewById(R.id.therapist_textView);
+            therapistNameTextView.setText(strings.get(0) + " " + strings.get(1));
+        }
+        else if(((Activity)context).findViewById(R.id.messageFrom) != null)
+        {
+            therapistNameTextView = (TextView) ((Activity) context).findViewById(R.id.messageFrom);
+            therapistNameTextView.setText(strings.get(0) + " " + strings.get(1));
+        }
+
+
     }
 }

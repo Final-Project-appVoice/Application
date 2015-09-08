@@ -58,6 +58,30 @@
 
         </LinearLayout>
 
+        <!-- Date -->
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+
+            <TextView
+                android:id="@+id/messageDate"
+                style="@style/Folder"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                style="@style/Folder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/messageDate"
+                />
+
+
+        </LinearLayout>
         <!--Description -->
         <LinearLayout
             style="@style/LinearStyle"

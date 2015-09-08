@@ -23,6 +23,7 @@ import com.example.sarah.myproject.Class.Exercise;
 import com.example.sarah.myproject.R;
 import com.example.sarah.myproject.Tasks.DownloadFileTask;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -92,7 +93,7 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
         exerciseTitle.setText(title);       // fill text view to be the title of the exercise
         exerciseIdTextView.setText(exerciseId);     // fill text view to be the id of the exercise
         Log.i("LIST EXERCISE", Exercise.getAllExercises());
-        Exercise selectedExercise = Exercise.getExerciseById(Integer.parseInt(exerciseId));       // get exercise using exerciseId
+        final Exercise selectedExercise = Exercise.getExerciseById(Integer.parseInt(exerciseId));       // get exercise using exerciseId
 
         final Exercise copyExercise = selectedExercise;
 
@@ -149,7 +150,8 @@ public class ExercisesAdapter extends ArrayAdapter<String> implements AdapterVie
                         @Override
                         public void onClick(View v)     // onClick = open file using DownloadFileTask
                         {
-                            DownloadFileTask downloadFileTask = new DownloadFileTask(v.getContext());
+                            File file = new File("/sdcard/AppVoice" + selectedExercise.getFilePath().trim());
+                            DownloadFileTask downloadFileTask = new DownloadFileTask(v.getContext(), file);
                             downloadFileTask.execute(copyExercise);
                         }
                     });

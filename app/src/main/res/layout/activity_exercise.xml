@@ -1,4 +1,8 @@
-<!--<?xml version="1.0" encoding="utf-8"?>--><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:id="@+id/scrollview"--><!--android:layout_width="fill_parent"--><!--android:layout_height="wrap_content">-->
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -82,8 +86,8 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
 
         </LinearLayout>
 
@@ -111,4 +115,4 @@
 
     </LinearLayout>
 </LinearLayout>
-
+</ScrollView>

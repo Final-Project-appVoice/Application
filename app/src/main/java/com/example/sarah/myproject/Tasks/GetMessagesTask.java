@@ -23,6 +23,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,7 +78,9 @@ public class GetMessagesTask extends AsyncTask<String, Boolean, List<Message>> i
                 String messageFrom = rs1.getString("MessageFrom");
                 String messageText = rs1.getString("Message");
                 int isRead = rs1.getInt("IsRead");
-                Message message = new Message(messageId, messageFrom, patientId, messageText, isRead);
+                Date messageDate = rs1.getDate("MessageDate");
+                //DateFormat dateFormat = "dd/mm/yyyy";
+                Message message = new Message(messageId, messageFrom, patientId, messageText, messageDate, isRead);
                 allMessages.add(message);
                 Log.i("DB MESSAGE", message.toString());
             }

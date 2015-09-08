@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 
 /**
  * Created by Sarah on 29-Jun-15.
@@ -72,8 +73,9 @@ public class GetMessageTask extends AsyncTask<String, Boolean, Message> {
                 String messageTo = rs1.getString("MessageTo");
                 String messageFrom = rs1.getString("MessageFrom");
                 String messageText = rs1.getString("Message");
+                Date messageDate = rs1.getDate("MessageDate");
                 int isRead = rs1.getInt("IsRead");
-                message = new Message(Integer.parseInt(messageId), messageFrom, messageTo, messageText, isRead);
+                message = new Message(Integer.parseInt(messageId), messageFrom, messageTo, messageText, messageDate, isRead);
                 Log.i("DB MESSAGE", message.toString());
             }
             con.close();
@@ -93,8 +95,11 @@ public class GetMessageTask extends AsyncTask<String, Boolean, Message> {
         bar.setVisibility(View.GONE);
         TextView messageFrom = (TextView)((Activity)context).findViewById(R.id.messageFrom);
         TextView messageText = (TextView)((Activity)context).findViewById(R.id.messageText);
+        TextView messageDate = (TextView)((Activity)context).findViewById(R.id.messageDate);
 
-        messageFrom.setText(message.getMessageFrom());
+        GetTherapistDetailsTask therapistDetailsTask = new GetTherapistDetailsTask(context);
+        therapistDetailsTask.execute(message.getMessageFrom());
+        messageDate.setText(message.getMessageDate().toString());
         messageText.setText(message.getMessageText());
 
     }

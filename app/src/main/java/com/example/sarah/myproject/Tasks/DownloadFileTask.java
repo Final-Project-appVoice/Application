@@ -37,20 +37,25 @@ public class DownloadFileTask extends AsyncTask<Exercise, Void, Void>  // <Param
     private ProgressDialog progressDialog;
     private SessionManager session;
     private String patientId, therapistId;
+    private File file;
+    private long mFileLen;
 
     // constant to log in the DB
     private static final String DB_URL = DalConstant.DB_URL;
     private static final String USER = DalConstant.USER;
     private static final String PASS = DalConstant.PASS;
 
-    public DownloadFileTask(Context context)
+    public DownloadFileTask(Context context, File file)
     {
         // We set the context this way so we don't accidentally leak activities
         this.context = context;
+        this.file = file;
+        mFileLen = file.length();
         session = new SessionManager(context);
         String[] patientDetails = session.getPatientDetails();
         patientId = patientDetails[0];
         therapistId = patientDetails[2];
+        progressDialog = new ProgressDialog(context);
     }
 
     @Override
@@ -66,7 +71,7 @@ public class DownloadFileTask extends AsyncTask<Exercise, Void, Void>  // <Param
         Exercise exercise = params[0];
 
         // create new file to save the one we are downloading
-        File file = new File("/sdcard/AppVoice" + exercise.getFilePath().trim());
+
         Log.d("File", exercise.getFilePath());
         FileOutputStream outputStream = null;
         try
@@ -124,6 +129,9 @@ public class DownloadFileTask extends AsyncTask<Exercise, Void, Void>  // <Param
         }
         return null;
     }
+
+
+
     protected void onPostExecute(Void object)
     {
         super.onPostExecute(object);

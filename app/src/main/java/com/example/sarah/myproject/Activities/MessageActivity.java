@@ -10,7 +10,8 @@ import android.view.View;
 import com.example.sarah.myproject.R;
 import com.example.sarah.myproject.Tasks.GetMessageTask;
 
-public class MessageActivity extends Activity {
+public class MessageActivity extends Activity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,6 +21,7 @@ public class MessageActivity extends Activity {
 
         Intent i = getIntent();
         String messageId = i.getStringExtra("MessageId");
+
 
         GetMessageTask getMessageTask = new GetMessageTask(this);
         getMessageTask.execute(messageId);
